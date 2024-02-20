@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-01-11 08:53+0000\n"
+"POT-Creation-Date: 2024-02-19 09:13+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -198,7 +198,7 @@ msgstr ""
 msgid "Tools"
 msgstr ""
 
-#: classes/Admin.php:136, classes/Admin.php:136, classes/Admin.php:565, classes/Utils.php:2868, templates/dashboard/settings.php:13, views/metabox/course-topics.php:68, views/options/settings.php:19, templates/dashboard/notifications/profile-completion.php:22, templates/dashboard/settings/social-profile.php:15
+#: classes/Admin.php:136, classes/Admin.php:136, classes/Admin.php:565, classes/Utils.php:2868, templates/dashboard/settings.php:13, views/metabox/course-topics.php:68, views/options/settings.php:19, templates/dashboard/notifications/profile-completion.php:22, templates/dashboard/settings/reset-password.php:14, templates/dashboard/settings/social-profile.php:15, templates/dashboard/settings/withdraw-settings.php:21
 msgid "Settings"
 msgstr ""
 
@@ -210,7 +210,7 @@ msgstr ""
 msgid "Tutor Pages"
 msgstr ""
 
-#: classes/Admin.php:246, classes/Tools_V2.php:108, templates/dashboard/purchase_history.php:100, templates/dashboard/withdraw.php:219, views/pages/instructors.php:133, views/pages/instructors.php:189, views/pages/instructors.php:208, views/pages/withdraw_requests.php:100, views/pages/withdraw_requests.php:250, views/qna/contexts.php:20, views/options/template/status.php:13, views/options/template/tutor_pages.php:33, views/pages/tools/tutor_pages.php:20
+#: classes/Admin.php:246, classes/Tools_V2.php:108, templates/dashboard/purchase_history.php:106, templates/dashboard/withdraw.php:219, views/pages/instructors.php:133, views/pages/instructors.php:189, views/pages/instructors.php:208, views/pages/withdraw_requests.php:100, views/pages/withdraw_requests.php:250, views/qna/contexts.php:20, views/options/template/status.php:13, views/options/template/tutor_pages.php:33, views/pages/tools/tutor_pages.php:20
 msgid "Status"
 msgstr ""
 
@@ -231,7 +231,7 @@ msgstr ""
 msgid "If you like %1$s please leave us a %2$s rating. A huge thanks in advance!"
 msgstr ""
 
-#: classes/Ajax.php:86, classes/Ajax.php:151, classes/Ajax.php:446, classes/Ajax.php:603, classes/Ajax.php:676, classes/Course.php:651, classes/Course.php:949, classes/Instructor.php:325, classes/Lesson.php:223, classes/Lesson.php:275, classes/Lesson.php:339, classes/Quiz.php:294, classes/Quiz.php:808, classes/Quiz.php:927, classes/Quiz.php:1000, classes/Quiz.php:1087, classes/Quiz.php:1261, classes/Quiz.php:1288, classes/Quiz.php:1438, classes/Quiz.php:1526, classes/Quiz.php:1564, classes/Quiz.php:1665, classes/Q_and_A.php:144
+#: classes/Ajax.php:86, classes/Ajax.php:151, classes/Ajax.php:446, classes/Ajax.php:603, classes/Ajax.php:676, classes/Course.php:651, classes/Course.php:949, classes/Instructor.php:325, classes/Lesson.php:223, classes/Lesson.php:275, classes/Lesson.php:339, classes/Quiz.php:294, classes/Quiz.php:841, classes/Quiz.php:960, classes/Quiz.php:1033, classes/Quiz.php:1120, classes/Quiz.php:1294, classes/Quiz.php:1321, classes/Quiz.php:1471, classes/Quiz.php:1559, classes/Quiz.php:1597, classes/Quiz.php:1698, classes/Q_and_A.php:172
 msgid "Access Denied"
 msgstr ""
 
@@ -319,15 +319,15 @@ msgstr ""
 msgid "Draft"
 msgstr ""
 
-#: classes/Backend_Page_Trait.php:91, includes/translate-text.php:93, includes/translate-text.php:97, includes/translate-text.php:101, templates/dashboard/purchase_history.php:127
+#: classes/Backend_Page_Trait.php:91, includes/translate-text.php:93, includes/translate-text.php:97, includes/translate-text.php:101, templates/dashboard/purchase_history.php:133
 msgid "On Hold"
 msgstr ""
 
-#: classes/Backend_Page_Trait.php:104, classes/Course_List.php:151, classes/Instructors_List.php:104, classes/Quiz_Attempts_List.php:229, classes/Utils.php:3012, includes/translate-text.php:41, templates/dashboard/dashboard.php:153, templates/dashboard/my-courses.php:60, templates/dashboard/purchase_history.php:139, views/pages/course-list.php:130, views/pages/instructors.php:50, views/quiz/attempt-details.php:306, views/quiz/attempt-details.php:707, views/quiz/attempt-table.php:156, templates/single/assignment/content.php:460, templates/single/course/reviews-loop.php:41
+#: classes/Backend_Page_Trait.php:104, classes/Course_List.php:151, classes/Instructors_List.php:104, classes/Quiz_Attempts_List.php:229, classes/Utils.php:3012, includes/translate-text.php:41, templates/dashboard/dashboard.php:153, templates/dashboard/my-courses.php:60, templates/dashboard/purchase_history.php:145, views/pages/course-list.php:130, views/pages/instructors.php:50, views/quiz/attempt-details.php:306, views/quiz/attempt-details.php:707, views/quiz/attempt-table.php:156, templates/single/assignment/content.php:459, templates/single/course/reviews-loop.php:41
 msgid "Pending"
 msgstr ""
 
-#: classes/Backend_Page_Trait.php:117, includes/translate-text.php:73, templates/dashboard/purchase_history.php:123, templates/dashboard/purchase_history.php:131
+#: classes/Backend_Page_Trait.php:117, includes/translate-text.php:73, templates/dashboard/purchase_history.php:129, templates/dashboard/purchase_history.php:137
 msgid "Processing"
 msgstr ""
 
@@ -387,7 +387,7 @@ msgstr ""
 msgid "Lessons"
 msgstr ""
 
-#: classes/Course.php:691, templates/course-filter/filters.php:122, templates/dashboard/purchase_history.php:97, views/pages/course-list.php:175
+#: classes/Course.php:691, templates/course-filter/filters.php:122, templates/dashboard/purchase_history.php:103, views/pages/course-list.php:175
 msgid "Price"
 msgstr ""
 
@@ -683,7 +683,7 @@ msgstr ""
 msgid "Instructor has been added successfully"
 msgstr ""
 
-#: classes/Instructors_List.php:62, classes/Options_V2.php:615, classes/Tutor_Setup.php:335, classes/Tutor_Setup.php:559, classes/Utils.php:9034, templates/dashboard/question-answer.php:53
+#: classes/Instructors_List.php:62, classes/Options_V2.php:615, classes/Tutor_Setup.php:335, classes/Tutor_Setup.php:559, classes/Utils.php:9034, templates/dashboard/question-answer.php:63
 msgid "Instructor"
 msgstr ""
 
@@ -695,7 +695,7 @@ msgstr ""
 msgid "Lesson Video"
 msgstr ""
 
-#: classes/Lesson.php:124, templates/single/assignment/content.php:206
+#: classes/Lesson.php:124, templates/single/assignment/content.php:205
 msgid "Attachments"
 msgstr ""
 
@@ -715,7 +715,7 @@ msgstr ""
 msgid " ago"
 msgstr ""
 
-#: classes/Options_V2.php:451, views/options/options_generator.php:16
+#: classes/Options_V2.php:451
 msgid "Settings Saved"
 msgstr ""
 
@@ -1151,7 +1151,7 @@ msgstr ""
 msgid "Layout"
 msgstr ""
 
-#: classes/Options_V2.php:1067, templates/instructor-setting.php:18
+#: classes/Options_V2.php:1067
 msgid "Instructor List Layout"
 msgstr ""
 
@@ -1275,7 +1275,7 @@ msgstr ""
 msgid "Enable to show course about section"
 msgstr ""
 
-#: classes/Options_V2.php:1249, views/modal/question_form.php:145, templates/single/assignment/content.php:191, templates/single/assignment/content.php:580, templates/single/assignment/content.php:368, views/pages/tools/manage-tokens.php:114, views/pages/tools/manage-tokens.php:180
+#: classes/Options_V2.php:1249, views/modal/question_form.php:145, templates/single/assignment/content.php:190, templates/single/assignment/content.php:579, templates/single/assignment/content.php:367, views/pages/tools/manage-tokens.php:114, views/pages/tools/manage-tokens.php:180
 msgid "Description"
 msgstr ""
 
@@ -1967,43 +1967,43 @@ msgstr ""
 msgid "Descending"
 msgstr ""
 
-#: classes/Quiz.php:786
+#: classes/Quiz.php:819
 msgid "Quiz has been timeout already"
 msgstr ""
 
-#: classes/Quiz.php:1056
+#: classes/Quiz.php:1089
 msgid "Quiz Permission Denied"
 msgstr ""
 
-#: classes/Quiz.php:1094, views/metabox/course-topics.php:64, views/qna/contexts.php:17, views/quiz/contexts.php:19, views/quiz/contexts.php:67
+#: classes/Quiz.php:1127, views/metabox/course-topics.php:64, views/qna/contexts.php:17, views/quiz/contexts.php:19, views/quiz/contexts.php:67
 msgid "Question"
 msgstr ""
 
-#: classes/Quiz.php:1161, classes/Quiz.php:1184
+#: classes/Quiz.php:1194, classes/Quiz.php:1217
 msgid "Invalid quiz question ID"
 msgstr ""
 
-#: classes/Quiz.php:1360, views/modal/question_answer_form.php:37
+#: classes/Quiz.php:1393, views/modal/question_answer_form.php:37
 msgid "True"
 msgstr ""
 
-#: classes/Quiz.php:1367, views/modal/question_answer_form.php:41
+#: classes/Quiz.php:1400, views/modal/question_answer_form.php:41
 msgid "False"
 msgstr ""
 
-#: classes/Quiz.php:1706
+#: classes/Quiz.php:1739
 msgid "Access Denied."
 msgstr ""
 
-#: classes/Quiz.php:1784
+#: classes/Quiz.php:1817
 msgid "You are not authorized to perform this action!"
 msgstr ""
 
-#: classes/Quiz.php:1781
+#: classes/Quiz.php:1814
 msgid "Invalid attempt ID"
 msgstr ""
 
-#: classes/Quiz.php:1779
+#: classes/Quiz.php:1812
 msgid "Attempt deleted successfully!"
 msgstr ""
 
@@ -2015,11 +2015,11 @@ msgstr ""
 msgid "Fail"
 msgstr ""
 
-#: classes/Q_and_A.php:67
+#: classes/Q_and_A.php:96
 msgid "Empty Content Not Allowed!"
 msgstr ""
 
-#: classes/Q_and_A.php:264
+#: classes/Q_and_A.php:292
 msgid "Permission Denied!"
 msgstr ""
 
@@ -2031,7 +2031,7 @@ msgstr ""
 msgid "Only admin can change review status"
 msgstr ""
 
-#: classes/Shortcode.php:109
+#: classes/Shortcode.php:108
 msgid "Please %1$sSign-In%2$s to view this page"
 msgstr ""
 
@@ -2362,7 +2362,7 @@ msgid "Let the students know the instructor(s). Display their credentials, profe
 msgstr ""
 
 #: classes/Tutor_Setup.php:473
-msgid "Question and Anwser"
+msgid "Question and Answer"
 msgstr ""
 
 #: classes/Tutor_Setup.php:474
@@ -2712,7 +2712,7 @@ msgstr ""
 msgid "In Progress"
 msgstr ""
 
-#: classes/Utils.php:7147, includes/translate-text.php:69, templates/dashboard/purchase_history.php:119
+#: classes/Utils.php:7147, includes/translate-text.php:69, templates/dashboard/purchase_history.php:125
 msgid "Completed"
 msgstr ""
 
@@ -2756,7 +2756,7 @@ msgstr ""
 msgid "My Courses"
 msgstr ""
 
-#: classes/Utils.php:9064
+#: classes/Utils.php:9064, templates/dashboard/withdraw.php:57
 msgid "Withdrawals"
 msgstr ""
 
@@ -2776,11 +2776,11 @@ msgstr ""
 msgid "My Quiz Attempts"
 msgstr ""
 
-#: classes/Utils.php:9113, templates/dashboard/purchase_history.php:83
+#: classes/Utils.php:9113, templates/dashboard/purchase_history.php:74, templates/dashboard/purchase_history.php:89
 msgid "Order History"
 msgstr ""
 
-#: classes/Utils.php:9117, templates/dashboard/question-answer.php:43, views/pages/question_answer.php:49, templates/single/course/enrolled/question_and_answer.php:114
+#: classes/Utils.php:9117, templates/dashboard/question-answer.php:53, views/pages/question_answer.php:49, templates/single/course/enrolled/question_and_answer.php:114
 msgid "Question & Answer"
 msgstr ""
 
@@ -3034,7 +3034,7 @@ msgstr ""
 msgid "Rejected"
 msgstr ""
 
-#: includes/translate-text.php:77, includes/translate-text.php:81, includes/translate-text.php:89, templates/dashboard/purchase_history.php:135
+#: includes/translate-text.php:77, includes/translate-text.php:81, includes/translate-text.php:89, templates/dashboard/purchase_history.php:141
 msgid "Cancelled"
 msgstr ""
 
@@ -3219,7 +3219,7 @@ msgstr ""
 msgid "API keys permanently revoked"
 msgstr ""
 
-#: restapi/RestAuth.php:327, views/fragments/announcement-list.php:174, views/fragments/announcement-list.php:322, views/modal/edit_quiz.php:62, views/pages/course-list.php:353, views/pages/instructors.php:215, templates/dashboard/announcements/details.php:45, templates/dashboard/reviews/given-reviews.php:76, templates/single/assignment/content.php:524, views/options/field-types/toggle_switch_button_thumb.php:28
+#: restapi/RestAuth.php:327, views/fragments/announcement-list.php:174, views/fragments/announcement-list.php:322, views/modal/edit_quiz.php:62, views/pages/course-list.php:353, views/pages/instructors.php:215, templates/dashboard/announcements/details.php:45, templates/dashboard/reviews/given-reviews.php:76, templates/single/assignment/content.php:523, views/options/field-types/toggle_switch_button_thumb.php:28
 msgid "Edit"
 msgstr ""
 
@@ -3227,95 +3227,95 @@ msgstr ""
 msgid "Revoke"
 msgstr ""
 
-#: restapi/REST_Author.php:35
+#: restapi/REST_Author.php:61
 msgid "Author details retrieved successfully"
 msgstr ""
 
-#: restapi/REST_Author.php:44
+#: restapi/REST_Author.php:70
 msgid "Author not found"
 msgstr ""
 
-#: restapi/REST_Course.php:79, restapi/REST_Course.php:193, restapi/REST_Course.php:278
+#: restapi/REST_Course.php:142, restapi/REST_Course.php:286, restapi/REST_Course.php:389
 msgid "Course retrieved successfully"
 msgstr ""
 
-#: restapi/REST_Course.php:88, restapi/REST_Course.php:287
+#: restapi/REST_Course.php:151, restapi/REST_Course.php:398
 msgid "Course not found"
 msgstr ""
 
-#: restapi/REST_Course.php:128
+#: restapi/REST_Course.php:174
 msgid "Course detail retrieved successfully"
 msgstr ""
 
-#: restapi/REST_Course.php:135
+#: restapi/REST_Course.php:181
 msgid "Detail not found for given ID"
 msgstr ""
 
-#: restapi/REST_Course.php:202
+#: restapi/REST_Course.php:295
 msgid "Course not found for given terms"
 msgstr ""
 
-#: restapi/REST_Course.php:219
+#: restapi/REST_Course.php:317
 msgid "Categories field is not an array"
 msgstr ""
 
-#: restapi/REST_Course.php:223
+#: restapi/REST_Course.php:321
 msgid "Tags field is not an array"
 msgstr ""
 
-#: restapi/REST_Course_Announcement.php:38
+#: restapi/REST_Course_Announcement.php:66
 msgid "Announcement retrieved successfully"
 msgstr ""
 
-#: restapi/REST_Course_Announcement.php:47
+#: restapi/REST_Course_Announcement.php:75
 msgid "Announcement not found for given ID"
 msgstr ""
 
-#: restapi/REST_Lesson.php:55
+#: restapi/REST_Lesson.php:98
 msgid "Lesson retrieved successfully"
 msgstr ""
 
-#: restapi/REST_Lesson.php:63
-msgid "Lesson not found for given topic ID"
+#: restapi/REST_Lesson.php:107
+msgid "Lesson not found for the given topic ID"
 msgstr ""
 
-#: restapi/REST_Quiz.php:45
+#: restapi/REST_Quiz.php:111
 msgid "Quiz retrieved successfully"
 msgstr ""
 
-#: restapi/REST_Quiz.php:53
+#: restapi/REST_Quiz.php:120
 msgid "Quiz not found for given ID"
 msgstr ""
 
-#: restapi/REST_Quiz.php:94
+#: restapi/REST_Quiz.php:183
 msgid "Question retrieved successfully"
 msgstr ""
 
-#: restapi/REST_Quiz.php:103
+#: restapi/REST_Quiz.php:192
 msgid "Question not found for given ID"
 msgstr ""
 
-#: restapi/REST_Quiz.php:140
+#: restapi/REST_Quiz.php:252
 msgid "Quiz attempts retrieved successfully"
 msgstr ""
 
-#: restapi/REST_Quiz.php:148
+#: restapi/REST_Quiz.php:261
 msgid "Quiz attempts not found for given ID"
 msgstr ""
 
-#: restapi/REST_Rating.php:45
+#: restapi/REST_Rating.php:69
 msgid "Course rating retrieved successfully"
 msgstr ""
 
-#: restapi/REST_Rating.php:54
+#: restapi/REST_Rating.php:78
 msgid "Rating not found for given ID"
 msgstr ""
 
-#: restapi/REST_Topic.php:38
+#: restapi/REST_Topic.php:66
 msgid "Topic retrieved successfully"
 msgstr ""
 
-#: restapi/REST_Topic.php:46
+#: restapi/REST_Topic.php:74
 msgid "Topic not found for given ID"
 msgstr ""
 
@@ -3341,10 +3341,6 @@ msgstr ""
 
 #: templates/dashboard.php:157
 msgid "Your Application is pending as of"
-msgstr ""
-
-#: templates/instructor-setting.php:38
-msgid "Selected one will be used if layout is not defined as shortcode attribute."
 msgstr ""
 
 #: templates/login-form.php:59
@@ -3399,7 +3395,7 @@ msgstr ""
 msgid "Course Completed"
 msgstr ""
 
-#: templates/public-profile.php:137, templates/dashboard/question-answer.php:51, templates/dashboard/reviews.php:54, views/elements/search-filter.php:43, views/qna/contexts.php:16, templates/dashboard/assignments/review.php:60, templates/dashboard/assignments/submitted.php:80, views/quiz/header-context/frontend-dashboard-students-attempts.php:31
+#: templates/public-profile.php:137, templates/dashboard/question-answer.php:61, templates/dashboard/reviews.php:54, views/elements/search-filter.php:43, views/qna/contexts.php:16, templates/dashboard/assignments/review.php:60, templates/dashboard/assignments/submitted.php:80, views/quiz/header-context/frontend-dashboard-students-attempts.php:31
 msgid "Student"
 msgstr ""
 
@@ -3479,7 +3475,7 @@ msgstr ""
 msgid "No course found"
 msgstr ""
 
-#: templates/dashboard/announcements.php:108, templates/dashboard/assignments.php:57, templates/dashboard/question-answer.php:62, views/elements/filters.php:135, templates/dashboard/elements/filters.php:44
+#: templates/dashboard/announcements.php:108, templates/dashboard/assignments.php:57, templates/dashboard/question-answer.php:72, views/elements/filters.php:135, templates/dashboard/elements/filters.php:44
 msgid "Sort By"
 msgstr ""
 
@@ -3491,7 +3487,7 @@ msgstr ""
 msgid "DESC"
 msgstr ""
 
-#: templates/dashboard/announcements.php:116, templates/dashboard/purchase_history.php:94, templates/dashboard/reviews.php:57, views/elements/filters.php:149, views/fragments/announcement-list.php:249, views/pages/course-list.php:178, views/quiz/contexts.php:16, views/quiz/contexts.php:66, templates/dashboard/assignments/submitted.php:77, templates/single/assignment/content.php:410, views/options/template/import_export.php:84
+#: templates/dashboard/announcements.php:116, templates/dashboard/purchase_history.php:100, templates/dashboard/reviews.php:57, views/elements/filters.php:149, views/fragments/announcement-list.php:249, views/pages/course-list.php:178, views/quiz/contexts.php:16, views/quiz/contexts.php:66, templates/dashboard/assignments/submitted.php:77, templates/single/assignment/content.php:409, views/options/template/import_export.php:84
 msgid "Date"
 msgstr ""
 
@@ -3507,7 +3503,7 @@ msgstr ""
 msgid "Assignment Name"
 msgstr ""
 
-#: templates/dashboard/assignments.php:80, views/quiz/contexts.php:20, views/quiz/contexts.php:70, templates/single/assignment/content.php:413, views/quiz/header-context/course-single-previous-attempts.php:44
+#: templates/dashboard/assignments.php:80, views/quiz/contexts.php:20, views/quiz/contexts.php:70, templates/single/assignment/content.php:412, views/quiz/header-context/course-single-previous-attempts.php:44
 msgid "Total Marks"
 msgstr ""
 
@@ -3581,7 +3577,7 @@ msgstr[1] ""
 msgid "View All"
 msgstr ""
 
-#: templates/dashboard/dashboard.php:350, templates/dashboard/purchase_history.php:91
+#: templates/dashboard/dashboard.php:350, templates/dashboard/purchase_history.php:97
 msgid "Course Name"
 msgstr ""
 
@@ -3629,7 +3625,7 @@ msgstr ""
 msgid "Are you sure you want to delete this course permanently from the site? Please confirm your choice."
 msgstr ""
 
-#: templates/dashboard/my-courses.php:301, views/fragments/announcement-list.php:220, views/qna/qna-single.php:195, views/qna/qna-table.php:179, templates/dashboard/reviews/given-reviews.php:140
+#: templates/dashboard/my-courses.php:301, views/fragments/announcement-list.php:220, views/qna/qna-single.php:198, views/qna/qna-table.php:179, templates/dashboard/reviews/given-reviews.php:140
 msgid "Yes, Delete This"
 msgstr ""
 
@@ -3669,7 +3665,7 @@ msgstr ""
 msgid "Yearly"
 msgstr ""
 
-#: templates/dashboard/purchase_history.php:88
+#: templates/dashboard/purchase_history.php:94
 msgid "Order ID"
 msgstr ""
 
@@ -3735,10 +3731,6 @@ msgstr ""
 
 #: templates/dashboard/withdraw.php:39
 msgid "Withdrawal request is pending for approval, please hold tight."
-msgstr ""
-
-#: templates/dashboard/withdraw.php:57
-msgid "Withdrawal"
 msgstr ""
 
 #: templates/dashboard/withdraw.php:69
@@ -3837,7 +3829,7 @@ msgstr ""
 msgid "No Attachment Found"
 msgstr ""
 
-#: templates/global/attachments.php:30, views/fragments/attachments.php:30, templates/dashboard/assignments/review.php:110, templates/single/assignment/content.php:551
+#: templates/global/attachments.php:30, views/fragments/attachments.php:30, templates/dashboard/assignments/review.php:110, templates/single/assignment/content.php:550
 msgid "Size"
 msgstr ""
 
@@ -3909,7 +3901,7 @@ msgstr ""
 msgid "Clear"
 msgstr ""
 
-#: templates/shortcode/instructor-filter.php:78, templates/single/assignment/content.php:589, templates/single/assignment/content.php:378, templates/single/course/course-content.php:41, views/options/template/color_picker.php:106
+#: templates/shortcode/instructor-filter.php:78, templates/single/assignment/content.php:588, templates/single/assignment/content.php:377, templates/single/course/course-content.php:41, views/options/template/color_picker.php:106
 msgid "Show More"
 msgstr ""
 
@@ -4033,7 +4025,7 @@ msgstr ""
 msgid "Use this media"
 msgstr ""
 
-#: views/fragments/thumbnail-uploader.php:40, views/fragments/thumbnail-uploader.php:35, templates/single/assignment/content.php:225
+#: views/fragments/thumbnail-uploader.php:40, views/fragments/thumbnail-uploader.php:35, templates/single/assignment/content.php:224
 msgid "Size: "
 msgstr ""
 
@@ -4041,7 +4033,7 @@ msgstr ""
 msgid "700x430 pixels"
 msgstr ""
 
-#: views/fragments/thumbnail-uploader.php:52, views/fragments/thumbnail-uploader.php:47, templates/single/assignment/content.php:301
+#: views/fragments/thumbnail-uploader.php:52, views/fragments/thumbnail-uploader.php:47, templates/single/assignment/content.php:300
 msgid "File Support: "
 msgstr ""
 
@@ -4562,14 +4554,6 @@ msgstr ""
 msgid "Add a summary of short text to prepare students for the activities for the topic. The text is shown on the course page beside the tooltip beside the topic name."
 msgstr ""
 
-#: views/options/options_generator.php:14
-msgid "Tutor Settings"
-msgstr ""
-
-#: views/options/options_generator.php:98
-msgid "Save Settings"
-msgstr ""
-
 #: views/options/settings.php:24
 msgid "Search ...⌃⌥ + S or Alt+S for shortcut"
 msgstr ""
@@ -4901,7 +4885,7 @@ msgstr ""
 msgid "Yes, Reject Withdrawal"
 msgstr ""
 
-#: views/qna/contexts.php:18, views/qna/qna-single.php:141, views/qna/qna-single.php:176, views/qna/qna-table.php:122, templates/dashboard/question-answer/answers.php:104, templates/single/lesson/comments-loop.php:38, templates/single/lesson/comments-loop.php:88
+#: views/qna/contexts.php:18, views/qna/qna-single.php:144, views/qna/qna-single.php:179, views/qna/qna-table.php:122, templates/dashboard/question-answer/answers.php:104, templates/single/lesson/comments-loop.php:38, templates/single/lesson/comments-loop.php:88
 msgid "Reply"
 msgstr ""
 
@@ -4941,15 +4925,15 @@ msgstr ""
 msgid "ago"
 msgstr ""
 
-#: views/qna/qna-single.php:171, views/pages/tools/manage-tokens.php:116, views/pages/tools/manage-tokens.php:182
+#: views/qna/qna-single.php:174, views/pages/tools/manage-tokens.php:116, views/pages/tools/manage-tokens.php:182
 msgid "Write here..."
 msgstr ""
 
-#: views/qna/qna-single.php:192
+#: views/qna/qna-single.php:195
 msgid "Do You Want to Delete This Question?"
 msgstr ""
 
-#: views/qna/qna-single.php:193, views/qna/qna-table.php:172
+#: views/qna/qna-single.php:196, views/qna/qna-table.php:172
 msgid "All the replies also will be deleted."
 msgstr ""
 
@@ -4989,7 +4973,7 @@ msgstr ""
 msgid "Attempt not found or access permission denied"
 msgstr ""
 
-#: views/quiz/attempt-details.php:333, templates/single/assignment/content.php:476
+#: views/quiz/attempt-details.php:333, templates/single/assignment/content.php:475
 msgid "Instructor Note"
 msgstr ""
 
@@ -5021,11 +5005,11 @@ msgstr ""
 msgid "Incorrect Answer"
 msgstr ""
 
-#: views/quiz/contexts.php:23, views/quiz/contexts.php:74, templates/single/assignment/content.php:419
+#: views/quiz/contexts.php:23, views/quiz/contexts.php:74, templates/single/assignment/content.php:418
 msgid "Earned Marks"
 msgstr ""
 
-#: views/quiz/contexts.php:24, views/quiz/contexts.php:75, views/quiz/contexts.php:100, templates/dashboard/assignments/submitted.php:86, templates/single/assignment/content.php:422
+#: views/quiz/contexts.php:24, views/quiz/contexts.php:75, views/quiz/contexts.php:100, templates/dashboard/assignments/submitted.php:86, templates/single/assignment/content.php:421
 msgid "Result"
 msgstr ""
 
@@ -5041,7 +5025,7 @@ msgstr ""
 msgid "Attempt Time"
 msgstr ""
 
-#: views/quiz/contexts.php:71, templates/single/assignment/content.php:416
+#: views/quiz/contexts.php:71, templates/single/assignment/content.php:415
 msgid "Pass Marks"
 msgstr ""
 
@@ -5313,23 +5297,23 @@ msgstr ""
 msgid "Update Profile"
 msgstr ""
 
-#: templates/dashboard/settings/reset-password.php:26, templates/dashboard/settings/reset-password.php:27
+#: templates/dashboard/settings/reset-password.php:28, templates/dashboard/settings/reset-password.php:29
 msgid "Current Password"
 msgstr ""
 
-#: templates/dashboard/settings/reset-password.php:36
+#: templates/dashboard/settings/reset-password.php:38
 msgid "New Password"
 msgstr ""
 
-#: templates/dashboard/settings/reset-password.php:44, templates/dashboard/settings/reset-password.php:74
+#: templates/dashboard/settings/reset-password.php:46, templates/dashboard/settings/reset-password.php:76
 msgid "Type Password"
 msgstr ""
 
-#: templates/dashboard/settings/reset-password.php:66
+#: templates/dashboard/settings/reset-password.php:68
 msgid "Re-type New Password"
 msgstr ""
 
-#: templates/dashboard/settings/reset-password.php:87
+#: templates/dashboard/settings/reset-password.php:89
 msgid "Reset Password"
 msgstr ""
 
@@ -5337,19 +5321,19 @@ msgstr ""
 msgid "Social Profile Link"
 msgstr ""
 
-#: templates/dashboard/settings/withdraw-settings.php:25
+#: templates/dashboard/settings/withdraw-settings.php:28
 msgid "Select a withdraw method"
 msgstr ""
 
-#: templates/dashboard/settings/withdraw-settings.php:155
+#: templates/dashboard/settings/withdraw-settings.php:158
 msgid "There's no Withdrawal method selected yet! To select a Withdraw method, please contact the Site Admin."
 msgstr ""
 
-#: templates/dashboard/settings/withdraw-settings.php:50
+#: templates/dashboard/settings/withdraw-settings.php:53
 msgid "Min withdraw"
 msgstr ""
 
-#: templates/dashboard/settings/withdraw-settings.php:143
+#: templates/dashboard/settings/withdraw-settings.php:146
 msgid "Save Withdrawal Account"
 msgstr ""
 
@@ -5381,69 +5365,69 @@ msgstr ""
 msgid "Passing Mark:"
 msgstr ""
 
-#: templates/single/assignment/content.php:180
+#: templates/single/assignment/content.php:179
 msgid "You have missed the submission deadline. Please contact the instructor for more information."
 msgstr ""
 
-#: templates/single/assignment/content.php:612
+#: templates/single/assignment/content.php:611
 msgid "Start Assignment Submit"
 msgstr ""
 
-#: templates/single/assignment/content.php:618, templates/single/assignment/content.php:387
+#: templates/single/assignment/content.php:617, templates/single/assignment/content.php:386
 msgid "Skip To Next"
 msgstr ""
 
-#: templates/single/assignment/content.php:453
+#: templates/single/assignment/content.php:452
 msgid "Failed"
 msgstr ""
 
-#: templates/single/assignment/content.php:449
+#: templates/single/assignment/content.php:448
 msgid "Passed"
 msgstr ""
 
-#: templates/single/assignment/content.php:514
+#: templates/single/assignment/content.php:513
 msgid "Your Assignment"
 msgstr ""
 
-#: templates/single/assignment/content.php:600
+#: templates/single/assignment/content.php:599
 msgid "Continue Lesson"
 msgstr ""
 
-#: templates/single/assignment/content.php:251
+#: templates/single/assignment/content.php:250
 msgid "Assignment Submission"
 msgstr ""
 
-#: templates/single/assignment/content.php:255
+#: templates/single/assignment/content.php:254
 msgid "Assignment answer form"
 msgstr ""
 
-#: templates/single/assignment/content.php:280
+#: templates/single/assignment/content.php:279
 msgctxt "Assignment attachment"
 msgid "Attach assignment files (Max: "
 msgstr ""
 
-#: templates/single/assignment/content.php:281
+#: templates/single/assignment/content.php:280
 msgctxt "Assignment attachment"
 msgid " file)"
 msgstr ""
 
-#: templates/single/assignment/content.php:292
+#: templates/single/assignment/content.php:291
 msgid "Choose file"
 msgstr ""
 
-#: templates/single/assignment/content.php:303
+#: templates/single/assignment/content.php:302
 msgid "Any standard Image, Document, Presentation, Sheet, PDF or Text file is allowed"
 msgstr ""
 
-#: templates/single/assignment/content.php:307
+#: templates/single/assignment/content.php:306
 msgid "Total File Size: Max"
 msgstr ""
 
-#: templates/single/assignment/content.php:310
+#: templates/single/assignment/content.php:309
 msgid "MB"
 msgstr ""
 
-#: templates/single/assignment/content.php:355
+#: templates/single/assignment/content.php:354
 msgid "Submit Assignment"
 msgstr ""
 
