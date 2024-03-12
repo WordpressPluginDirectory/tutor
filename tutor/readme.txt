@@ -5,7 +5,7 @@ Tags: lms, course, elearning, education, learning management system
 Requires at least: 5.3
 Tested up to: 6.4
 Requires PHP: 7.4
-Stable tag: 2.6.1
+Stable tag: 2.6.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -315,6 +315,14 @@ These key integrations with Tutor LMS extend its capabilities for a more powerfu
 31. Mobile Responsive: Highly responsive UI designed for quality user experience
 
 == Changelog ==
+
+= 2.6.2 - March 11, 2024
+
+New: APIs for enabling students to submit assignments (Pro)
+New: APIs allowing students to add courses to their wishlists (Pro)
+New: APIs enabling students to review and rate courses (Pro)
+Update: Some enhancements to improve the overall experience
+Fix: Strengthened security to prevent data loss
 
 = 2.6.1 - February 19, 2024
 
