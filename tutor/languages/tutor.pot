@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-04-24 04:51+0000\n"
+"POT-Creation-Date: 2024-05-14 11:00+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -162,7 +162,7 @@ msgstr ""
 msgid "Tags"
 msgstr ""
 
-#: classes/Admin.php:113, classes/Admin.php:113, classes/Course.php:689, classes/Students_List.php:62, templates/public-profile.php:137, views/pages/students.php:84
+#: classes/Admin.php:113, classes/Admin.php:113, classes/Course.php:691, classes/Students_List.php:62, templates/public-profile.php:137, views/pages/students.php:84
 msgid "Students"
 msgstr ""
 
@@ -231,7 +231,7 @@ msgstr ""
 msgid "If you like %1$s please leave us a %2$s rating. A huge thanks in advance!"
 msgstr ""
 
-#: classes/Ajax.php:91, classes/Ajax.php:170, classes/Ajax.php:505, classes/Ajax.php:662, classes/Ajax.php:735, classes/Course.php:650, classes/Course.php:933, classes/Instructor.php:325, classes/Lesson.php:223, classes/Lesson.php:275, classes/Lesson.php:339, classes/Quiz.php:294, classes/Quiz.php:841, classes/Quiz.php:960, classes/Quiz.php:1033, classes/Quiz.php:1120, classes/Quiz.php:1294, classes/Quiz.php:1321, classes/Quiz.php:1471, classes/Quiz.php:1559, classes/Quiz.php:1597, classes/Quiz.php:1698, classes/Q_And_A.php:205
+#: classes/Ajax.php:91, classes/Ajax.php:170, classes/Ajax.php:509, classes/Ajax.php:666, classes/Ajax.php:739, classes/Course.php:652, classes/Course.php:935, classes/Instructor.php:325, classes/Lesson.php:223, classes/Lesson.php:275, classes/Lesson.php:339, classes/Quiz.php:294, classes/Quiz.php:841, classes/Quiz.php:960, classes/Quiz.php:1033, classes/Quiz.php:1120, classes/Quiz.php:1294, classes/Quiz.php:1321, classes/Quiz.php:1471, classes/Quiz.php:1559, classes/Quiz.php:1597, classes/Quiz.php:1698, classes/Q_And_A.php:205
 msgid "Access Denied"
 msgstr ""
 
@@ -259,47 +259,47 @@ msgstr ""
 msgid "SSL certificate"
 msgstr ""
 
-#: classes/Ajax.php:568
+#: classes/Ajax.php:572
 msgid "Nonce verification failed"
 msgstr ""
 
-#: classes/Ajax.php:606
+#: classes/Ajax.php:610
 msgid "Username is required."
 msgstr ""
 
-#: classes/Ajax.php:680
+#: classes/Ajax.php:684
 msgid "Course name required"
 msgstr ""
 
-#: classes/Ajax.php:685
+#: classes/Ajax.php:689
 msgid "Announcement title required"
 msgstr ""
 
-#: classes/Ajax.php:689, classes/Ajax.php:694
+#: classes/Ajax.php:693, classes/Ajax.php:698
 msgid "Announcement summary required"
 msgstr ""
 
-#: classes/Ajax.php:702
+#: classes/Ajax.php:706
 msgid "All fields required!"
 msgstr ""
 
-#: classes/Ajax.php:716
+#: classes/Ajax.php:720
 msgid "Announcement created successfully"
 msgstr ""
 
-#: classes/Ajax.php:716
+#: classes/Ajax.php:720
 msgid "Announcement updated successfully"
 msgstr ""
 
-#: classes/Ajax.php:720
+#: classes/Ajax.php:724
 msgid "Something Went Wrong!"
 msgstr ""
 
-#: classes/Ajax.php:740
+#: classes/Ajax.php:744
 msgid "Announcement deleted successfully"
 msgstr ""
 
-#: classes/Ajax.php:743
+#: classes/Ajax.php:747
 msgid "Announcement delete failed"
 msgstr ""
 
@@ -367,97 +367,101 @@ msgstr ""
 msgid "Access Denied!"
 msgstr ""
 
-#: classes/Course.php:332, classes/Course.php:422
+#: classes/Course.php:303, templates/loop/course-price-edd.php:80, templates/loop/course-price-woocommerce.php:77, templates/loop/course-price.php:72
+msgid "Fully Booked"
+msgstr ""
+
+#: classes/Course.php:334, classes/Course.php:424
 msgid "Course Builder"
 msgstr ""
 
-#: classes/Course.php:334, classes/Course.php:425
+#: classes/Course.php:336, classes/Course.php:427
 msgid "Additional Data"
 msgstr ""
 
-#: classes/Course.php:336, classes/Course.php:419, classes/Options_V2.php:815
+#: classes/Course.php:338, classes/Course.php:421, classes/Options_V2.php:815
 msgid "Video"
 msgstr ""
 
-#: classes/Course.php:638
+#: classes/Course.php:640
 msgid "Topic title is required!"
 msgstr ""
 
-#: classes/Course.php:688, classes/Post_types.php:231
+#: classes/Course.php:690, classes/Post_types.php:231
 msgid "Lessons"
 msgstr ""
 
-#: classes/Course.php:690, templates/course-filter/filters.php:122, templates/dashboard/purchase_history.php:103, views/pages/course-list.php:175
+#: classes/Course.php:692, templates/course-filter/filters.php:122, templates/dashboard/purchase_history.php:103, views/pages/course-list.php:175
 msgid "Price"
 msgstr ""
 
-#: classes/Course.php:733
+#: classes/Course.php:735
 msgid "free"
 msgstr ""
 
-#: classes/Course.php:794
+#: classes/Course.php:796
 msgid "Please Sign In first"
 msgstr ""
 
-#: classes/Course.php:845, classes/Lesson.php:437
+#: classes/Course.php:847, classes/Lesson.php:437
 msgid "Please Sign-In"
 msgstr ""
 
-#: classes/Course.php:942
+#: classes/Course.php:944
 msgid "Only main instructor can delete this course"
 msgstr ""
 
-#: classes/Course.php:1130, classes/Options_V2.php:1044, views/metabox/course-level-metabox.php:19
+#: classes/Course.php:1132, classes/Options_V2.php:1044, views/metabox/course-level-metabox.php:19
 msgid "Difficulty Level"
 msgstr ""
 
-#: classes/Course.php:1131, classes/Course_Settings_Tabs.php:92, classes/Options_V2.php:1178, classes/Options_V2.php:1186, classes/Options_V2.php:1194, classes/Options_V2.php:1210, classes/Options_V2.php:1218, classes/Options_V2.php:1226, classes/Options_V2.php:1234, classes/Options_V2.php:1242, classes/Options_V2.php:1250, classes/Options_V2.php:1258, classes/Options_V2.php:1266, classes/Options_V2.php:1282, classes/Options_V2.php:1290, classes/User.php:377
+#: classes/Course.php:1133, classes/Course_Settings_Tabs.php:92, classes/Options_V2.php:1178, classes/Options_V2.php:1186, classes/Options_V2.php:1194, classes/Options_V2.php:1210, classes/Options_V2.php:1218, classes/Options_V2.php:1226, classes/Options_V2.php:1234, classes/Options_V2.php:1242, classes/Options_V2.php:1250, classes/Options_V2.php:1258, classes/Options_V2.php:1266, classes/Options_V2.php:1282, classes/Options_V2.php:1290, classes/User.php:377
 msgid "Enable"
 msgstr ""
 
-#: classes/Course.php:1134
+#: classes/Course.php:1136
 msgid "Course difficulty level"
 msgstr ""
 
-#: classes/Course.php:1433
+#: classes/Course.php:1435
 msgid "Complete all lessons to mark this course as complete"
 msgstr ""
 
-#: classes/Course.php:1498
+#: classes/Course.php:1500
 msgid "quiz"
 msgid_plural "quizzes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: classes/Course.php:1499
+#: classes/Course.php:1501
 msgid "assignment"
 msgid_plural "assignments"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %1$s: number of quiz/assignment pass required; %2$s: quiz/assignment string
-#: classes/Course.php:1503, classes/Course.php:1508
+#: classes/Course.php:1505, classes/Course.php:1510
 msgid "You have to pass %1$s %2$s to complete this course."
 msgstr ""
 
 #. translators: %1$s: number of quiz pass required; %2$s: quiz string; %3$s: number of assignment pass required; %4$s: assignment string
-#: classes/Course.php:1513
+#: classes/Course.php:1515
 msgid "You have to pass %1$s %2$s and %3$s %4$s to complete this course."
 msgstr ""
 
-#: classes/Course.php:1610
+#: classes/Course.php:1612
 msgid "Invalid Course ID or Access Denied."
 msgstr ""
 
-#: classes/Course.php:1659
+#: classes/Course.php:1661
 msgid "Invalid course ID"
 msgstr ""
 
-#: classes/Course.php:1656
+#: classes/Course.php:1658
 msgid "Enrollment failed, please try again!"
 msgstr ""
 
-#: classes/Course.php:1654
+#: classes/Course.php:1656
 msgid "Enrollment successfully done!"
 msgstr ""
 
@@ -489,11 +493,11 @@ msgstr ""
 msgid "Could not delete selected courses"
 msgstr ""
 
-#: classes/Course_List.php:372
+#: classes/Course_List.php:373
 msgid "Course delete failed "
 msgstr ""
 
-#: classes/Course_List.php:370
+#: classes/Course_List.php:371
 msgid "Course has been deleted "
 msgstr ""
 
@@ -2789,7 +2793,7 @@ msgstr ""
 msgid "Order History"
 msgstr ""
 
-#: classes/Utils.php:9155, templates/dashboard/question-answer.php:53, views/pages/question_answer.php:49, templates/single/course/enrolled/question_and_answer.php:114
+#: classes/Utils.php:9155, templates/dashboard/question-answer.php:53, views/pages/question_answer.php:50, templates/single/course/enrolled/question_and_answer.php:114
 msgid "Question & Answer"
 msgstr ""
 
@@ -3021,7 +3025,7 @@ msgstr ""
 msgid "Count"
 msgstr ""
 
-#: includes/translate-text.php:28, restapi/RestAuth.php:353
+#: includes/translate-text.php:28, restapi/RestAuth.php:408
 msgid "Read"
 msgstr ""
 
@@ -3222,23 +3226,23 @@ msgstr ""
 msgid "second"
 msgstr ""
 
-#: restapi/RestAuth.php:194
+#: restapi/RestAuth.php:244
 msgid "Invalid meta id"
 msgstr ""
 
-#: restapi/RestAuth.php:204
+#: restapi/RestAuth.php:254
 msgid "API keys revoke failed, please try again."
 msgstr ""
 
-#: restapi/RestAuth.php:202
+#: restapi/RestAuth.php:252
 msgid "API keys permanently revoked"
 msgstr ""
 
-#: restapi/RestAuth.php:328, views/fragments/announcement-list.php:174, views/fragments/announcement-list.php:322, views/modal/edit_quiz.php:62, views/pages/course-list.php:353, views/pages/instructors.php:215, templates/dashboard/announcements/details.php:45, templates/dashboard/reviews/given-reviews.php:76, templates/single/assignment/content.php:523, views/options/field-types/toggle_switch_button_thumb.php:28
+#: restapi/RestAuth.php:383, views/fragments/announcement-list.php:174, views/fragments/announcement-list.php:322, views/modal/edit_quiz.php:62, views/pages/course-list.php:353, views/pages/instructors.php:215, templates/dashboard/announcements/details.php:45, templates/dashboard/reviews/given-reviews.php:76, templates/single/assignment/content.php:523, views/options/field-types/toggle_switch_button_thumb.php:28
 msgid "Edit"
 msgstr ""
 
-#: restapi/RestAuth.php:332
+#: restapi/RestAuth.php:387
 msgid "Revoke"
 msgstr ""
 
@@ -3250,39 +3254,35 @@ msgstr ""
 msgid "Author not found"
 msgstr ""
 
-#: restapi/REST_Course.php:143, restapi/REST_Course.php:286, restapi/REST_Course.php:390
+#: restapi/REST_Course.php:184
 msgid "Course retrieved successfully"
 msgstr ""
 
-#: restapi/REST_Course.php:152, restapi/REST_Course.php:399
+#: restapi/REST_Course.php:193
 msgid "Course not found"
 msgstr ""
 
-#: restapi/REST_Course.php:175
+#: restapi/REST_Course.php:216
 msgid "Course detail retrieved successfully"
 msgstr ""
 
-#: restapi/REST_Course.php:182
+#: restapi/REST_Course.php:223
 msgid "Detail not found for given ID"
 msgstr ""
 
-#: restapi/REST_Course.php:295
-msgid "Course not found for given terms"
-msgstr ""
-
-#: restapi/REST_Course.php:317
+#: restapi/REST_Course.php:282
 msgid "Categories field is not an array"
 msgstr ""
 
-#: restapi/REST_Course.php:321
+#: restapi/REST_Course.php:286
 msgid "Tags field is not an array"
 msgstr ""
 
-#: restapi/REST_Course.php:441
+#: restapi/REST_Course.php:330
 msgid "Course contents retrieved successfully"
 msgstr ""
 
-#: restapi/REST_Course.php:449
+#: restapi/REST_Course.php:338
 msgid "Contents for this course with the given course id not found"
 msgstr ""
 
@@ -3294,35 +3294,39 @@ msgstr ""
 msgid "Announcement not found for given ID"
 msgstr ""
 
-#: restapi/REST_Lesson.php:98
+#: restapi/REST_Lesson.php:61
+msgid "topic_id is required"
+msgstr ""
+
+#: restapi/REST_Lesson.php:109
 msgid "Lesson retrieved successfully"
 msgstr ""
 
-#: restapi/REST_Lesson.php:107
+#: restapi/REST_Lesson.php:118
 msgid "Lesson not found for the given topic ID"
 msgstr ""
 
-#: restapi/REST_Quiz.php:109
-msgid "Quiz retrieved successfully"
-msgstr ""
-
-#: restapi/REST_Quiz.php:118
+#: restapi/REST_Quiz.php:105, restapi/REST_Quiz.php:207
 msgid "Quiz not found for given ID"
 msgstr ""
 
-#: restapi/REST_Quiz.php:183
+#: restapi/REST_Quiz.php:151, restapi/REST_Quiz.php:198
+msgid "Quiz retrieved successfully"
+msgstr ""
+
+#: restapi/REST_Quiz.php:272
 msgid "Question retrieved successfully"
 msgstr ""
 
-#: restapi/REST_Quiz.php:192
+#: restapi/REST_Quiz.php:281
 msgid "Question not found for given ID"
 msgstr ""
 
-#: restapi/REST_Quiz.php:252
+#: restapi/REST_Quiz.php:341
 msgid "Quiz attempts retrieved successfully"
 msgstr ""
 
-#: restapi/REST_Quiz.php:261
+#: restapi/REST_Quiz.php:350
 msgid "Quiz attempts not found for given ID"
 msgstr ""
 
@@ -3334,12 +3338,16 @@ msgstr ""
 msgid "Rating not found for given ID"
 msgstr ""
 
-#: restapi/REST_Topic.php:64
+#: restapi/REST_Topic.php:58
+msgid "course_id is required"
+msgstr ""
+
+#: restapi/REST_Topic.php:73
 msgid "Topic retrieved successfully"
 msgstr ""
 
-#: restapi/REST_Topic.php:72
-msgid "Topic not found for given ID"
+#: restapi/REST_Topic.php:81
+msgid "Topic not found for given course ID"
 msgstr ""
 
 #: templates/course-embed.php:95, templates/loop/course-author.php:32, templates/loop/meta.php:53, templates/single/course/lead-info.php:72, templates/single/course/enrolled/announcements.php:34
@@ -3890,10 +3898,6 @@ msgstr ""
 
 #: templates/loop/course-price-edd.php:57, templates/loop/course-price-woocommerce.php:65, templates/loop/course-price.php:59
 msgid "% Booked"
-msgstr ""
-
-#: templates/loop/course-price-edd.php:80, templates/loop/course-price-woocommerce.php:77, templates/loop/course-price.php:72
-msgid "Fully Booked"
 msgstr ""
 
 #: templates/modal/alert.php:37
