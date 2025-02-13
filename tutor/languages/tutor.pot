@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-01-21 10:21+0000\n"
+"POT-Creation-Date: 2025-02-12 10:33+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -22,7 +22,7 @@ msgstr ""
 msgid "SSL certificate"
 msgstr ""
 
-#: classes/Addons.php:183, classes/Ajax.php:86, classes/Ajax.php:166, classes/Ajax.php:503, classes/Ajax.php:582, classes/Course.php:1810, classes/Course.php:2044, classes/Instructor.php:325, classes/Quiz.php:358, classes/Quiz.php:940, classes/Quiz.php:1294, classes/Quiz.php:1444, classes/Quiz.php:1532, classes/Quiz.php:1960, classes/Quiz.php:1997, classes/Q_And_A.php:205
+#: classes/Addons.php:183, classes/Ajax.php:86, classes/Ajax.php:166, classes/Ajax.php:503, classes/Ajax.php:582, classes/Course.php:1830, classes/Course.php:2064, classes/Instructor.php:325, classes/Quiz.php:358, classes/Quiz.php:940, classes/Quiz.php:1294, classes/Quiz.php:1444, classes/Quiz.php:1532, classes/Quiz.php:1960, classes/Quiz.php:1997, classes/Q_And_A.php:205
 msgid "Access Denied"
 msgstr ""
 
@@ -500,177 +500,185 @@ msgstr ""
 msgid "Mark as unpaid"
 msgstr ""
 
-#: classes/Course.php:378
-msgid "Invalid video source"
-msgstr ""
-
-#: classes/Course.php:376
-msgid "Video source is required"
+#: classes/Course.php:287
+msgid "Invalid password"
 msgstr ""
 
 #: classes/Course.php:396
+msgid "Invalid video source"
+msgstr ""
+
+#: classes/Course.php:394
+msgid "Video source is required"
+msgstr ""
+
+#: classes/Course.php:414
 msgid "Invalid course categories"
 msgstr ""
 
-#: classes/Course.php:404
+#: classes/Course.php:422
 msgid "Invalid course tags"
 msgstr ""
 
-#: classes/Course.php:472, classes/Course.php:510
+#: classes/Course.php:490, classes/Course.php:528
 msgid "Invalid price type"
 msgstr ""
 
-#: classes/Course.php:485, classes/Course.php:525
+#: classes/Course.php:503, classes/Course.php:543
 msgid "Product already linked with course"
 msgstr ""
 
-#: classes/Course.php:537
+#: classes/Course.php:555
 msgid "Price is required"
 msgstr ""
 
-#: classes/Course.php:529
+#: classes/Course.php:547
 msgid "Invalid product"
 msgstr ""
 
-#: classes/Course.php:764, classes/Post_types.php:98
+#: classes/Course.php:782, classes/Post_types.php:98
 msgid "New Course"
 msgstr ""
 
-#: classes/Course.php:785
+#: classes/Course.php:805
 msgid "Draft course created"
 msgstr ""
 
-#: classes/Course.php:898, classes/Course.php:990, classes/Course.php:1132, classes/Course.php:1163
+#: classes/Course.php:918, classes/Course.php:1010, classes/Course.php:1152, classes/Course.php:1183
 msgid "Invalid input"
 msgstr ""
 
-#: classes/Course.php:923
+#: classes/Course.php:943
 msgid "Course created successfully"
 msgstr ""
 
-#: classes/Course.php:1038
+#: classes/Course.php:1058
 msgid "Course updated successfully."
 msgstr ""
 
-#: classes/Course.php:1065
+#: classes/Course.php:1085
 msgid "Builder unlinked successfully."
 msgstr ""
 
-#: classes/Course.php:1128, classes/Course.php:1159
+#: classes/Course.php:1148, classes/Course.php:1179
 msgid "Invalid course id"
 msgstr ""
 
-#: classes/Course.php:1138
+#: classes/Course.php:1158
 msgid "Course contents fetched successfully"
 msgstr ""
 
-#: classes/Course.php:1281
+#: classes/Course.php:1301
 msgid "You cannot edit this course because it is in the Trash. Please restore it and try again"
 msgstr ""
 
-#: classes/Course.php:1478
+#: classes/Course.php:1498
 msgid "Products retrieved successfully!"
 msgstr ""
 
-#: classes/Course.php:1508
+#: classes/Course.php:1528
 msgid "One product can not be added to multiple course!"
 msgstr ""
 
-#: classes/Course.php:1520
+#: classes/Course.php:1540
 msgid "Product not found"
 msgstr ""
 
-#: classes/Course.php:1539, classes/Frontend.php:107
+#: classes/Course.php:1559, classes/Frontend.php:107
 msgid "Access Denied!"
 msgstr ""
 
-#: classes/Course.php:1569, templates/loop/course-price-edd.php:80, templates/loop/course-price-tutor.php:85, templates/loop/course-price-woocommerce.php:77, templates/loop/course-price.php:78
+#: classes/Course.php:1589, templates/loop/course-price-edd.php:80, templates/loop/course-price-tutor.php:85, templates/loop/course-price-woocommerce.php:77, templates/loop/course-price.php:79
 msgid "Fully Booked"
 msgstr ""
 
-#: classes/Course.php:1793
+#: classes/Course.php:1813
 msgid "Topic title is required!"
 msgstr ""
 
-#: classes/Course.php:1838
+#: classes/Course.php:1858
 msgid "Topic created successfully!"
 msgstr ""
 
-#: classes/Course.php:1833
+#: classes/Course.php:1853
 msgid "Topic updated successfully!"
 msgstr ""
 
-#: classes/Course.php:1884
+#: classes/Course.php:1904
 msgid "Topic deleted successfully!"
 msgstr ""
 
-#: classes/Course.php:1906
+#: classes/Course.php:1926
 msgid "Please Sign In first"
 msgstr ""
 
-#: classes/Course.php:1956, classes/Lesson.php:430
+#: classes/Course.php:1976, classes/Lesson.php:430
 msgid "Please Sign-In"
 msgstr ""
 
-#: classes/Course.php:2053
+#: classes/Course.php:2073
 msgid "Only main instructor can delete this course"
 msgstr ""
 
-#: classes/Course.php:2074
+#: classes/Course.php:2094
 msgid "Course has been trashed successfully "
 msgstr ""
 
-#: classes/Course.php:2262, classes/Options_V2.php:1186
+#: classes/Course.php:2282, classes/Options_V2.php:1186
 msgid "Difficulty Level"
 msgstr ""
 
-#: classes/Course.php:2263, classes/Options_V2.php:1320, classes/Options_V2.php:1328, classes/Options_V2.php:1336, classes/Options_V2.php:1352, classes/Options_V2.php:1360, classes/Options_V2.php:1368, classes/Options_V2.php:1376, classes/Options_V2.php:1384, classes/Options_V2.php:1392, classes/Options_V2.php:1400, classes/Options_V2.php:1408, classes/Options_V2.php:1424, classes/Options_V2.php:1432, classes/User.php:452
+#: classes/Course.php:2283, classes/Options_V2.php:1320, classes/Options_V2.php:1328, classes/Options_V2.php:1336, classes/Options_V2.php:1352, classes/Options_V2.php:1360, classes/Options_V2.php:1368, classes/Options_V2.php:1376, classes/Options_V2.php:1384, classes/Options_V2.php:1392, classes/Options_V2.php:1400, classes/Options_V2.php:1408, classes/Options_V2.php:1424, classes/Options_V2.php:1432, classes/User.php:452
 msgid "Enable"
 msgstr ""
 
-#: classes/Course.php:2266
+#: classes/Course.php:2286
 msgid "Course difficulty level"
 msgstr ""
 
-#: classes/Course.php:2596
+#: classes/Course.php:2616
 msgid "Complete all lessons to mark this course as complete"
 msgstr ""
 
-#: classes/Course.php:2661
+#: classes/Course.php:2681
 msgid "quiz"
 msgid_plural "quizzes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: classes/Course.php:2662
+#: classes/Course.php:2682
 msgid "assignment"
 msgid_plural "assignments"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %1$s: number of quiz/assignment pass required; %2$s: quiz/assignment string
-#: classes/Course.php:2666, classes/Course.php:2671
+#: classes/Course.php:2686, classes/Course.php:2691
 msgid "You have to pass %1$s %2$s to complete this course."
 msgstr ""
 
 #. translators: %1$s: number of quiz pass required; %2$s: quiz string; %3$s: number of assignment pass required; %4$s: assignment string
-#: classes/Course.php:2676
+#: classes/Course.php:2696
 msgid "You have to pass %1$s %2$s and %3$s %4$s to complete this course."
 msgstr ""
 
-#: classes/Course.php:2773
+#: classes/Course.php:2793
 msgid "Invalid Course ID or Access Denied."
 msgstr ""
 
-#: classes/Course.php:2822
+#: classes/Course.php:2846
 msgid "Invalid course ID"
 msgstr ""
 
-#: classes/Course.php:2819
+#: classes/Course.php:2837
+msgid "This course is password protected"
+msgstr ""
+
+#: classes/Course.php:2843
 msgid "Enrollment failed, please try again!"
 msgstr ""
 
-#: classes/Course.php:2817
+#: classes/Course.php:2841
 msgid "Enrollment successfully done!"
 msgstr ""
 
@@ -702,15 +710,19 @@ msgstr ""
 msgid "Could not delete selected courses"
 msgstr ""
 
-#: classes/Course_List.php:371
+#: classes/Course_List.php:326
+msgid "Could not update course status"
+msgstr ""
+
+#: classes/Course_List.php:366
 msgid "Course trashed successfully"
 msgstr ""
 
-#: classes/Course_List.php:419
+#: classes/Course_List.php:414
 msgid "Course delete failed "
 msgstr ""
 
-#: classes/Course_List.php:417
+#: classes/Course_List.php:412
 msgid "Course has been deleted "
 msgstr ""
 
@@ -3458,147 +3470,151 @@ msgstr ""
 msgid "%s payment method is not configured properly. Please contact with site administrator!"
 msgstr ""
 
-#: ecommerce/EmailController.php:504, ecommerce/EmailController.php:568, ecommerce/EmailController.php:628
+#: ecommerce/EmailController.php:508, ecommerce/EmailController.php:572, ecommerce/EmailController.php:632
 msgid "New order placed"
 msgstr ""
 
-#: ecommerce/EmailController.php:507, ecommerce/EmailController.php:631
+#: ecommerce/EmailController.php:511, ecommerce/EmailController.php:575, ecommerce/EmailController.php:635
 msgid "New order emails are sent to chosen recipient(s) when a new order is received."
 msgstr ""
 
-#: ecommerce/EmailController.php:508
+#: ecommerce/EmailController.php:512
 msgid "Your order has been received! 🎉"
 msgstr ""
 
-#: ecommerce/EmailController.php:509
+#: ecommerce/EmailController.php:513
 msgid "Your order has been received!"
 msgstr ""
 
-#: ecommerce/EmailController.php:523, ecommerce/EmailController.php:585
+#: ecommerce/EmailController.php:527, ecommerce/EmailController.php:589
 msgid "Hi"
 msgstr ""
 
-#: ecommerce/EmailController.php:524
+#: ecommerce/EmailController.php:528
 msgid "Thank you for your order. We've received your order successfully, and it is now being processed."
 msgstr ""
 
-#: ecommerce/EmailController.php:525
+#: ecommerce/EmailController.php:529
 msgid "Below are the details of your order:"
 msgstr ""
 
-#: ecommerce/EmailController.php:526, ecommerce/EmailController.php:555, ecommerce/EmailController.php:588, ecommerce/EmailController.php:616, ecommerce/EmailController.php:644
+#: ecommerce/EmailController.php:530, ecommerce/EmailController.php:559, ecommerce/EmailController.php:592, ecommerce/EmailController.php:620, ecommerce/EmailController.php:648
 msgid "Order ID:"
 msgstr ""
 
-#: ecommerce/EmailController.php:527, ecommerce/EmailController.php:558, ecommerce/EmailController.php:589, ecommerce/EmailController.php:645
+#: ecommerce/EmailController.php:531, ecommerce/EmailController.php:562, ecommerce/EmailController.php:593, ecommerce/EmailController.php:649
 msgid "Order Date:"
 msgstr ""
 
-#: ecommerce/EmailController.php:528, ecommerce/EmailController.php:559, ecommerce/EmailController.php:619, ecommerce/EmailController.php:646
+#: ecommerce/EmailController.php:532, ecommerce/EmailController.php:563, ecommerce/EmailController.php:623, ecommerce/EmailController.php:650
 msgid "Total Amount:"
 msgstr ""
 
-#: ecommerce/EmailController.php:531, ecommerce/EmailController.php:562
+#: ecommerce/EmailController.php:535, ecommerce/EmailController.php:566
 msgid "We will let you know once your order has been completed and is ready for access."
 msgstr ""
 
-#: ecommerce/EmailController.php:535, ecommerce/EmailController.php:597, ecommerce/EmailController.php:653
+#: ecommerce/EmailController.php:539, ecommerce/EmailController.php:601, ecommerce/EmailController.php:657
 msgid "Order status updated"
 msgstr ""
 
-#: ecommerce/EmailController.php:539
+#: ecommerce/EmailController.php:542, ecommerce/EmailController.php:604, ecommerce/EmailController.php:660
+msgid "Order status update emails are sent to chosen recipient(s) whenever a order status updated."
+msgstr ""
+
+#: ecommerce/EmailController.php:543
 msgid "Your Order Status Has Been Updated to {order_status} "
 msgstr ""
 
-#: ecommerce/EmailController.php:540
+#: ecommerce/EmailController.php:544
 msgid "Your Order Status Has Been Updated to {order_status}"
 msgstr ""
 
-#: ecommerce/EmailController.php:553, ecommerce/EmailController.php:614, ecommerce/EmailController.php:671
+#: ecommerce/EmailController.php:557, ecommerce/EmailController.php:618, ecommerce/EmailController.php:675
 msgid "Hi {user_name},"
 msgstr ""
 
-#: ecommerce/EmailController.php:554
+#: ecommerce/EmailController.php:558
 msgid "We're reaching out to let you know that your order status has been updated to {order_status}. We understand the importance of keeping you informed at every step of the way. Below is a summary of your order:"
 msgstr ""
 
-#: ecommerce/EmailController.php:556, ecommerce/EmailController.php:617
+#: ecommerce/EmailController.php:560, ecommerce/EmailController.php:621
 msgid "Order Status:"
 msgstr ""
 
-#: ecommerce/EmailController.php:557, templates/dashboard/reviews.php:93
+#: ecommerce/EmailController.php:561, templates/dashboard/reviews.php:93
 msgid "Course:"
 msgstr ""
 
-#: ecommerce/EmailController.php:572
+#: ecommerce/EmailController.php:576
 msgid "A New Student Has Enrolled in Your Course! 🎉"
 msgstr ""
 
-#: ecommerce/EmailController.php:573
+#: ecommerce/EmailController.php:577
 msgid "A New Student Has Enrolled in Your Course!"
 msgstr ""
 
-#: ecommerce/EmailController.php:586
+#: ecommerce/EmailController.php:590
 msgid "We're excited to let you know that a new student has just enrolled in one of your courses! Here are the course details:"
 msgstr ""
 
-#: ecommerce/EmailController.php:587
+#: ecommerce/EmailController.php:591
 msgid "Student Name:"
 msgstr ""
 
-#: ecommerce/EmailController.php:590
+#: ecommerce/EmailController.php:594
 msgid "Payment Status:"
 msgstr ""
 
-#: ecommerce/EmailController.php:593, ecommerce/EmailController.php:622, ecommerce/EmailController.php:649, ecommerce/EmailController.php:680
+#: ecommerce/EmailController.php:597, ecommerce/EmailController.php:626, ecommerce/EmailController.php:653, ecommerce/EmailController.php:684
 msgid "Please review the order and ensure everything is in place for the student's access to the course. Thank you."
 msgstr ""
 
-#: ecommerce/EmailController.php:601, ecommerce/EmailController.php:602
+#: ecommerce/EmailController.php:605, ecommerce/EmailController.php:606
 msgid "Instructor Notice: Your Student's Order Status is Now {order_status}"
 msgstr ""
 
-#: ecommerce/EmailController.php:615
+#: ecommerce/EmailController.php:619
 msgid "We'd like to update you on your course enrollment status. One of your students has an order that has been updated to {order_status}. Here are the details:"
 msgstr ""
 
-#: ecommerce/EmailController.php:618
+#: ecommerce/EmailController.php:622
 msgid "Course Name:"
 msgstr ""
 
-#: ecommerce/EmailController.php:632, ecommerce/EmailController.php:633
+#: ecommerce/EmailController.php:636, ecommerce/EmailController.php:637
 msgid "A New Order Has Been Placed on Your Platform!"
 msgstr ""
 
-#: ecommerce/EmailController.php:643
+#: ecommerce/EmailController.php:647
 msgid "Below are the order details:"
 msgstr ""
 
-#: ecommerce/EmailController.php:657, ecommerce/EmailController.php:658
+#: ecommerce/EmailController.php:661, ecommerce/EmailController.php:662
 msgid "An Order's Status Has Been Updated to {order_status}"
 msgstr ""
 
-#: ecommerce/EmailController.php:672
+#: ecommerce/EmailController.php:676
 msgid "We're reaching out to let you know that the order status of {student_name} has been updated to {order_status}. Here is the summary of the order:"
 msgstr ""
 
-#: ecommerce/EmailController.php:673, templates/dashboard/purchase_history.php:103
+#: ecommerce/EmailController.php:677, templates/dashboard/purchase_history.php:103
 msgid "Order ID"
 msgstr ""
 
-#: ecommerce/EmailController.php:674
+#: ecommerce/EmailController.php:678
 msgid "Order Date"
 msgstr ""
 
-#: ecommerce/EmailController.php:675
+#: ecommerce/EmailController.php:679
 msgid "Order Status"
 msgstr ""
 
-#: ecommerce/EmailController.php:676, templates/dashboard/dashboard.php:350
+#: ecommerce/EmailController.php:680, templates/dashboard/dashboard.php:350
 msgid "Course Name"
 msgstr ""
 
-#: ecommerce/EmailController.php:677
+#: ecommerce/EmailController.php:681
 msgid "Total Amount"
 msgstr ""
 
@@ -4119,7 +4135,7 @@ msgstr ""
 msgid "file not exists"
 msgstr ""
 
-#: includes/tutor-general-functions.php:1565, templates/single/course/add-to-cart-tutor.php:59
+#: includes/tutor-general-functions.php:1572, templates/single/course/add-to-cart-tutor.php:59
 msgid "Incl. tax"
 msgstr ""
 
@@ -4641,7 +4657,7 @@ msgstr ""
 msgid "Co-author"
 msgstr ""
 
-#: templates/dashboard/my-courses.php:202, templates/single/password-protected.php:53, views/qna/qna-new.php:36, templates/single/lesson/comment.php:90, views/pages/tools/manage-tokens.php:194
+#: templates/dashboard/my-courses.php:202, templates/single/password-protected.php:55, views/qna/qna-new.php:36, templates/single/lesson/comment.php:90, views/pages/tools/manage-tokens.php:194
 msgid "Submit"
 msgstr ""
 
@@ -5105,11 +5121,11 @@ msgstr ""
 msgid "Review Progress"
 msgstr ""
 
-#: templates/loop/course-price-edd.php:29, templates/loop/course-price-tutor.php:21, templates/loop/course-price-woocommerce.php:23, templates/loop/course-price.php:37
+#: templates/loop/course-price-edd.php:29, templates/loop/course-price-tutor.php:21, templates/loop/course-price-woocommerce.php:23, templates/loop/course-price.php:38
 msgid "Enroll Course"
 msgstr ""
 
-#: templates/loop/course-price-edd.php:57, templates/loop/course-price-tutor.php:66, templates/loop/course-price-woocommerce.php:65, templates/loop/course-price.php:65
+#: templates/loop/course-price-edd.php:57, templates/loop/course-price-tutor.php:66, templates/loop/course-price-woocommerce.php:65, templates/loop/course-price.php:66
 msgid "% Booked"
 msgstr ""
 
@@ -5169,7 +5185,7 @@ msgstr ""
 msgid "Enter your password"
 msgstr ""
 
-#: templates/single/password-protected.php:49
+#: templates/single/password-protected.php:51
 msgid "Show password"
 msgstr ""
 
@@ -5235,6 +5251,10 @@ msgstr ""
 
 #: views/elements/filters.php:146, views/elements/filters.php:167
 msgid "Select"
+msgstr ""
+
+#: views/elements/filters.php:211
+msgid "Search..."
 msgstr ""
 
 #: views/elements/navbar.php:67, templates/dashboard/settings/nav-bar.php:54, templates/single/course/enrolled/nav.php:34
@@ -6950,11 +6970,31 @@ msgid "Amount must be less than 100"
 msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
-msgid "Something went wrong, please try again after refreshing page"
+msgid "Success"
 msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
-msgid "Success"
+msgid "Reset all settings to default successfully!"
+msgstr ""
+
+#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
+msgid "Please add a correctly formatted json file"
+msgstr ""
+
+#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
+msgid "Data imported successfully!"
+msgstr ""
+
+#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
+msgid "Applied settings successfully!"
+msgstr ""
+
+#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
+msgid "Data deleted successfully!"
+msgstr ""
+
+#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
+msgid "Something went wrong, please try again after refreshing page"
 msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
@@ -6975,6 +7015,14 @@ msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
 msgid "Warning!"
+msgstr ""
+
+#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
+msgid "Reset Successful"
+msgstr ""
+
+#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
+msgid "All modified settings of %s have been changed to default."
 msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
@@ -7090,11 +7138,35 @@ msgid "Cover Photo Changed Successfully!"
 msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
+msgid "Maximum file size exceeded!"
+msgstr ""
+
+#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
+msgid "Invalid"
+msgstr ""
+
+#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
+msgid "Invalid phone number"
+msgstr ""
+
+#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
 msgid "N/A"
 msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
 msgid "View Cart"
+msgstr ""
+
+#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
+msgid "Error!"
+msgstr ""
+
+#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
+msgid "Cart page is not configured."
+msgstr ""
+
+#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
+msgid "Checkout page is not configured."
 msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
@@ -7119,6 +7191,10 @@ msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
 msgid "Keep Data"
+msgstr ""
+
+#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
+msgid "Request Error"
 msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
@@ -7167,10 +7243,6 @@ msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
 msgid "Updating..."
-msgstr ""
-
-#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
-msgid "Error!"
 msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
@@ -7750,6 +7822,14 @@ msgid "Duration unit is required"
 msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
+msgid "Minutes"
+msgstr ""
+
+#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
+msgid "Hours"
+msgstr ""
+
+#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
 msgid "Auto recording is required"
 msgstr ""
 
@@ -7799,6 +7879,14 @@ msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
 msgid "Templates"
+msgstr ""
+
+#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
+msgid "Custom Certificates"
+msgstr ""
+
+#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
+msgid "Certificates"
 msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
@@ -8458,6 +8546,10 @@ msgid "Write answer explanation..."
 msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
+msgid "Question %d"
+msgstr ""
+
+#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
 msgid "True"
 msgstr ""
 
@@ -8495,14 +8587,6 @@ msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
 msgid "Seconds"
-msgstr ""
-
-#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
-msgid "Minutes"
-msgstr ""
-
-#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
-msgid "Hours"
 msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
@@ -8823,6 +8907,10 @@ msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
 msgid "Add Image"
+msgstr ""
+
+#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
+msgid "Image"
 msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
@@ -9214,6 +9302,10 @@ msgid "Description"
 msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
+msgid "Classic Editor"
+msgstr ""
+
+#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
 msgid "Expand All"
 msgstr ""
 
@@ -9238,10 +9330,6 @@ msgid "Add Topic"
 msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
-msgid "Classic Editor"
-msgstr ""
-
-#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
 msgid "Topic saved successfully"
 msgstr ""
 
@@ -9255,6 +9343,10 @@ msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
 msgid "Something went wrong."
+msgstr ""
+
+#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
+msgid "Failed to fetch the video data"
 msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
@@ -9279,6 +9371,22 @@ msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
 msgid "Please add matched text to all options."
+msgstr ""
+
+#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
+msgid "Failed to get canvas context"
+msgstr ""
+
+#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
+msgid "Unknown error occurred"
+msgstr ""
+
+#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
+msgid "Thumbnail generation timed out"
+msgstr ""
+
+#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
+msgid "Unsupported video source"
 msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
@@ -9594,6 +9702,14 @@ msgid "Install"
 msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
+msgid "Remove %s"
+msgstr ""
+
+#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
+msgid "Are you sure you want to remove this payment method?"
+msgstr ""
+
+#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
 msgid "Update available"
 msgstr ""
 
@@ -9602,19 +9718,15 @@ msgid "Update now"
 msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
+msgid "Plugin not installed"
+msgstr ""
+
+#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
 msgid "Necessary plugin is not installed to display options!"
 msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
 msgid "Recommended size: 48x48"
-msgstr ""
-
-#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
-msgid "Remove %s"
-msgstr ""
-
-#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
-msgid "Are you sure you want to remove this payment method?"
 msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
@@ -9650,7 +9762,7 @@ msgid "Payment gateways"
 msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
-msgid "Add new gateway"
+msgid "Add New Gateway"
 msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
@@ -9658,7 +9770,7 @@ msgid "Set up manual payment method"
 msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
-msgid "Add manual payment"
+msgid "Add Manual Payment"
 msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
@@ -10478,6 +10590,10 @@ msgid "%s %s trial"
 msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
+msgid "Until cancelled"
+msgstr ""
+
+#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
 msgid "Billing Cycles"
 msgstr ""
 
@@ -10499,10 +10615,6 @@ msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
 msgid "%s times"
-msgstr ""
-
-#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
-msgid "Until cancelled"
 msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
@@ -10678,6 +10790,14 @@ msgid "Cannot select more than %d files"
 msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
+msgid "Invalid file type"
+msgstr ""
+
+#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
+msgid "Maximum upload size exceeded"
+msgstr ""
+
+#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
 msgid "Page"
 msgstr ""
 
@@ -10691,6 +10811,14 @@ msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
 msgid "The field is required"
+msgstr ""
+
+#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
+msgid "Invalid date entered!"
+msgstr ""
+
+#: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
+msgid "Invalid time entered!"
 msgstr ""
 
 #: assets/js/tutor.min.js:1, assets/js/tutor-front.min.js:1, assets/js/tutor-admin.min.js:1, assets/js/tutor-setup.min.js:1, assets/js/tutor-course-builder.min.js:1, assets/js/tutor-order-details.min.js:1, assets/js/tutor-tax-settings.min.js:1, assets/js/tutor-coupon.min.js:1
