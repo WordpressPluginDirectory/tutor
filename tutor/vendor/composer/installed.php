@@ -3,7 +3,7 @@
         'name' => 'themeum/tutor',
         'pretty_version' => '3.3.0.x-dev',
         'version' => '3.3.0.9999999-dev',
-        'reference' => 'e8ffc8f4bb22e0acead31177e73787dd4f51aad7',
+        'reference' => '9b463b2d29afafaaca47cd8d5c3bb2b2efbdd3a6',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'themeum/tutor' => array(
             'pretty_version' => '3.3.0.x-dev',
             'version' => '3.3.0.9999999-dev',
-            'reference' => 'e8ffc8f4bb22e0acead31177e73787dd4f51aad7',
+            'reference' => '9b463b2d29afafaaca47cd8d5c3bb2b2efbdd3a6',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
