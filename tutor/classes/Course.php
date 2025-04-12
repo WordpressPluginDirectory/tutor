@@ -388,11 +388,12 @@ class Course extends Tutor_Base {
 	 */
 	public function validate_video_source( $params, &$errors ) {
 		if ( isset( $params['video'] ) ) {
-			$video_source = isset( $params['video']['source'] ) ? $params['video']['source'] : '';
+			$video_source      = isset( $params['video']['source'] ) ? $params['video']['source'] : '';
+			$video_source_type = isset( $params['video']['source_type'] ) ? $params['video']['source_type'] : '';
 
 			if ( '' === $video_source ) {
 				$errors['video_source'] = __( 'Video source is required', 'tutor' );
-			} elseif ( ! $this->is_valid_video_source_type( $video_source ) ) {
+			} elseif ( ! $this->is_valid_video_source_type( $video_source_type ) ) {
 					$errors['video_source'] = __( 'Invalid video source', 'tutor' );
 			}
 		}
@@ -415,6 +416,10 @@ class Course extends Tutor_Base {
 			}
 
 			$course_settings = $params['course_settings'];
+
+			if ( $course_settings['course_enrollment_period'] && 'no' === $course_settings['course_enrollment_period'] ) {
+				return;
+			}
 
 			if ( isset( $course_settings['enrollment_starts_at'] ) && ! empty( $course_settings['enrollment_starts_at'] ) ) {
 				$enrollment_start = strtotime( $course_settings['enrollment_starts_at'] );
@@ -1362,8 +1367,7 @@ class Course extends Tutor_Base {
 		wp_enqueue_editor();
 
 		wp_enqueue_media();
-		wp_enqueue_script( 'tutor-shared', tutor()->url . 'assets/js/tutor-shared.min.js', array( 'wp-date', 'wp-i18n', 'wp-element', 'wp-api' ), TUTOR_VERSION, true );
-		wp_enqueue_script( 'tutor-course-builder', tutor()->url . 'assets/js/tutor-course-builder.min.js', array( 'tutor-shared' ), TUTOR_VERSION, true );
+		wp_enqueue_script( 'tutor-course-builder', tutor()->url . 'assets/js/tutor-course-builder.min.js', array( 'wp-date', 'wp-i18n', 'wp-element', 'wp-api' ), TUTOR_VERSION, true );
 
 		wp_localize_script(
 			'mce-view',
