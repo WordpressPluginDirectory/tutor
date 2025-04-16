@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-04-11 11:37+0000\n"
+"POT-Creation-Date: 2025-04-15 07:25+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -22,7 +22,7 @@ msgstr ""
 msgid "SSL certificate"
 msgstr ""
 
-#: classes/Addons.php:183, classes/Ajax.php:86, classes/Ajax.php:166, classes/Ajax.php:503, classes/Ajax.php:582, classes/Course.php:1895, classes/Course.php:2129, classes/Instructor.php:325, classes/Quiz.php:358, classes/Quiz.php:940, classes/Quiz.php:1296, classes/Quiz.php:1446, classes/Quiz.php:1534, classes/Quiz.php:1962, classes/Quiz.php:1999, classes/Q_And_A.php:205
+#: classes/Addons.php:183, classes/Ajax.php:86, classes/Ajax.php:166, classes/Ajax.php:503, classes/Ajax.php:582, classes/Course.php:1897, classes/Course.php:2131, classes/Instructor.php:325, classes/Quiz.php:358, classes/Quiz.php:940, classes/Quiz.php:1296, classes/Quiz.php:1446, classes/Quiz.php:1534, classes/Quiz.php:1962, classes/Quiz.php:1999, classes/Q_And_A.php:205
 msgid "Access Denied"
 msgstr ""
 
@@ -500,197 +500,197 @@ msgstr ""
 msgid "Invalid password"
 msgstr ""
 
-#: classes/Course.php:397
+#: classes/Course.php:399
 msgid "Invalid video source"
 msgstr ""
 
-#: classes/Course.php:395
+#: classes/Course.php:397
 msgid "Video source is required"
 msgstr ""
 
-#: classes/Course.php:429
+#: classes/Course.php:431
 msgid "The enrollment start date cannot be earlier than the course start date"
 msgstr ""
 
-#: classes/Course.php:448
+#: classes/Course.php:450
 msgid "Invalid course categories"
 msgstr ""
 
-#: classes/Course.php:456
+#: classes/Course.php:458
 msgid "Invalid course tags"
 msgstr ""
 
-#: classes/Course.php:524, classes/Course.php:562
+#: classes/Course.php:526, classes/Course.php:564
 msgid "Invalid price type"
 msgstr ""
 
-#: classes/Course.php:537, classes/Course.php:577
+#: classes/Course.php:539, classes/Course.php:579
 msgid "Product already linked with course"
 msgstr ""
 
-#: classes/Course.php:589
+#: classes/Course.php:591
 msgid "Price is required"
 msgstr ""
 
-#: classes/Course.php:581
+#: classes/Course.php:583
 msgid "Invalid product"
 msgstr ""
 
-#: classes/Course.php:818, classes/Post_types.php:98
+#: classes/Course.php:820, classes/Post_types.php:98
 msgid "New Course"
 msgstr ""
 
-#: classes/Course.php:841
+#: classes/Course.php:843
 msgid "Draft course created"
 msgstr ""
 
-#: classes/Course.php:904
+#: classes/Course.php:906
 msgid "Course list retrieved successfully!"
 msgstr ""
 
-#: classes/Course.php:954, classes/Course.php:1050, classes/Course.php:1192, classes/Course.php:1223
+#: classes/Course.php:956, classes/Course.php:1052, classes/Course.php:1194, classes/Course.php:1225
 msgid "Invalid input"
 msgstr ""
 
-#: classes/Course.php:979
+#: classes/Course.php:981
 msgid "Course created successfully"
 msgstr ""
 
-#: classes/Course.php:1098
+#: classes/Course.php:1100
 msgid "Course updated successfully."
 msgstr ""
 
-#: classes/Course.php:1125
+#: classes/Course.php:1127
 msgid "Builder unlinked successfully."
 msgstr ""
 
-#: classes/Course.php:1188, classes/Course.php:1219
+#: classes/Course.php:1190, classes/Course.php:1221
 msgid "Invalid course id"
 msgstr ""
 
-#: classes/Course.php:1198
+#: classes/Course.php:1200
 msgid "Course contents fetched successfully"
 msgstr ""
 
-#: classes/Course.php:1306
+#: classes/Course.php:1308
 msgid "Data retrieved successfully!"
 msgstr ""
 
-#: classes/Course.php:1341
+#: classes/Course.php:1343
 msgid "You cannot edit this course because it is in the Trash. Please restore it and try again"
 msgstr ""
 
-#: classes/Course.php:1562
+#: classes/Course.php:1564
 msgid "Products retrieved successfully!"
 msgstr ""
 
-#: classes/Course.php:1592
+#: classes/Course.php:1594
 msgid "One product can not be added to multiple course!"
 msgstr ""
 
-#: classes/Course.php:1604
+#: classes/Course.php:1606
 msgid "Product not found"
 msgstr ""
 
-#: classes/Course.php:1623, classes/Frontend.php:107
+#: classes/Course.php:1625, classes/Frontend.php:107
 msgid "Access Denied!"
 msgstr ""
 
-#: classes/Course.php:1654, templates/loop/course-price-edd.php:80, templates/loop/course-price-tutor.php:84, templates/loop/course-price-woocommerce.php:77, templates/loop/course-price.php:79
+#: classes/Course.php:1656, templates/loop/course-price-edd.php:80, templates/loop/course-price-tutor.php:84, templates/loop/course-price-woocommerce.php:77, templates/loop/course-price.php:79
 msgid "Fully Booked"
 msgstr ""
 
-#: classes/Course.php:1878
+#: classes/Course.php:1880
 msgid "Topic title is required!"
 msgstr ""
 
-#: classes/Course.php:1880, classes/Lesson.php:279, ecommerce/BillingController.php:168
+#: classes/Course.php:1882, classes/Lesson.php:279, ecommerce/BillingController.php:168
 msgid "Invalid inputs"
 msgstr ""
 
-#: classes/Course.php:1923
+#: classes/Course.php:1925
 msgid "Topic created successfully!"
 msgstr ""
 
-#: classes/Course.php:1918
+#: classes/Course.php:1920
 msgid "Topic updated successfully!"
 msgstr ""
 
-#: classes/Course.php:1969
+#: classes/Course.php:1971
 msgid "Topic deleted successfully!"
 msgstr ""
 
-#: classes/Course.php:1991
+#: classes/Course.php:1993
 msgid "Please Sign In first"
 msgstr ""
 
-#: classes/Course.php:2041, classes/Lesson.php:430
+#: classes/Course.php:2043, classes/Lesson.php:430
 msgid "Please Sign-In"
 msgstr ""
 
-#: classes/Course.php:2138
+#: classes/Course.php:2140
 msgid "Only main instructor can delete this course"
 msgstr ""
 
-#: classes/Course.php:2159
+#: classes/Course.php:2161
 msgid "Course has been trashed successfully "
 msgstr ""
 
-#: classes/Course.php:2347, classes/Options_V2.php:1215
+#: classes/Course.php:2349, classes/Options_V2.php:1215
 msgid "Difficulty Level"
 msgstr ""
 
-#: classes/Course.php:2348, classes/Options_V2.php:1349, classes/Options_V2.php:1357, classes/Options_V2.php:1365, classes/Options_V2.php:1381, classes/Options_V2.php:1389, classes/Options_V2.php:1397, classes/Options_V2.php:1405, classes/Options_V2.php:1413, classes/Options_V2.php:1421, classes/Options_V2.php:1429, classes/Options_V2.php:1437, classes/Options_V2.php:1453, classes/Options_V2.php:1461, classes/User.php:452
+#: classes/Course.php:2350, classes/Options_V2.php:1349, classes/Options_V2.php:1357, classes/Options_V2.php:1365, classes/Options_V2.php:1381, classes/Options_V2.php:1389, classes/Options_V2.php:1397, classes/Options_V2.php:1405, classes/Options_V2.php:1413, classes/Options_V2.php:1421, classes/Options_V2.php:1429, classes/Options_V2.php:1437, classes/Options_V2.php:1453, classes/Options_V2.php:1461, classes/User.php:452
 msgid "Enable"
 msgstr ""
 
-#: classes/Course.php:2351
+#: classes/Course.php:2353
 msgid "Course difficulty level"
 msgstr ""
 
-#: classes/Course.php:2681
+#: classes/Course.php:2683
 msgid "Complete all lessons to mark this course as complete"
 msgstr ""
 
-#: classes/Course.php:2746
+#: classes/Course.php:2748
 msgid "quiz"
 msgid_plural "quizzes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: classes/Course.php:2747
+#: classes/Course.php:2749
 msgid "assignment"
 msgid_plural "assignments"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %1$s: number of quiz/assignment pass required; %2$s: quiz/assignment string
-#: classes/Course.php:2751, classes/Course.php:2756
+#: classes/Course.php:2753, classes/Course.php:2758
 msgid "You have to pass %1$s %2$s to complete this course."
 msgstr ""
 
 #. translators: %1$s: number of quiz pass required; %2$s: quiz string; %3$s: number of assignment pass required; %4$s: assignment string
-#: classes/Course.php:2761
+#: classes/Course.php:2763
 msgid "You have to pass %1$s %2$s and %3$s %4$s to complete this course."
 msgstr ""
 
-#: classes/Course.php:2858
+#: classes/Course.php:2860
 msgid "Invalid Course ID or Access Denied."
 msgstr ""
 
-#: classes/Course.php:2913
+#: classes/Course.php:2915
 msgid "Invalid course ID"
 msgstr ""
 
-#: classes/Course.php:2904
+#: classes/Course.php:2906
 msgid "This course is password protected"
 msgstr ""
 
-#: classes/Course.php:2910
+#: classes/Course.php:2912
 msgid "Enrollment failed, please try again!"
 msgstr ""
 
-#: classes/Course.php:2908
+#: classes/Course.php:2910
 msgid "Enrollment successfully done!"
 msgstr ""
 
@@ -3184,88 +3184,88 @@ msgstr ""
 msgid "Shortcode"
 msgstr ""
 
-#: classes/Utils.php:10230
+#: classes/Utils.php:10269
 msgid "Something went wrong"
 msgstr ""
 
-#: classes/Utils.php:10235
+#: classes/Utils.php:10274
 msgid "You are not authorzied to perform this action"
 msgstr ""
 
-#: classes/Utils.php:10236
+#: classes/Utils.php:10275
 msgid "Nonce not matched. Action failed!"
 msgstr ""
 
-#: classes/Utils.php:10237
+#: classes/Utils.php:10276
 msgid "Invalid request"
 msgstr ""
 
-#: classes/Utils.php:10238
+#: classes/Utils.php:10277
 msgid "Authentication failed"
 msgstr ""
 
-#: classes/Utils.php:10239
+#: classes/Utils.php:10278
 msgid "Authorization required"
 msgstr ""
 
-#: classes/Utils.php:10240
+#: classes/Utils.php:10279
 msgid "Requested resource not found"
 msgstr ""
 
-#: classes/Utils.php:10241
+#: classes/Utils.php:10280
 msgid "Internal server error"
 msgstr ""
 
-#: classes/Utils.php:10242
+#: classes/Utils.php:10281
 msgid "Request timed out"
 msgstr ""
 
-#: classes/Utils.php:10243
+#: classes/Utils.php:10282
 msgid "Access to this resource is forbidden"
 msgstr ""
 
-#: classes/Utils.php:10244
+#: classes/Utils.php:10283
 msgid "HTTP method not allowed"
 msgstr ""
 
-#: classes/Utils.php:10245
+#: classes/Utils.php:10284
 msgid "Too many requests"
 msgstr ""
 
-#: classes/Utils.php:10246
+#: classes/Utils.php:10285
 msgid "Validation error"
 msgstr ""
 
-#: classes/Utils.php:10247
+#: classes/Utils.php:10286
 msgid "Database operation failed"
 msgstr ""
 
-#: classes/Utils.php:10248
+#: classes/Utils.php:10287
 msgid "Requested file not found"
 msgstr ""
 
-#: classes/Utils.php:10249
+#: classes/Utils.php:10288
 msgid "Unsupported media type"
 msgstr ""
 
-#: classes/Utils.php:10295
+#: classes/Utils.php:10334
 msgid "Gutenberg"
 msgstr ""
 
-#: classes/Utils.php:10310
+#: classes/Utils.php:10349
 msgid "Droip"
 msgstr ""
 
-#: classes/Utils.php:10325
+#: classes/Utils.php:10364
 msgid "Elementor"
 msgstr ""
 
-#: classes/Utils.php:10352
+#: classes/Utils.php:10391
 msgid "Classic Editor"
 msgstr ""
 
 #. translators: %s: timestamp
-#: classes/Utils.php:10444
+#: classes/Utils.php:10483
 msgid "%s left"
 msgstr ""
 
