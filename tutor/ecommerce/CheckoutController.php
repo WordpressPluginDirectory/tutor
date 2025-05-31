@@ -17,7 +17,9 @@ use Tutor\Models\BillingModel;
 use Tutor\Traits\JsonResponse;
 use Tutor\Models\CartModel;
 use Tutor\Models\CouponModel;
+use Tutor\Models\OrderMetaModel;
 use Tutor\Models\OrderModel;
+use TutorPro\Ecommerce\GuestCheckout\GuestCheckout;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -78,6 +80,15 @@ class CheckoutController {
 	public $coupon_model;
 
 	/**
+	 * Instance of order controller.
+	 *
+	 * @since 3.5.0
+	 *
+	 * @var OrderController
+	 */
+	public $order_ctrl;
+
+	/**
 	 * Constructor.
 	 *
 	 * Initializes the Checkout class, sets the page title, and optionally registers
@@ -92,12 +103,14 @@ class CheckoutController {
 	 */
 	public function __construct( $register_hooks = true ) {
 		$this->coupon_model = new CouponModel();
+		$this->order_ctrl   = new OrderController( false );
 
 		if ( $register_hooks ) {
 			add_action( 'tutor_action_tutor_pay_now', array( $this, 'pay_now' ) );
 			add_action( 'tutor_action_tutor_pay_incomplete_order', array( $this, 'pay_incomplete_order' ) );
 			add_action( 'template_redirect', array( $this, 'restrict_checkout_page' ) );
 			add_action( 'wp_ajax_tutor_get_checkout_html', array( $this, 'ajax_get_checkout_html' ) );
+			add_action( 'tutor_before_checkout_order_details', array( $this, 'add_warning_alert' ) );
 		}
 	}
 
@@ -166,6 +179,81 @@ class CheckoutController {
 	}
 
 	/**
+	 * Add warning alert to checkout details.
+	 *
+	 * @since 3.5.0
+	 *
+	 * @param array $course_list course list.
+	 *
+	 * @return void
+	 */
+	public function add_warning_alert( $course_list ) {
+		/**
+		 * Scenario: Guest checkout and buy now option enabled.
+		 * Display a warning alert if the user attempts to purchase a course they are already enrolled in.
+		 */
+		$course_id = (int) Input::sanitize_request_data( 'course_id', 0 );
+		if ( Settings::is_buy_now_enabled() && $course_id && tutor_utils()->is_enrolled( $course_id, get_current_user_id() ) ) {
+			add_filter( 'tutor_checkout_enable_pay_now_btn', '__return_false' );
+			?>
+			<div class="tutor-alert tutor-warning tutor-d-flex tutor-gap-1">
+				<span><?php esc_html_e( 'You\'re already enrolled in this course.', 'tutor' ); ?></span>
+				<a href="<?php echo esc_url( get_the_permalink( $course_id ) ); ?>"><?php esc_html_e( 'Start learning!', 'tutor' ); ?></a>
+			</div>
+			<?php
+		}
+
+		/**
+		 * Scenario: user login from the checkout page with courses in the cart.
+		 * Display a warning alert if the user tries to purchase a course they are already enrolled in.
+		 */
+		if ( ! Settings::is_buy_now_enabled() && is_array( $course_list ) && count( $course_list ) ) {
+			$enrolled_courses = array();
+			foreach ( $course_list as $course ) {
+				if ( tutor_utils()->is_enrolled( $course->ID, get_current_user_id() ) ) {
+					$enrolled_courses[] = $course;
+				}
+			}
+
+			if ( count( $enrolled_courses ) ) {
+				add_filter( 'tutor_checkout_enable_pay_now_btn', '__return_false' );
+				?>
+				<div class="tutor-alert tutor-warning">
+					<div>
+						<p class="tutor-mb-8">
+						<?php
+						if ( count( $enrolled_courses ) > 1 ) {
+							esc_html_e( 'You are already enrolled in the following courses. Please remove those from your cart and continue.', 'tutor' );
+						} else {
+							esc_html_e( 'You are already enrolled in the following course. Please remove that from your cart and continue.', 'tutor' );
+						}
+						?>
+						<a class="tutor-text-decoration-none tutor-color-primary" href="<?php echo esc_url( CartController::get_page_url() ); ?>"><?php esc_html_e( 'View Cart', 'tutor' ); ?></a>
+						</p>
+						<ul>
+						<?php foreach ( $enrolled_courses as $course ) : ?>
+							<li><a class="tutor-text-decoration-none tutor-color-primary" href="<?php echo esc_url( get_the_permalink( $course->ID ) ); ?>"><?php echo esc_html( $course->post_title ); ?></a></li>
+						<?php endforeach; ?>
+						</ul>
+					</div>
+				</div>
+				<?php
+			}
+		}
+	}
+
+	/**
+	 * Check coupon is applied on checkout item.
+	 *
+	 * @param array $item checkout item.
+	 *
+	 * @return boolean applied or not.
+	 */
+	private function is_coupon_applied_on_item( array $item ) {
+		return isset( $item['is_coupon_applied'] ) && (bool) $item['is_coupon_applied'];
+	}
+
+	/**
 	 * Prepare items
 	 *
 	 * @since 3.0.0
@@ -181,35 +269,35 @@ class CheckoutController {
 		$plan_info = null;
 
 		foreach ( $item_ids as $item_id ) {
-			$item_name    = get_the_title( $item_id );
-			$course_price = tutor_utils()->get_raw_course_price( $item_id );
-			if ( OrderModel::TYPE_SINGLE_ORDER !== $order_type ) {
-				$plan_info = apply_filters( 'tutor_get_plan_info', null, $item_id );
-				if ( $plan_info ) {
-					$item_name                   = $plan_info->plan_name;
-					$course_price->regular_price = $plan_info->regular_price;
-					$course_price->sale_price    = $plan_info->in_sale_price ? $plan_info->sale_price : 0;
-				}
+
+			if ( OrderModel::TYPE_SINGLE_ORDER === $order_type ) {
+				$item_name    = get_the_title( $item_id );
+				$course_price = tutor_utils()->get_raw_course_price( $item_id );
+
+				$regular_price = $course_price->regular_price;
+				$sale_price    = $course_price->sale_price;
+
+				$item = array(
+					'item_id'           => (int) $item_id,
+					'item_name'         => $item_name,
+					'regular_price'     => $regular_price,
+					'sale_price'        => $sale_price ? $sale_price : null,
+					'is_coupon_applied' => false,
+					'coupon_code'       => null,
+				);
 			}
 
-			$regular_price = $course_price->regular_price;
-			$sale_price    = $course_price->sale_price;
-
-			$item = array(
-				'item_id'           => (int) $item_id,
-				'item_name'         => $item_name,
-				'regular_price'     => $regular_price,
-				'sale_price'        => $sale_price ? $sale_price : null,
-				'is_coupon_applied' => false,
-				'coupon_code'       => null,
-			);
+			if ( OrderModel::TYPE_SUBSCRIPTION === $order_type ) {
+				$item = apply_filters( 'tutor_checkout_subscription_item', array(), $item_id, $coupon );
+			}
 
 			$is_coupon_applicable = false;
 			if ( Settings::is_coupon_usage_enabled() && is_object( $coupon ) ) {
-				$is_coupon_applicable = ! $sale_price && $this->coupon_model->is_coupon_applicable( $coupon, $item_id );
+				$is_coupon_applicable = $this->coupon_model->is_coupon_applicable( $coupon, $item_id, $order_type );
 				if ( $is_coupon_applicable ) {
 					$item['is_coupon_applied'] = $is_coupon_applicable;
 					$item['coupon_code']       = $coupon->coupon_code;
+					$item['sale_price']        = null;
 				}
 			}
 
@@ -223,6 +311,7 @@ class CheckoutController {
 	 * Calculate discount.
 	 *
 	 * @since 3.0.0
+	 * @since 3.6.0 refactor and inaccurate flat discount distribution.
 	 *
 	 * @param array  $items item array.
 	 * @param string $discount_type discount type. like percentage or fixed.
@@ -231,43 +320,69 @@ class CheckoutController {
 	 * @return array
 	 */
 	public function calculate_discount( $items, $discount_type, $discount_value ) {
-		// Filter products without a sale price.
-		$items_without_sale = array_filter(
-			$items,
-			function( $item ) {
-				return empty( $item['sale_price'] );
-			}
-		);
+		$final                              = array();
+		$coupon_applied_items               = array();
+		$total_regular_price_coupon_applied = 0;
 
-		// Calculate the total regular price of products without a sale price.
-		$total_regular_price = array_sum( array_column( $items_without_sale, 'regular_price' ) );
-
-		$final = array();
 		foreach ( $items as $item ) {
-			// If product already has a sale price, no discount is applied.
-			if ( ! empty( $item['sale_price'] ) || ( isset( $item['is_coupon_applied'] ) && ! $item['is_coupon_applied'] ) ) {
+			if ( $this->is_coupon_applied_on_item( $item ) ) {
+				$coupon_applied_items[]              = $item;
+				$total_regular_price_coupon_applied += $item['regular_price'];
+			} else {
 				$item['discount_amount'] = 0;
 				$final[]                 = $item;
-			} else {
-				if ( 'percentage' === $discount_type ) {
-					// Apply percentage discount.
-					$discount       = $item['regular_price'] * ( $discount_value / 100 );
-					$discount_price = $item['regular_price'] - $discount;
-
-					$item['discount_amount'] = round( $discount, 2 );
-					$item['discount_price']  = $discount_price;
-
-				} elseif ( 'flat' === $discount_type && $total_regular_price > 0 ) {
-					// Apply a proportional fixed discount based on the regular price.
-					$proportion     = $item['regular_price'] / $total_regular_price;
-					$discount       = $discount_value * $proportion;
-					$discount_price = $item['regular_price'] - $discount;
-
-					$item['discount_amount'] = round( $discount, 2 );
-					$item['discount_price']  = round( $discount_price, 2 );
-				}
-				$final[] = $item;
 			}
+		}
+
+		// For flat discount calculation.
+		$cumulative_discount  = 0;
+		$coupon_applied_count = count( $coupon_applied_items );
+
+		foreach ( $coupon_applied_items as $index => $item ) {
+			$regular_price = $item['regular_price'];
+
+			if ( 'percentage' === $discount_type ) {
+				// Limit percentage value between 0 and 100.
+				$percentage   = max( 0, min( 100, (float) $discount_value ) );
+				$raw_discount = $regular_price * ( $percentage / 100 );
+				$discount     = round( $raw_discount, 2 );
+
+				// Prevent discount from exceeding the item price.
+				$discount = min( $discount, $regular_price );
+
+				$discount_price = round( $regular_price - $discount, 2 );
+
+				$item['discount_amount'] = $discount;
+				$item['discount_price']  = $discount_price;
+
+			} elseif ( 'flat' === $discount_type && $total_regular_price_coupon_applied > 0 ) {
+				/**
+				 * Apply a proportional fixed discount
+				 * based on the total applied coupon item regular price.
+				 */
+				$proportion = $regular_price / $total_regular_price_coupon_applied;
+				$discount   = $discount_value * $proportion;
+
+				/**
+				 * On last item, fix rounding error.
+				 *
+				 * Example: $100 discount spread over 3 items
+				 * could result in $33.33 + $33.33 + $33.33 = $99.99, losing 1 cent.
+				 */
+				if ( $index === $coupon_applied_count - 1 ) {
+					$discount = $discount_value - $cumulative_discount;
+				}
+
+				// Prevent discount from exceeding the item price.
+				$discount       = min( $discount, $regular_price );
+				$discount_price = $regular_price - $discount;
+
+				$item['discount_amount'] = round( $discount, 2 );
+				$item['discount_price']  = round( $discount_price, 2 );
+				$cumulative_discount    += round( $discount, 2 );
+			}
+
+			$final[] = $item;
 		}
 
 		return $final;
@@ -289,6 +404,7 @@ class CheckoutController {
 	public function prepare_checkout_items( $item_ids, $order_type = OrderModel::TYPE_SINGLE_ORDER, $coupon_code = null ) {
 		$item_ids = is_array( $item_ids ) ? $item_ids : array( $item_ids );
 		$response = array();
+		$user_id  = get_current_user_id();
 
 		$coupon_type       = empty( $coupon_code ) ? 'automatic' : 'manual';
 		$is_coupon_applied = false;
@@ -304,8 +420,11 @@ class CheckoutController {
 		$is_meet_min_requirement = false;
 		$selected_coupon         = null;
 
-		if ( Settings::is_coupon_usage_enabled() ) {
+		if ( Settings::is_coupon_usage_enabled() && '-1' !== $coupon_code ) {
 			$selected_coupon = $this->coupon_model->get_coupon_details_for_checkout( $coupon_code );
+			if ( ! $selected_coupon ) {
+				$this->coupon_model->set_apply_coupon_error( $this->coupon_model->get_coupon_failed_error_msg( 'not_found' ) );
+			}
 		}
 
 		$is_valid = is_object( $selected_coupon ) && $this->coupon_model->is_coupon_valid( $selected_coupon );
@@ -316,14 +435,14 @@ class CheckoutController {
 			}
 		}
 
-		list($items, $plan_info) = $this->prepare_items( $item_ids, $order_type, $coupon );
+		list( $items, $plan_info ) = $this->prepare_items( $item_ids, $order_type, $coupon );
 
 		// Iterate with each item and check if coupon is applicable @since 3.3.0.
 		$is_coupon_applicable = false;
 		if ( $coupon ) {
 			foreach ( $items as $item ) {
 				if ( ! $is_coupon_applicable ) {
-					$is_coupon_applicable = $this->coupon_model->is_coupon_applicable( $coupon, $item['item_id'] );
+					$is_coupon_applicable = $this->coupon_model->is_coupon_applicable( $coupon, $item['item_id'], $order_type );
 				}
 			}
 			if ( $is_coupon_applicable ) {
@@ -354,10 +473,11 @@ class CheckoutController {
 			$subtotal_price  += $item['regular_price'];
 			$coupon_discount += $discount_amount;
 			$sale_discount   += $sale_discount_amount;
-		}
 
-		if ( $plan_info && $plan_info->enrollment_fee > 0 ) {
-			$subtotal_price += $plan_info->enrollment_fee;
+			$additional_items = $item['additional_items'] ?? array();
+			foreach ( $additional_items as $additional_item ) {
+				$subtotal_price += $additional_item['regular_price'] ?? 0;
+			}
 		}
 
 		$total_price = $subtotal_price - ( $coupon_discount + $sale_discount );
@@ -372,7 +492,10 @@ class CheckoutController {
 		// Total price should not negative.
 		$total_price = max( 0, $total_price );
 
+		$response['plan_info'] = $plan_info;
+
 		$response['coupon_type']       = $coupon_type;
+		$response['coupon_code']       = $is_coupon_applied ? $coupon->coupon_code : null;
 		$response['coupon_title']      = $coupon_title;
 		$response['is_coupon_applied'] = $is_coupon_applied;
 
@@ -384,6 +507,9 @@ class CheckoutController {
 		$response['tax_amount']              = $tax_amount;
 		$response['total_price']             = $total_price;
 		$response['order_type']              = $order_type;
+
+		$response['formatted_total_price_without_tax'] = tutor_get_formatted_price( $total_price_without_tax );
+		$response['formatted_total_price']             = tutor_get_formatted_price( $total_price );
 
 		return (object) $response;
 	}
@@ -449,16 +575,12 @@ class CheckoutController {
 		$object_ids     = array_filter( explode( ',', $request['object_ids'] ), 'is_numeric' );
 		$coupon_code    = isset( $request['coupon_code'] ) ? $request['coupon_code'] : '';
 		$payment_method = $request['payment_method'];
-		$payment_type   = $request['payment_type'];
+		$payment_type   = 'free' === strtolower( $payment_method ) ? 'manual' : $request['payment_type'];
 		$order_type     = $request['order_type'];
 
 		if ( empty( $object_ids ) ) {
 			array_push( $errors, __( 'Invalid cart items', 'tutor' ) );
 		}
-
-		// if ( ! Ecommerce::is_payment_gateway_configured( $payment_method ) ) {
-		// array_push( $errors, Ecommerce::get_incomplete_payment_setup_error_message( $payment_method ) );
-		// }
 
 		$billing_info = $billing_model->get_info( $current_user_id );
 		if ( $billing_info ) {
@@ -477,7 +599,12 @@ class CheckoutController {
 		}
 
 		$checkout_data = $this->prepare_checkout_items( $object_ids, $order_type, $coupon_code );
-		$items         = array();
+
+		if ( $checkout_data->total_price > 0 && 'free' === $payment_method ) {
+			array_push( $errors, __( 'Select a payment method', 'tutor' ) );
+		}
+
+		$items = array();
 		foreach ( $checkout_data->items as $item ) {
 			$items[] = array(
 				'item_id'        => $item->item_id,
@@ -520,7 +647,16 @@ class CheckoutController {
 				}
 			}
 
-			$order_data = ( new OrderController( false ) )->create_order( $current_user_id, $items, OrderModel::PAYMENT_UNPAID, $order_type, $coupon_code, $args, false );
+			$order_data = $this->order_ctrl->create_order(
+				$current_user_id,
+				$items,
+				OrderModel::PAYMENT_UNPAID,
+				$order_type,
+				$checkout_data->coupon_code,
+				$args,
+				false
+			);
+
 			if ( ! empty( $order_data ) ) {
 				if ( 'automate' === $payment_type ) {
 					try {
@@ -557,6 +693,7 @@ class CheckoutController {
 	 */
 	public static function prepare_payment_data( array $order ) {
 		$site_name     = get_bloginfo( 'name' );
+		$order_id      = $order['id'];
 		$order_user_id = $order['user_id'];
 		$user_data     = get_userdata( $order_user_id );
 
@@ -600,46 +737,24 @@ class CheckoutController {
 		$customer_info = $shipping_and_billing;
 
 		foreach ( $order['items'] as $item ) {
-			$item            = (object) $item;
-			$item_name       = '';
-			$enrollment_item = null;
-
-			// Support for both item_id & id added.
+			$item    = (object) $item;
 			$item_id = $item->item_id ?? $item->id;
 
-			if ( OrderModel::TYPE_SUBSCRIPTION === $order_type ) {
-				$plan_id   = $item_id;
-				$plan_info = apply_filters( 'tutor_get_plan_info', new \stdClass(), $plan_id );
-				$item_name = $plan_info->plan_name ?? '';
-
+			if ( OrderModel::TYPE_SINGLE_ORDER === $order_type ) {
 				$items[] = array(
 					'item_id'          => $item_id,
-					'item_name'        => $item_name,
+					'item_name'        => get_the_title( $item_id ),
 					'regular_price'    => $item->sale_price > 0 ? $item->sale_price : $item->regular_price,
 					'quantity'         => 1,
 					'discounted_price' => is_null( $item->discount_price ) || '' === $item->discount_price ? null : $item->discount_price,
 				);
+			}
 
-				if ( $plan_info && property_exists( $plan_info, 'enrollment_fee' ) && $plan_info->enrollment_fee > 0 ) {
-					$enrollment_item = array(
-						'item_id'          => 0,
-						'item_name'        => 'Enrollment Fee',
-						'regular_price'    => floatval( $plan_info->enrollment_fee ),
-						'quantity'         => 1,
-						'discounted_price' => null,
-					);
-
-					$items[] = $enrollment_item;
+			if ( OrderModel::TYPE_SUBSCRIPTION === $order_type ) {
+				$subscription_items = apply_filters( 'tutor_checkout_subscription_payment_items', array(), $item, $order_id );
+				foreach ( $subscription_items as $subscription_item ) {
+					$items[] = $subscription_item;
 				}
-			} else {
-				// Single order item.
-				$items[] = array(
-					'item_id'          => $item_id,
-					'item_name'        => get_the_title( $item_id ),
-					'regular_price'    => tutor_get_locale_price( $item->sale_price > 0 ? $item->sale_price : $item->regular_price ),
-					'quantity'         => 1,
-					'discounted_price' => is_null( $item->discount_price ) || '' === $item->discount_price ? null : tutor_get_locale_price( $item->discount_price ),
-				);
 			}
 		}
 
@@ -661,7 +776,7 @@ class CheckoutController {
 			'items'              => (object) $items,
 			'subtotal'           => floatval( $subtotal_price ),
 			'total_price'        => floatval( $total_price ),
-			'order_id'           => $order['id'],
+			'order_id'           => $order_id,
 			'store_name'         => $site_name,
 			'order_description'  => 'Tutor Order',
 			'tax'                => 0,
@@ -819,21 +934,26 @@ class CheckoutController {
 	 * @return void
 	 */
 	public function restrict_checkout_page() {
-		$page_id = self::get_page_id();
-		$plan_id = Input::get( 'plan' );
-		$buy_now = Settings::is_buy_now_enabled();
+		if ( ! is_page( self::get_page_id() ) ) {
+			return;
+		}
 
-		if ( is_page( $page_id ) && ! $plan_id ) {
-			$cart_controller = new CartController();
-			$cart_model      = new CartModel();
+		$cart_page_url = CartController::get_page_url();
 
-			$user_id       = tutils()->get_user_id();
-			$has_cart_item = $cart_model->has_item_in_cart( $user_id );
+		if ( ! is_user_logged_in() && ! GuestCheckout::is_enable() ) {
+			wp_safe_redirect( $cart_page_url );
+			exit;
+		}
 
-			if ( ! $has_cart_item && ! $buy_now ) {
-				wp_safe_redirect( $cart_controller::get_page_url() );
-				exit;
-			}
+		$user_id       = tutils()->get_user_id();
+		$cart_model    = new CartModel();
+		$has_cart_item = $cart_model->has_item_in_cart( $user_id );
+		$buy_now       = Settings::is_buy_now_enabled();
+		$plan_id       = Input::get( 'plan', 0, Input::TYPE_INT );
+
+		if ( ! $has_cart_item && ! $buy_now && ! $plan_id ) {
+			wp_safe_redirect( $cart_page_url );
+			exit;
 		}
 	}
 
@@ -897,7 +1017,7 @@ class CheckoutController {
 			$order_data  = $order_model->get_order_by_id( $order_id );
 			if ( $order_data ) {
 				try {
-					if ( ! empty( $payment_method ) && OrderModel::PAYMENT_MANUAL === $order_data->payment_method ) {
+					if ( ! empty( $payment_method ) && OrderModel::PAYMENT_METHOD_MANUAL === $order_data->payment_method ) {
 						$billing_info = $billing_model->get_info( $order_data->user_id );
 						if ( $billing_info ) {
 							$update_billing = $billing_model->update( $billing_fillable_fields, array( 'user_id' => $order_data->user_id ) );
@@ -958,6 +1078,7 @@ class CheckoutController {
 			OrderModel::TYPE_SUBSCRIPTION,
 			OrderModel::TYPE_RENEWAL,
 		);
+
 		$order_types = implode( ',', $order_types );
 
 		$validation_rules = array(

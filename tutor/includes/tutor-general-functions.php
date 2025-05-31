@@ -565,7 +565,7 @@ if ( ! function_exists( 'tutor_alert' ) ) {
 			return $msg;
 		}
 
-		$html = '<div class="asas tutor-alert tutor-' . esc_attr( $type ) . '">
+		$html = '<div class="tutor-alert tutor-' . esc_attr( $type ) . '">
 					<div class="tutor-alert-text">
 						<span class="tutor-alert-icon tutor-fs-4 tutor-icon-circle-info tutor-mr-12"></span>
 						<span>' . wp_kses( $msg, array( 'div', 'span' ) ) . '</span>
@@ -1213,6 +1213,7 @@ if ( ! function_exists( 'tutor_entry_box_buttons' ) ) {
 		$conditional_buttons = (object) array(
 			'show_enroll_btn'              => false,
 			'show_add_to_cart_btn'         => false,
+			'show_view_cart_btn'           => false,
 			'show_start_learning_btn'      => false,
 			'show_continue_learning_btn'   => false,
 			'show_complete_course_btn'     => false,
@@ -1263,7 +1264,11 @@ if ( ! function_exists( 'tutor_entry_box_buttons' ) ) {
 			} else {
 				$is_paid_course = tutor_utils()->is_course_purchasable( $course_id );
 				if ( $is_paid_course ) {
-					$conditional_buttons->show_add_to_cart_btn = true;
+					if ( tutor_is_item_in_cart( $course_id ) ) {
+						$conditional_buttons->show_view_cart_btn = true;
+					} else {
+						$conditional_buttons->show_add_to_cart_btn = true;
+					}
 				} else {
 					$conditional_buttons->show_enroll_btn = true;
 				}
@@ -1753,3 +1758,35 @@ if ( ! function_exists( 'tutor_is_local_env' ) ) {
 }
 
 
+
+if ( ! function_exists( 'get_tutor_post_types') ) {
+	/**
+	 * Get tutor post type list
+	 *
+	 * @since 3.6.0
+	 *
+	 * @param string $post_type the post type to get single tutor valid post type
+	 *
+	 * @return array|string
+	 */
+	function get_tutor_post_types( $post_type = '' ) {
+		$valid_post_types = array(
+			'course'       => tutor()->course_post_type,
+			'bundle'       => tutor()->bundle_post_type,
+			'lesson'       => tutor()->lesson_post_type,
+			'topics'       => tutor()->topics_post_type,
+			'quiz'         => tutor()->quiz_post_type,
+			'assignment'   => tutor()->assignment_post_type,
+			'zoom'         => tutor()->zoom_post_type,
+			'meet'         => tutor()->meet_post_type,
+			'enrollment'   => tutor()->enrollment_post_type,
+			'announcement' => tutor()->announcement_post_type,
+		);
+
+		if ( $post_type && isset( $valid_post_types[ $post_type ] ) ) {
+			return $valid_post_types[ $post_type ];
+		}
+
+		return $valid_post_types;
+	}
+}

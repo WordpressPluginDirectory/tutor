@@ -16,6 +16,7 @@ use Tutor\Ecommerce\CouponController;
 use Tutor\Ecommerce\OptionKeys;
 use Tutor\Ecommerce\Settings;
 use TUTOR\Input;
+use Tutor\Models\CouponModel;
 
 /**
  * Determine active tab
@@ -29,7 +30,7 @@ $paged_filter = Input::get( 'paged', 1, Input::TYPE_INT );
 $limit        = (int) tutor_utils()->get_option( 'pagination_per_page', 10 );
 $offset       = ( $limit * $paged_filter ) - $limit;
 
-$coupon_controller = new CouponController();
+$coupon_controller = new CouponController( false );
 
 $get_coupons = $coupon_controller->get_coupons( $limit, $offset );
 $coupons     = $get_coupons['results'];
@@ -76,7 +77,7 @@ $filters = array(
 		<div class="tutor-mt-24">
 			<div class="tutor-table-responsive">
 
-				<table class="tutor-table tutor-table-middle table-dashboard-course-list">
+				<table class="tutor-table tutor-table-middle">
 					<thead class="tutor-text-sm tutor-text-400">
 						<tr>
 							<th>
@@ -86,6 +87,9 @@ $filters = array(
 							</th>
 							<th class="tutor-table-rows-sorting">
 								<?php esc_html_e( 'Name', 'tutor' ); ?>
+							</th>
+							<th>
+								<?php esc_html_e( 'Applies to', 'tutor' ); ?>
 							</th>
 							<th>
 								<?php esc_html_e( 'Discount', 'tutor' ); ?>
@@ -100,7 +104,7 @@ $filters = array(
 								<?php esc_html_e( 'Status', 'tutor' ); ?>
 							</th>
 							<th colspan="2">
-								<?php esc_html_e( 'Uses', 'tutor' ); ?>
+								<?php esc_html_e( 'Usage', 'tutor' ); ?>
 							</th>
 						</tr>
 					</thead>
@@ -118,14 +122,20 @@ $filters = array(
 									</td>
 
 									<td>
-										<div class="tutor-fs-7">
+										<a href="<?php echo esc_url( $coupon_page_url . '&action=edit&coupon_id=' . $coupon->id ); ?>" class="tutor-table-link tutor-fs-7">
 											<?php echo esc_html( $coupon->coupon_title ); ?>
+										</a>
+									</td>
+
+									<td>
+										<div class="tutor-fs-7">
+											<?php echo esc_html( CouponModel::get_coupon_applies_to_label( $coupon->applies_to ) ); ?>
 										</div>
 									</td>
 
 									<td>
 										<div class="tutor-fs-7">
-											<?php echo esc_html( 'flat' === $coupon->discount_type ? $currency_symbol . $coupon->discount_amount : $coupon->discount_amount . '%' ); ?>
+											<?php echo wp_kses_post( ( 'flat' === $coupon->discount_type ? tutor_utils()->tutor_price( $coupon->discount_amount ) : $coupon->discount_amount . '%' ) ); ?>
 										</div>
 									</td>
 									<td>
@@ -142,7 +152,11 @@ $filters = array(
 
 									<td>
 										<?php
-										echo wp_kses_post( tutor_utils()->translate_dynamic_text( $coupon->coupon_status, true ) );
+										$coupon_status = $coupon->coupon_status;
+										if ( CouponModel::STATUS_ACTIVE === $coupon_status ) {
+											$coupon_status = $coupon_controller->model->has_coupon_validity( $coupon ) ? $coupon->coupon_status : 'expired';
+										}
+										echo wp_kses_post( tutor_utils()->translate_dynamic_text( $coupon_status, true ) );
 										?>
 									</td>
 
