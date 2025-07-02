@@ -30,7 +30,8 @@ trait ThumbnailGenerator {
 		$thumbnail      = $this->get_course_thumbnail( $thumbnail_type, true, $course_id, $this->options );
 		if ( $thumbnail['type'] === 'video' ) {
 			if ( $thumbnail['source'] === 'html5' || $thumbnail['source'] === 'external_url' ) {
-				return "<video playsinline controls $this->attributes><source src=" . $thumbnail['src'] . " type='video/mp4'></video>";
+				$poster_url_attribute = isset($thumbnail['poster_url']) ? 'poster="' . $thumbnail['poster_url'] . '"' : '';
+				return "<video playsinline controls $poster_url_attribute $this->attributes><source src=" . $thumbnail['src'] . " type='video/mp4'></video>";
 			}
 			if ( $thumbnail['source'] === 'youtube' ) {
 				return "<iframe $this->attributes frameborder='0' allowfullscreen allowtransparency allow='autoplay' src='https://www.youtube.com/embed/" . $thumbnail['id'] . "'></iframe>";
@@ -72,6 +73,7 @@ trait ThumbnailGenerator {
 							'type'   => 'video',
 							'src'    => $video_info->$source_key,
 							'source' => $video_info->source,
+							'poster_url' => $video_info->poster_url
 						);
 					} elseif ( $video_info->source === 'youtube' ) {
 						$youtube_video_id = tutor_utils()->get_youtube_video_id( tutor_utils()->avalue_dot( 'source_youtube', $video_info ) );

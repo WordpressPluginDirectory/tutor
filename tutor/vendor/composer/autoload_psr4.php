@@ -12,4 +12,5 @@ return array(
     'Tutor\\Helpers\\' => array($baseDir . '/helpers'),
     'Tutor\\Ecommerce\\' => array($baseDir . '/ecommerce'),
     'Tutor\\Cache\\' => array($baseDir . '/cache'),
+    'TUTOR\\' => array($baseDir . '/classes'),
 );

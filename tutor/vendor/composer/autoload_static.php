@@ -15,6 +15,7 @@ class ComposerStaticInit631a460b6010ba6d03c73cfd415f87ca
             'Tutor\\Helpers\\' => 14,
             'Tutor\\Ecommerce\\' => 16,
             'Tutor\\Cache\\' => 12,
+            'TUTOR\\' => 6,
         ),
     );
 
@@ -42,6 +43,10 @@ class ComposerStaticInit631a460b6010ba6d03c73cfd415f87ca
         'Tutor\\Cache\\' => 
         array (
             0 => __DIR__ . '/../..' . '/cache',
+        ),
+        'TUTOR\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/classes',
         ),
     );
 

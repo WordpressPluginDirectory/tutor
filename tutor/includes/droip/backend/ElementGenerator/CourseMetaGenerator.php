@@ -30,7 +30,8 @@ trait CourseMetaGenerator {
 		$settings      = isset( $this->element['properties']['settings'] ) ? $this->element['properties']['settings'] : array();
 		$meta_type     = isset( $settings['course_meta_type'] ) ? $settings['course_meta_type'] : 'default';
 		$course_id     = isset( $this->options['post'] ) ? $this->options['post']->ID : get_the_ID();
-		$is_instructor = isset( $this->options['itemType'] ) && $this->options['itemType'] !== 'post';
+		$is_instructor = isset( $this->options['itemType'] ) && ($this->options['itemType'] !== 'post' || $this->options['itemType'] === 'user' );
+		if(isset($this->options['itemType']) && $this->options['itemType'] === 'user') $course_id = $this->options['user']['ID'];
 		$meta          = $this->get_course_meta( $meta_type, $course_id, $this->options, $settings, $is_instructor );
 		$meta          = $this->wrap_if_meta_has_label( $meta, $settings );
 
@@ -176,7 +177,7 @@ trait CourseMetaGenerator {
 				$comments = json_decode( json_encode( $options['comment'] ), true );
 				if ( $meta_type === 'comment_date' ) {
 					$format                   = isset( $settings['date_format'] ) ? $settings['date_format'] : 'M j, Y';
-					$comments['comment_date'] = self::format_date( $comments['comment_date'], $format );
+					$comments['comment_date'] = self::format_date( $comments['comment_date'], $format, "Y-m-d H:i:s" );
 				}
 				return $comments[ $meta_type ];
 			case 'active_stars':
@@ -512,6 +513,17 @@ trait CourseMetaGenerator {
 					return '';
 				}
 				return $user->display_name;
+			case 'instructor_job_title':
+				$user_id = $course_id;
+				if (! $is_instructor && $course_id) {
+					$post    = get_post($course_id);
+					$user_id = $post->post_author;
+				}
+				$user = tutor_utils()->get_tutor_user($user_id);
+				if (! $user) {
+					return '';
+				}
+				return $user->tutor_profile_job_title;
 			case 'instructor_email':
 				$user_id = $course_id;
 				if ( ! $is_instructor && $course_id ) {
@@ -554,45 +566,49 @@ trait CourseMetaGenerator {
 				$instructor_bio = $user->tutor_profile_bio;
 				return $instructor_bio;
 			case 'topic_duration':
-				$topic_contents = tutor_utils()->get_course_contents_by_topic( $course_id, -1 );
-				if ( ! isset( $topic_contents ) || ! isset( $topic_contents->posts ) ) {
-					return array();
+                $topic_contents = tutor_utils()->get_course_contents_by_topic($course_id, -1);
+                if (! isset($topic_contents) || ! isset($topic_contents->posts)) {
+                    return [];
 				}
 				$topic_contents = $topic_contents->posts;
 				$hours_sum      = 0;
 				$minutes_sum    = 0;
 				$seconds_sum    = 0;
-				foreach ( $topic_contents as $content ) {
-					$duration = self::get_material_duration( $content );
-					if ( ! $duration ) {
+                $hours          = 0;
+                $minutes        = 0;
+                $seconds        = 0;
+                foreach ($topic_contents as $content) {
+                    $duration = self::get_material_duration($content);
+                    if (! $duration) {
 						continue;
 					}
 
-					$duration = explode( ':', $duration );
-					$hours    = count( $duration ) === 3 ? (int) $duration[0] : 0;
-					$minutes  = count( $duration ) >= 2 ? (int) $duration[ count( $duration ) - 2 ] : 0;
-					$seconds  = $duration[ count( $duration ) - 1 ];
+                    $duration = explode(':', $duration);
+                    $hours    = count($duration) === 3 ? (int) $duration[0] : 0;
+                    $minutes  = count($duration) >= 2 ? (int) $duration[count($duration) - 2] : 0;
+                    $seconds  = $duration[count($duration) - 1];
 
-					$hours_sum   += (int) $hours;
+                    $hours_sum += (int) $hours;
 					$minutes_sum += (int) $minutes;
 					$seconds_sum += (int) $seconds;
 				}
-				$hours   += (int) ( $minutes_sum / 60 );
-				$minutes  = (int) ( $minutes_sum % 60 );
-				$minutes += (int) ( $seconds_sum / 60 );
-				$seconds  = (int) ( $seconds_sum % 60 );
+
+                $hours += (int) ($minutes_sum / 60);
+                $minutes = (int) ($minutes_sum % 60);
+                $minutes += (int) ($seconds_sum / 60);
+                $seconds = (int) ($seconds_sum % 60);
 
 				$duration = '';
-				if ( $hours > 0 ) {
+                if ($hours > 0) {
 					$duration .= $hours . ' hr ';
 				}
 
-				if ( $minutes > 0 ) {
+                if ($minutes > 0) {
 					$duration .= $minutes . ' min ';
 				}
 
 				// if ($seconds > 0) $duration .= $seconds . ' sec';
-				$duration = trim( $duration );
+                $duration = trim($duration);
 				return $duration;
 			case 'topic_lesson_count':
 			case 'topic_quiz_count':
@@ -652,11 +668,14 @@ trait CourseMetaGenerator {
 		return $duration;
 	}
 
-	public static function format_date( $date, $format ) {
-		if ( $date && $format ) {
-			$date = new \DateTime( $date );
-			$date = $date->format( $format );
-			return $date;
+	public static function format_date($date, $format, $current_format = false)
+	{
+		if ($date && $format) {
+			$wp_format = !$current_format ? get_option('date_format') : $current_format;
+			$datetime = \DateTime::createFromFormat($wp_format, $date);
+			if ($datetime) {
+				return $datetime->format($format);
+			}
 		}
 		return $date;
 	}

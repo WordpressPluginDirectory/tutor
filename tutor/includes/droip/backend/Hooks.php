@@ -221,6 +221,18 @@ class Hooks {
 				'pagination' => array(),
 				'itemType'   => 'resources',
 			);
+		} elseif ($args['name'] === 'TUTOR_LMS-instructors') {
+			$instructors = tutor_utils()->get_instructors_by_course($args['post_parent']);
+			$instructors = array_map(fn($user) => (array) array_merge((array) $user, [
+				'user_url' => get_author_posts_url($user->ID),
+				'profile_image' => get_avatar_url($user->ID)
+			]), $instructors);
+			
+			return array(
+				'data'       => $instructors,
+				'pagination' => array(),
+				'itemType'   => 'user',
+			);
 		} else {
 			return array(
 				'data'       => array(),
@@ -314,6 +326,11 @@ class Hooks {
 			$is_instructor = false;
 			if ( ! $collectionItem && isset( $args['templateEditContext']['collectionType'] ) ) {
 				$is_instructor = $args['templateEditContext']['collectionType'] === 'user';
+			} else if (
+				$collectionItem && $collectionItem['collectionType'] === 'users' ||
+				$args['collectionProperties']['type'] === 'TUTOR_LMS-instructors'
+			) {
+				$is_instructor = true;
 			}
 
 			if ( isset( $settings['course_meta_type'] ) ) {

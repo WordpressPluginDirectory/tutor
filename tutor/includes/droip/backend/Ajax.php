@@ -9,6 +9,7 @@ namespace TutorLMSDroip;
 
 use Droip\HelperFunctions;
 use stdClass;
+use Tutor\Ecommerce\CartController;
 use TutorLMSDroip\ElementGenerator\Preview;
 use TUTOR\Input;
 use Tutor\Models\CourseModel;
@@ -76,6 +77,13 @@ class Ajax {
 			$course_id = Input::post( 'course_id' );
 			$res       = tutor_add_to_cart( $course_id );
 			wp_send_json_success( $res );
+		}
+
+		if('get_user_cart_item_count' === $request_method) {
+			$cart = new CartController();
+			$cart_items = $cart->get_cart_items();
+			$count = $cart_items['courses']['total_count'];
+			wp_send_json_success($count);
 		}
 
 		if ( 'complete_course' === $request_method ) {
