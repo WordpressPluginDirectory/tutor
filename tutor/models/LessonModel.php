@@ -10,6 +10,8 @@
 
 namespace Tutor\Models;
 
+use Tutor\Helpers\QueryHelper;
+
 /**
  * LessonModel Class
  *
@@ -22,17 +24,29 @@ class LessonModel {
 	 *
 	 * @since 2.0.2
 	 *
+	 * @since 3.7.1 Course ids param added
+	 *
+	 * @param array $course_ids Array of course ids.
+	 *
 	 * @return int
 	 */
-	public static function get_total_lesson() {
+	public static function get_total_lesson( array $course_ids = array() ) {
 		global $wpdb;
 		$lesson_type = tutor()->lesson_post_type;
+
+		$course_in_clause = '';
+		if ( count( $course_ids ) ) {
+			$prepare_ids      = QueryHelper::prepare_in_clause( $course_ids );
+			$course_in_clause = "AND course.ID IN ({$prepare_ids})";
+		}
 
 		$sql = "SELECT COUNT(DISTINCT lesson.ID)
 				FROM {$wpdb->posts} lesson
 					INNER JOIN {$wpdb->posts} topic ON lesson.post_parent=topic.ID
 					INNER JOIN {$wpdb->posts} course ON topic.post_parent=course.ID
-				WHERE lesson.post_type = %s
+				WHERE 1 = 1
+					{$course_in_clause}
+					AND lesson.post_type = %s
 					AND lesson.post_status = %s
 					AND course.post_status = %s
 					AND topic.post_status = %s";
@@ -131,5 +145,42 @@ class LessonModel {
 		do_action( 'tutor_mark_lesson_complete_before', $post_id, $user_id );
 		update_user_meta( $user_id, '_tutor_completed_lesson_id_' . $post_id, tutor_time() );
 		do_action( 'tutor_mark_lesson_complete_after', $post_id, $user_id );
+	}
+
+	/**
+	 * Get lesson details.
+	 *
+	 * @since 3.7.0
+	 *
+	 * @param int $lesson_id lesson id.
+	 *
+	 * @return array
+	 */
+	public static function get_lesson_details( $lesson_id ) {
+		$post = get_post( $lesson_id, ARRAY_A );
+
+		if ( $post ) {
+			$post['thumbnail_id'] = get_post_meta( $lesson_id, '_thumbnail_id', true );
+			$post['thumbnail']    = get_the_post_thumbnail_url( $lesson_id );
+			$post['attachments']  = tutor_utils()->get_attachments( $lesson_id );
+
+			$video = maybe_unserialize( get_post_meta( $lesson_id, '_video', true ) );
+			if ( $video ) {
+				$source = $video['source'] ?? '';
+				if ( 'html5' === $source ) {
+					$poster_url            = wp_get_attachment_url( $video['poster'] ?? 0 );
+					$source_html5          = wp_get_attachment_url( $video['source_video_id'] ?? 0 );
+					$video['poster_url']   = $poster_url;
+					$video['source_html5'] = $source_html5;
+				}
+			}
+			$post['video'] = $video;
+		} else {
+			$post = array();
+		}
+
+		$data = apply_filters( 'tutor_lesson_details_response', $post, $lesson_id );
+
+		return $data;
 	}
 }

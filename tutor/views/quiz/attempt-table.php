@@ -9,6 +9,8 @@
  * @since 1.0.0
  */
 
+use Tutor\Models\QuizModel;
+
 // Data variable contains $attempt_list, $context.
 extract( $data ); //phpcs:ignore WordPress.PHP.DontExtract.extract_extract
 
@@ -25,7 +27,7 @@ if ( 'course-single-previous-attempts' == $context && is_array( $attempt_list ) 
 ?>
 
 <?php if ( is_array( $attempt_list ) && count( $attempt_list ) ) : ?>
-	<div class="tutor-table-responsive tutor-table-mobile tutor-my-24">
+	<div class="tutor-table-responsive tutor-dashboard-list-table <?php echo esc_attr( is_admin() ? '' : 'tutor-table-mobile tutor-mt-32' ); ?>">
 		<table class="tutor-table tutor-table-quiz-attempts">
 			<thead>
 				<tr>
@@ -55,21 +57,11 @@ if ( 'course-single-previous-attempts' == $context && is_array( $attempt_list ) 
 				<?php foreach ( $attempt_list as $attempt ) : ?>
 					<?php
 						$course_id         = is_object( $attempt ) && property_exists( $attempt, 'course_id' ) ? $attempt->course_id : 0;
-						$earned_percentage = ( $attempt->earned_marks > 0 && $attempt->total_marks > 0 ) ? ( number_format( ( $attempt->earned_marks * 100 ) / $attempt->total_marks ) ) : 0;
 						$answers           = isset( $answers_array[ $attempt->attempt_id ] ) ? $answers_array[ $attempt->attempt_id ] : array();
-						$attempt_info      = @unserialize( $attempt->attempt_info );
-						$attempt_info      = ! is_array( $attempt_info ) ? array() : $attempt_info;
-						$passing_grade     = isset( $attempt_info['passing_grade'] ) ? (int) $attempt_info['passing_grade'] : 0;
-						$ans_array         = is_array( $answers ) ? $answers : array();
+						$earned_percentage = QuizModel::calculate_attempt_earned_percentage( $attempt );
 
-						$has_pending = count(
-							array_filter(
-								$ans_array,
-								function( $ans ) {
-									return null === $ans->is_correct;
-								}
-							)
-						);
+						$attempt_result    = QuizModel::get_attempt_result( $attempt->attempt_id );
+						$is_result_pending = QuizModel::RESULT_PENDING === $attempt_result;
 
 						$correct    = 0;
 						$incorrect  = 0;
@@ -152,12 +144,12 @@ if ( 'course-single-previous-attempts' == $context && is_array( $attempt_list ) 
 									<?php echo esc_html( isset( $attempt->earned_marks ) ? round( $attempt->earned_marks ) . ' (' . $earned_percentage . '%)' : '0 (0%)' ); ?>
 								<?php elseif ( 'result' == $key ) : ?>
 									<?php
-									if ( $has_pending ) {
+									if ( $is_result_pending ) {
 										echo '<span class="tutor-badge-label label-warning">' . esc_html__( 'Pending', 'tutor' ) . '</span>';
 									} else {
-										echo $earned_percentage >= $passing_grade ?
-											'<span class="tutor-badge-label label-success">' . esc_html__( 'Pass', 'tutor' ) . '</span>' :
-											'<span class="tutor-badge-label label-danger">' . esc_html__( 'Fail', 'tutor' ) . '</span>';
+										echo QuizModel::RESULT_PASS === $attempt_result
+												? '<span class="tutor-badge-label label-success">' . esc_html__( 'Pass', 'tutor' ) . '</span>'
+												: '<span class="tutor-badge-label label-danger">' . esc_html__( 'Fail', 'tutor' ) . '</span>';
 									}
 									?>
 								<?php elseif ( 'details' == $key ) : ?>
@@ -169,9 +161,9 @@ if ( 'course-single-previous-attempts' == $context && is_array( $attempt_list ) 
 										$style     = '';
 									?>
 									<div class="tutor-d-inline-flex tutor-align-center" style="<?php echo esc_attr( ! is_admin() ? $style : '' ); ?>">
-										<a href="<?php echo esc_url( $url ); ?>" class="tutor-btn tutor-btn-outline-primary tutor-btn-sm">
+										<a href="<?php echo esc_url( $url ); ?>" class="tutor-btn tutor-btn-tertiary tutor-btn-sm">
 											<?php
-											if ( $has_pending && ( 'frontend-dashboard-students-attempts' == $context || 'backend-dashboard-students-attempts' == $context ) ) {
+											if ( $is_result_pending && ( 'frontend-dashboard-students-attempts' === $context || 'backend-dashboard-students-attempts' === $context ) ) {
 												esc_html_e( 'Review', 'tutor' );
 											} else {
 												esc_html_e( 'Details', 'tutor' );
@@ -199,7 +191,7 @@ if ( 'course-single-previous-attempts' == $context && is_array( $attempt_list ) 
 		</table>
 	</div>
 <?php else : ?>
-	<?php tutor_utils()->tutor_empty_state( tutor_utils()->not_found_text() ); ?>
+	<?php tutils()->render_list_empty_state(); ?>
 <?php endif; ?>
 <?php
 // Load delete modal.

@@ -8,8 +8,6 @@
 
 namespace TutorLMSDroip\ElementGenerator;
 
-use TUTOR\Course;
-use Tutor\Models\CartModel;
 use TUTOR_CERT\Certificate;
 use TutorLMSDroip\Helper;
 
@@ -62,6 +60,8 @@ trait ActionsGenerator {
 			}
 		}
 
+		$entry_box_button_logic = $this->update_entry_box_button_logic( $entry_box_button_logic, $this->options );
+
 		if ( ! isset( $entry_box_button_logic->{'show_' . $type} ) || ( isset( $entry_box_button_logic->{'show_' . $type} ) && $entry_box_button_logic->{'show_' . $type} !== true ) ) {
 			return '';
 		}
@@ -73,7 +73,7 @@ trait ActionsGenerator {
 				return $this->generate_child_element_with_parent_droip_data( $extra_attributes );
 			}
 			case 'add_to_cart_btn':{
-					$is_course_in_user_cart = CartModel::is_course_in_user_cart( get_current_user_id(), $course_id );
+					$is_course_in_user_cart = tutor_is_item_in_cart( $course_id );
 				if ( $is_course_in_user_cart ) {
 					return '';
 				}
@@ -82,8 +82,17 @@ trait ActionsGenerator {
 				}
 				return $this->generate_child_element_with_parent_droip_data( $extra_attributes );
 			}
+
+			case 'remove_from_cart_btn':{
+				$is_course_in_user_cart = tutor_is_item_in_cart( $course_id );
+				if ( !$is_course_in_user_cart ) {
+					return '';
+				}
+				return $this->generate_child_element_with_parent_droip_data( $extra_attributes );
+			}
+			
 			case 'view_cart_btn':{
-					$is_course_in_user_cart = CartModel::is_course_in_user_cart( get_current_user_id(), $course_id );
+					$is_course_in_user_cart = tutor_is_item_in_cart( $course_id );
 				if ( ! $is_course_in_user_cart ) {
 					return '';
 				}
@@ -164,6 +173,20 @@ trait ActionsGenerator {
 
 		}
 		return '';
+	}
+
+	private function update_entry_box_button_logic($entry_box_button_logic, $options)
+	{
+		if (isset($options['relation_type']) && $options['relation_type'] === 'TUTOR_LMS_CART') {
+			if ($entry_box_button_logic->show_view_cart_btn) {
+				$entry_box_button_logic->show_remove_from_cart_btn = true;
+			}
+		}
+		if (isset($options['relation_type']) && $options['relation_type'] === 'TUTOR_LMS_CART') {
+			$entry_box_button_logic->show_view_cart_btn = false;
+		}
+
+		return $entry_box_button_logic;
 	}
 
 	private function generate_child_element_with_parent_droip_data( $extra_attributes ) {

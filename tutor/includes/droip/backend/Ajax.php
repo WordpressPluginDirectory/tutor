@@ -9,7 +9,6 @@ namespace TutorLMSDroip;
 
 use Droip\HelperFunctions;
 use stdClass;
-use Tutor\Ecommerce\CartController;
 use TutorLMSDroip\ElementGenerator\Preview;
 use TUTOR\Input;
 use Tutor\Models\CourseModel;
@@ -33,6 +32,7 @@ class Ajax {
 	 */
 	public function __construct() {
 		add_action( 'wp_ajax_tutor_handle_api_calls', array( $this, 'tutor_handle_api_calls' ) );
+		add_action( 'wp_ajax_nopriv_tutor_handle_api_calls', array( $this, 'tutor_handle_api_calls' ) );
 	}
 
 	/**
@@ -42,9 +42,8 @@ class Ajax {
 	 */
 	public function tutor_handle_api_calls() {
 		$request_method = Input::post( 'method' );
-
+		tutor_utils()->checking_nonce();
 		if ( 'generate_html' === $request_method ) {
-			tutor_utils()->checking_nonce();
 
 			$course_id  = Input::post( 'course_id' );
             $droip_data = isset( $_REQUEST['droip_data'] ) ? wp_unslash( $_REQUEST['droip_data'] ) : null; //phpcs:ignore
@@ -67,27 +66,28 @@ class Ajax {
 			wp_send_json_success( $collection_wrapper_html_string );
 		}
 		if ( 'enroll_course' === $request_method ) {
-			tutor_utils()->checking_nonce();
 			$course_id = Input::post( 'course_id' );
 			$res       = tutor_utils()->do_enroll( $course_id );
 			wp_send_json_success( $res );
 		}
 		if ( 'add_to_cart_course' === $request_method ) {
-			tutor_utils()->checking_nonce();
 			$course_id = Input::post( 'course_id' );
 			$res       = tutor_add_to_cart( $course_id );
 			wp_send_json_success( $res );
 		}
 
+		if ('remove_from_cart_course' === $request_method) {
+			$res       = tutor_remove_cart_item(Input::post('course_id'));
+			wp_send_json_success($res);
+		}
+
 		if('get_user_cart_item_count' === $request_method) {
-			$cart = new CartController();
-			$cart_items = $cart->get_cart_items();
-			$count = $cart_items['courses']['total_count'];
+			$cart_items = tutor_get_cart_items();
+			$count = count($cart_items);
 			wp_send_json_success($count);
 		}
 
 		if ( 'complete_course' === $request_method ) {
-			tutor_utils()->checking_nonce();
 			$course_id = Input::post( 'course_id' );
 			$user_id   = get_current_user_id();
 			if ( ! $user_id ) {
@@ -99,13 +99,16 @@ class Ajax {
 		}
 
 		if ( 'add_qna' === $request_method ) {
-			tutor_utils()->checking_nonce();
 			$course_id         = Input::post( 'course_id' );
 			$comment_parent_id = Input::post( 'comment_parent_id' );
 			$content           = Input::post( 'content' );
 
 			$user = wp_get_current_user();
 			$date = gmdate( 'Y-m-d H:i:s', tutor_time() );
+
+			if ( ! $user->ID ) {
+				wp_send_json_error( 'Please Sign-In' );
+			}
 
             $collection_data = isset($_REQUEST['collection_data']) ? json_decode(wp_unslash($_REQUEST['collection_data']), true) : null; //phpcs:ignore
 

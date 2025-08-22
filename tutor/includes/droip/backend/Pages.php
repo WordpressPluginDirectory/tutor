@@ -34,7 +34,8 @@ class Pages
         add_action('wp_ajax_nopriv_tde_get_apis', [$this, 'tde_get_apis']);
         add_action('wp_ajax_tde_get_apis', [$this, 'tde_get_apis']);
 
-        add_action('template_redirect', [$this, 'control_pages_content']);
+        // add_action('template_redirect', [$this, 'control_pages_content']);
+        add_action('template_include', [$this, 'may_be_change_template'], PHP_INT_MAX);
 
         add_filter('droip_assets_should_load', [$this, 'load_droip_assets']);
 
@@ -71,40 +72,83 @@ class Pages
         wp_send_json_success($pages);
     }
 
-    /**
-     * Generate courses page
-     *
-     * @since 1.0.0
-     */
-    public function control_pages_content()
+    public function may_be_change_template($template_path)
     {
         $action   = Input::get('action');
         $load_for = Input::get('load_for');
         if ($this->is_course_page() && ($action !== 'droip' || $load_for === 'droip-iframe')) {
-            $this->generate_page_using_full_canvas_template();
+            $template_path = $this->generate_page_using_full_canvas_template($template_path);
         }
 
         if ($this->is_course_bundle_page() && ($action !== 'droip' || $load_for === 'droip-iframe')) {
-            $this->generate_page_using_full_canvas_template();
+            $template_path = $this->generate_page_using_full_canvas_template($template_path);
         }
 
         if ($this->is_course_list_page() && ($action !== 'droip' || $load_for === 'droip-iframe')) {
-            $utility_page = HelperFunctions::find_utility_page_for_this_context('lms_course_list');
-            if ($utility_page) {
+            $template_path = $this->generate_utility_page_content_with_fullcanvas_template_using_type('lms_course_list', $template_path);
+        }
+
+        if ($this->is_cart_page() && ($action !== 'droip' || $load_for === 'droip-iframe')) {
+            $template_path = $this->generate_utility_page_content_with_fullcanvas_template_using_type('lms_cart', $template_path);
+        }
+
+        if ($this->is_checkout_page() && ($action !== 'droip' || $load_for === 'droip-iframe')) {
+            $template_path = $this->generate_utility_page_content_with_fullcanvas_template_using_type('lms_checkout', $template_path);
+        }
+
+        return $template_path;
+    }
+
+    private function generate_utility_page_content_with_fullcanvas_template_using_type($type, $template_path)
+    {
+        $utility_page = HelperFunctions::find_utility_page_for_this_context($type);
+        if ($utility_page) {
+            $html = apply_filters(
+                'droip_html_generator',
+                '',
+                $utility_page['id']
+            );
+            $custom_data = [
+                'droip_template_content' => $html,
+                'droip_template_id'      => $utility_page['id'],
+            ];
+            set_query_var('droip_custom_data', $custom_data);
+            $template_path = DROIP_FULL_CANVAS_TEMPLATE_PATH;
+        }
+
+        return $template_path;
+    }
+
+    /**
+     * Generate course page
+     *
+     * @since 1.0.0
+     */
+    private function generate_page_using_full_canvas_template($template_path)
+    {
+        $template = apply_filters('droip_template_finder', 'post', get_post(get_the_ID()));
+        if ($template) {
+
+            $course_template = get_post($template['id']);
+
+            if ($course_template->post_status === 'publish') {
                 $html = apply_filters(
                     'droip_html_generator',
                     '',
-                    $utility_page['id']
+                    $course_template->ID
                 );
                 $custom_data = [
-                    'droip_template_content' => $html,
-                    'droip_template_id'      => $utility_page['id'],
+                    'droip_template_content' => $html, // Example: Get the current post ID
+                    'droip_template_id'      => $template['id'],
                 ];
+                // Set a global variable with custom data to make it available in the template
                 set_query_var('droip_custom_data', $custom_data);
-                include_once DROIP_FULL_CANVAS_TEMPLATE_PATH;
-                exit();
+
+                $template_path = DROIP_FULL_CANVAS_TEMPLATE_PATH;
             }
         }
+
+        return $template_path;
     }
 
     /**
@@ -131,37 +175,6 @@ class Pages
             return true;
         }
         return $default_value;
-    }
-    /**
-     * Generate course page
-     *
-     * @since 1.0.0
-     */
-    private function generate_page_using_full_canvas_template()
-    {
-        $template = apply_filters('droip_template_finder', 'post', get_post(get_the_ID()));
-        if (! $template) {
-            return;
-        }
-
-        $course_template = get_post($template['id']);
-
-        if ($course_template->post_status === 'publish') {
-            $html = apply_filters(
-                'droip_html_generator',
-                '',
-                $course_template->ID
-            );
-            $custom_data = [
-                'droip_template_content' => $html, // Example: Get the current post ID
-                'droip_template_id'      => $template['id'],
-            ];
-            // Set a global variable with custom data to make it available in the template
-            set_query_var('droip_custom_data', $custom_data);
-
-            include_once DROIP_FULL_CANVAS_TEMPLATE_PATH;
-            exit();
-        }
     }
 
     /**
@@ -198,6 +211,29 @@ class Pages
             if (isset($wp_query->query_vars['course-category']) || isset($wp_query->query_vars['course-tag'])) {
                 return false;
             }
+            return true;
+        }
+        return false;
+    }
+
+    private function is_cart_page()
+    {
+        global $wp_query;
+        if (isset($wp_query->query['pagename']) && $wp_query->query['pagename'] === 'cart') {
+            return true;
+        }
+        if (isset($wp_query->query['droip_utility_page_type']) && $wp_query->query['droip_utility_page_type'] === 'lms_cart') {
+            return true;
+        }
+        return false;
+    }
+    private function is_checkout_page()
+    {
+        global $wp_query;
+        if (isset($wp_query->query['pagename']) && $wp_query->query['pagename'] === 'checkout') {
+            return true;
+        }
+        if (isset($wp_query->query['droip_utility_page_type']) && $wp_query->query['droip_utility_page_type'] === 'lms_cart') {
             return true;
         }
         return false;

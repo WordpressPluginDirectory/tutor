@@ -79,10 +79,11 @@ class OrderModel {
 	 *
 	 * @var string
 	 */
-	const META_ENROLLMENT_FEE      = 'plan_enrollment_fee';
-	const META_TRIAL_FEE           = 'plan_trial_fee';
-	const META_PLAN_INFO           = 'plan_info';
-	const META_IS_PLAN_TRIAL_ORDER = 'is_plan_trial_order';
+	const META_ENROLLMENT_FEE          = 'plan_enrollment_fee';
+	const META_TRIAL_FEE               = 'plan_trial_fee';
+	const META_PLAN_INFO               = 'plan_info';
+	const META_IS_PLAN_TRIAL_ORDER     = 'is_plan_trial_order';
+	const META_IS_RESUBSCRIPTION_ORDER = 'is_resubscription_order';
 
 	/**
 	 * Tax type constants
@@ -268,6 +269,21 @@ class OrderModel {
 			self::ORDER_COMPLETED  => __( 'Completed', 'tutor' ),
 			self::ORDER_CANCELLED  => __( 'Cancelled', 'tutor' ),
 			self::ORDER_TRASH      => __( 'Trash', 'tutor' ),
+		);
+	}
+
+	/**
+	 * Get all order types
+	 *
+	 * @since 3.7.0
+	 *
+	 * @return array
+	 */
+	public static function get_order_type_list() {
+		return array(
+			self::TYPE_SINGLE_ORDER => __( 'Single Order', 'tutor' ),
+			self::TYPE_SUBSCRIPTION => __( 'Subscription', 'tutor' ),
+			self::TYPE_RENEWAL      => __( 'Renewal', 'tutor' ),
 		);
 	}
 
@@ -1900,7 +1916,6 @@ class OrderModel {
 				$limit
 			)
 		);
-		//phpcs:enable
 
 		$total_statements = $wpdb->get_var(
 			$wpdb->prepare(
@@ -1915,6 +1930,7 @@ class OrderModel {
 				$user_id
 			)
 		);
+		//phpcs:enable
 
 		return array(
 			'statements'       => $statements,

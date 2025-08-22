@@ -10,6 +10,9 @@ namespace TutorLMSDroip\ElementGenerator;
 
 use Droip\HelperFunctions;
 use Tutor\Models\CourseModel;
+use Tutor\Ecommerce\CartController;
+use Tutor\Ecommerce\Tax;
+use Tutor\Models\OrderModel;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -27,6 +30,7 @@ trait CourseMetaGenerator {
 	 * @return string
 	 */
 	private function generate_course_meta_markup() {
+		self::fill_dynamic_data_if_symbol_html_generation();
 		$settings      = isset( $this->element['properties']['settings'] ) ? $this->element['properties']['settings'] : array();
 		$meta_type     = isset( $settings['course_meta_type'] ) ? $settings['course_meta_type'] : 'default';
 		$course_id     = isset( $this->options['post'] ) ? $this->options['post']->ID : get_the_ID();
@@ -88,6 +92,29 @@ trait CourseMetaGenerator {
 			return "<img $this->attributes src='" . $meta['src'] . "' alt='" . $meta['alt'] . "'/>";
 		} else {
 			return "<span $this->attributes>$meta</span>";
+		}
+	}
+
+
+	private function fill_dynamic_data_if_symbol_html_generation() {
+		if(isset($this->options['comment']) && isset($this->options['comment']->collectionType)) {
+			$comment_id = ((array) $this->options['comment'])['comment_ID'];
+			$reviews = tutor_utils()->get_course_reviews($comment_id, 0, 100, false, array('approved'), get_current_user_id(), false);
+			$review = count($reviews) > 0 ? $reviews[0] : array();
+			$qna_data = tutor_utils()->get_qa_question($comment_id);
+			$qna = $qna_data ? $qna_data : array();
+			$comment = array_merge( (array) $review, (array) $qna);
+			$comment['author_profile_picture'] = array('src' => get_avatar_url($comment['user_id']));
+			$this->options['comment'] = $comment;
+		}
+		if (isset($this->options['announcement']) && isset($this->options['announcement']->collectionType)) {
+			$announcement_id = ((array) $this->options['announcement'])['ID'];
+			$this->options['announcement'] = get_post($announcement_id);
+		}
+		if (isset($this->options['resources']) && isset($this->options['resources']->collectionType)) {
+			$resource_id = ((array) $this->options['resources'])['id'];
+			$resource = tutor_utils()->get_attachment_data($resource_id);
+			$this->options['resources'] = $resource;
 		}
 	}
 
@@ -621,9 +648,101 @@ trait CourseMetaGenerator {
 
 				return $count;
 
+			case 'cart_subtotal': {
+					return tutor_get_formatted_price(self::get_cart_subtotal());
+				}
+
+			case 'cart_grand_total': {
+					return tutor_get_formatted_price(self::get_cart_grand_total());
+				}
+
+			case 'net_payment':
+			case 'discount_amount':
+			case 'coupon_amount':
+			case 'tax_rate':
+			case 'tax_amount': {
+					$order_id  = Input::post('order_id'); // TODO: get id from dynamic data
+					$key = $meta_type;
+
+					if (! $order_id)  return $key;
+
+					return self::get_order_data($order_id, $key);
+				}
+
 			default:
 				return '';
 		}
+	}
+
+	/**
+	 * Get Tutor Cart Net Payment
+	 * 
+	 * @param int $order_id
+	 * @param string $key
+	 * 
+	 * @return float || null
+	 */
+
+	// MAKE A COMMON FUNCTION FOR GETTING ORDERS INFO
+	public static function get_order_data($order_id, $key = null)
+	{
+		$order_model = new OrderModel();
+		$order = $order_model->get_order_by_id($order_id);
+
+		if ($order && $key) {
+			return isset($order->$key) ? $order->$key : null;
+		}
+
+		return null;
+	}
+
+	/**
+	 * Get Tutor Cart Grand Total
+	 * 
+	 * @return float
+	 */
+	public static function get_cart_grand_total()
+	{
+		$subtotal = self::get_cart_subtotal();
+
+		$is_tax_included_in_price = Tax::is_tax_included_in_price();
+		$tax_rate                 = Tax::get_user_tax_rate();
+		$tax_amount               = Tax::calculate_tax($subtotal, $tax_rate);
+		$grand_total              = $subtotal;
+
+		if (! $is_tax_included_in_price) {
+			$grand_total += $tax_amount;
+		}
+
+		return $grand_total;
+	}
+
+	/**
+	 * Get Tutor Cart Subtotal
+	 * 
+	 * @return float
+	 */
+	public static function get_cart_subtotal()
+	{
+		$cart_controller = new CartController();
+		$get_cart        = $cart_controller->get_cart_items();
+		$courses         = $get_cart['courses'];
+		$course_list     = $courses['results'];
+
+		$subtotal = 0;
+
+		if (! empty($course_list)) {
+			foreach ($course_list as $course) {
+				$course_price     = tutor_utils()->get_raw_course_price($course->ID);
+
+				$regular_price    = $course_price->regular_price;
+				$sale_price       = $course_price->sale_price;
+
+				$subtotal += $sale_price ? $sale_price : $regular_price;
+			}
+		}
+
+		return $subtotal;
 	}
 
 	/**
