@@ -8,9 +8,12 @@
 
 namespace TutorLMSDroip;
 
+use Tutor\Ecommerce\CheckoutController;
 use TutorLMSDroip\ElementGenerator\CourseMetaGenerator;
 use TutorLMSDroip\ElementGenerator\ThumbnailGenerator;
 use Tutor\Ecommerce\CartController;
+use TutorPro\Subscription\Models\PlanModel;
+use TutorPro\Subscription\Subscription;
 
 if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly.
@@ -31,6 +34,7 @@ class Hooks
         add_filter('droip_collection_TUTOR_LMS_COURSES', [$this, 'droip_collection_TUTOR_LMS_COURSES'], 10, 2);
         add_filter('droip_collection_TUTOR_LMS_CURRICULUM', [$this, 'droip_collection_TUTOR_LMS_CURRICULUM'], 10, 2);
         add_filter('droip_collection_TUTOR_LMS_CART', [$this, 'droip_collection_TUTOR_LMS_CART'], 10, 2);
+        add_filter('droip_collection_TUTOR_LMS_MEMBERSHIP', [$this, 'droip_collection_TUTOR_LMS_MEMBERSHIP'], 10, 2);
         add_filter('droip_dynamic_content', [$this, 'droip_dynamic_content'], 10, 2);
         add_filter('droip_comment-TUTOR_LMS-tutor_q_and_a', [$this, 'modify_qna_comment_data']);
         add_filter('droip_comment-TUTOR_LMS-tutor_course_rating', [$this, 'modify_rating_comment_data']);
@@ -42,6 +46,7 @@ class Hooks
         add_filter('droip_dynamic_content_fields', [$this, 'modify_droip_dynamic_content_fields'], 10, 2);
         add_filter('droip_external_collection_options', [$this, 'modify_external_collection_options'], 10, 2);
         add_filter('droip_external_collection_item_type', [$this, 'get_tutor_item_types'], 10, 2);
+        add_filter('droip_element_generator_radio-button', [$this, 'droip_element_generator_radio_buttons'], 10, 2);
     }
 
     public function modify_droip_dynamic_content_fields($fields, $collection_data)
@@ -54,7 +59,56 @@ class Hooks
                     }
                 }
             }
+        } else if (isset($collection_data['collectionType'], $collection_data['type']) && $collection_data['collectionType'] === 'TUTOR_LMS_COURSES' && $collection_data['type'] === 'TUTOR_LMS-subscriptions') {
+            if ($collection_data['elementContentType'] === 'content') {
+                $fields['typeValues']['content'][] = ['title' => 'Subscription', 'value' => 'TUTOR_LMS-subscriptions'];
+                $fields['typeValuesAttr']['content']['TUTOR_LMS-subscriptions'] = [
+                    ['title' => 'Plan name', 'value' => 'TUTOR_LMS-subscriptions-plan-name'],
+                    ['title' => 'Plan price', 'value' => 'TUTOR_LMS-subscriptions-plan-price'],
+                    ['title' => 'Plan sale price', 'value' => 'TUTOR_LMS-subscriptions-plan-sale-price'],
+                    ['title' => 'Plan Recurring Interval', 'value' => 'TUTOR_LMS-subscriptions-plan-recurring-interval'],
+                    ['title' => 'Enrollment Fee', 'value' => 'TUTOR_LMS-subscriptions-enrollment-fee'],
+                    ['title' => 'Plan Short Description', 'value' => 'TUTOR_LMS-subscriptions-plan-short-description'],
+                ];
+            }
+        } else if (isset($collection_data['collectionType'], $collection_data['type']) && $collection_data['collectionType'] === 'TUTOR_LMS_MEMBERSHIP' && $collection_data['type'] === 'TUTOR_LMS-membership-plans') {
+            if ($collection_data['elementContentType'] === 'content') {
+                $fields['typeValues']['content'][] = ['title' => 'Membership Plan', 'value' => 'TUTOR_LMS-membership-plans'];
+                $fields['typeValuesAttr']['content']['TUTOR_LMS-membership-plans'] = [
+                    ['title' => 'Plan name', 'value' => 'TUTOR_LMS-membership-plans-plan-name'],
+                    ['title' => 'Plan price', 'value' => 'TUTOR_LMS-membership-plans-plan-price'],
+                    ['title' => 'Plan sale price', 'value' => 'TUTOR_LMS-membership-plans-plan-sale-price'],
+                    ['title' => 'Plan Recurring Interval', 'value' => 'TUTOR_LMS-membership-plans-plan-recurring-interval'],
+                    ['title' => 'Enrollment Fee', 'value' => 'TUTOR_LMS-membership-plans-enrollment-fee'],
+                    ['title' => 'Plan Short Description', 'value' => 'TUTOR_LMS-membership-plans-plan-short-description'],
+                    ['title' => 'Featured Text', 'value' => 'TUTOR_LMS-membership-plans-featured-text'],
+                    ['title' => 'Trial Fee', 'value' => 'TUTOR_LMS-membership-plans-trial-fee'],
+                    ['title' => 'Trial Interval', 'value' => 'TUTOR_LMS-membership-plans-trial-interval'],
+                    ['title' => 'Trial Value', 'value' => 'TUTOR_LMS-membership-plans-trial-value'],
+
+                ];
+            }
+
+            if (isset($collection_data['elementContentType']) && $collection_data['elementContentType'] === 'anchor') {
+                $plan_model         = new PlanModel();
+                $active_membership_plans     = $plan_model->get_membership_plans(PlanModel::STATUS_ACTIVE);
+
+                if (count($active_membership_plans) > 0) {
+                    $fields['typeValues']['anchor'][] = ['title' => 'Membership', 'value' => 'membership-anchor'];
+
+                    // get all active membership plans names
+                    $fields['typeValuesAttr']['anchor']['membership-anchor'] = [['title' => 'Link', 'value' => 'membership-link']];
+                }
+            }
+        } else if (isset($collection_data['collectionType'], $collection_data['type']) && $collection_data['collectionType'] === 'TUTOR_LMS_MEMBERSHIP' && $collection_data['type'] === 'TUTOR_LMS-membership-features') {
+            if ($collection_data['elementContentType'] === 'content') {
+                $fields['typeValues']['content'][] = ['title' => 'Membership Features', 'value' => 'TUTOR_LMS-membership-features'];
+                $fields['typeValuesAttr']['content']['TUTOR_LMS-membership-features'] = [
+                    ['title' => 'Content', 'value' => 'TUTOR_LMS-membership-features-feature-content'],
+                ];
+            }
         }
+
         return $fields;
     }
 
@@ -76,6 +130,7 @@ class Hooks
                 ['title' => 'Resources', 'value' => "TUTOR_LMS-resources", 'itemType' => 'resources'],
                 ['title' => 'Gradebooks', 'value' => "TUTOR_LMS-gradebooks", 'itemType' => 'post'],
                 ['title' => 'Instructors', 'value' => "TUTOR_LMS-instructors", 'itemType' => 'user'],
+                ['title' => 'Subscriptions', 'value' => "TUTOR_LMS-subscriptions", 'itemType' => 'subscriptions'],
                 // ['title' => 'Cart', 		 'value' => "TUTOR_LMS-cart", 'itemType' => 'post'] //temporary commented.
             ],
         ];
@@ -100,6 +155,17 @@ class Hooks
             ],
         ];
 
+        $membership_group = [
+            'title'               => 'Membership',
+            'value'               => 'TUTOR_LMS_MEMBERSHIP',
+            'inherit'             => true,
+            'default_select_type' => "TUTOR_LMS-membership-plans",
+            'group'               => [
+                ['title' => 'Plans', 'value' => "TUTOR_LMS-membership-plans", 'itemType' => 'membership-plan'],
+                ['title' => 'Features', 'value' => "TUTOR_LMS-membership-features", 'itemType' => 'membership-feature'],
+            ],
+        ];
+
         if ($collectionType === 'posts' && $type === 'courses') {
             $options[] = $courses_group;
         } else if ($collectionType === 'TUTOR_LMS_COURSES' && $type === 'TUTOR_LMS-topics') {
@@ -107,6 +173,9 @@ class Hooks
         } else {
             // $options[] = $cart_group; //temporary commented.
         }
+
+        $options[] = $membership_group;
+
         return $options;
     }
 
@@ -325,6 +394,16 @@ class Hooks
                 'pagination' => null,
                 'itemType'   => 'post',
             ];
+        } else if ($args['name'] === 'TUTOR_LMS-subscriptions') {
+            if (tutor()->has_pro && Subscription::is_enabled()) {
+                $plan_model = new PlanModel();
+                $items = $plan_model->get_subscription_plans($args['post_parent']);
+                return [
+                    'data'       => $items,
+                    'pagination' => null,
+                    'itemType'   => 'TUTOR_LMS-subscriptions',
+                ];
+            }
         } else {
             return [
                 'data'       => [],
@@ -355,19 +434,77 @@ class Hooks
         return $value;
     }
 
+    public function droip_collection_TUTOR_LMS_MEMBERSHIP($value, $args)
+    {
+        if ($args['name'] === 'TUTOR_LMS-membership-plans') {
+            $plan_model         = new PlanModel();
+            $active_membership_plans     = $plan_model->get_membership_plans(PlanModel::STATUS_ACTIVE);
+
+            return [
+                'data'       => $active_membership_plans,
+                'pagination' => null,
+                'itemType'   => 'membership-plan',
+            ];
+        } elseif ($args['name'] === 'TUTOR_LMS-membership-features' && isset($args['post_parent'])) {
+            $plan_id = $args['post_parent'];
+
+            if (isset($args['parent_item_type']) && $args['parent_item_type'] === 'membership-plan') {
+                if (isset($args['parent_item'], $args['parent_item']->id)) {
+                    $plan_id = $args['parent_item']->id;
+                }
+            }
+
+            $plan_model = new PlanModel();
+            $active_membership_plans     = $plan_model->get_membership_plans(PlanModel::STATUS_ACTIVE);
+
+            $plan_details = null;
+            foreach ($active_membership_plans as $plan) {
+                if ($plan->id === $plan_id) {
+                    $plan_details = $plan;
+                    break;
+                }
+            }
+
+            if (! $plan_details) {
+                return [
+                    'data'       => [],
+                    'pagination' => [],
+                    'itemType'   => false,
+                ];
+            }
+
+            $features = isset($plan_details->description) ? json_decode($plan_details->description, true) : [];
+
+
+            return [
+                'data'       => $features,
+                'pagination' => null,
+                'itemType'   => 'membership-feature',
+            ];
+        } else {
+            return [
+                'data'       => [],
+                'pagination' => [],
+                'itemType'   => false,
+            ];
+        }
+
+        return $value;
+    }
+
     public function droip_dynamic_content($value, $args)
     {
         if (isset($args['dynamicContent'])) {
             $dynamicContent = $args['dynamicContent'];
-            $collectionItem = $args['collectionItem'];
-
-            if ($collectionItem && isset($collectionItem['ID'])) {
-                $course_id = $collectionItem['ID'];
-            } elseif (isset($args['post_id'])) {
-                $course_id = $args['post_id'];
-            }
 
             if ($dynamicContent['type'] === 'course') {
+                $collectionItem = $args['collectionItem'];
+                if ($collectionItem && isset($collectionItem['ID'])) {
+                    $course_id = $collectionItem['ID'];
+                } elseif (isset($args['post_id'])) {
+                    $course_id = $args['post_id'];
+                }
+
                 if ($dynamicContent['value'] === 'thumbnail_image') {
                     $tutor_course_img = get_tutor_course_thumbnail_src('post-thumbnail', $course_id);
                     if ($tutor_course_img) {
@@ -379,6 +516,146 @@ class Hooks
                     if ($source_key) {
                         return ['url' => $video_info->$source_key];
                     }
+                }
+            } else if ($dynamicContent['type'] === 'TUTOR_LMS-subscriptions') {
+                $collectionItem = isset($args['collectionItem']) ? $args['collectionItem'] : false;
+                $plan_id = false;
+                if ($collectionItem && isset($collectionItem['id'])) {
+                    $plan_id = $collectionItem['id'];
+                } elseif (isset($args['options'], $args['options']['TUTOR_LMS-subscriptions'])) {
+                    $plan_id = $args['options']['TUTOR_LMS-subscriptions']->id;
+                }
+
+                $plan_model = new PlanModel();
+                $plan_details = $plan_model->get_plan($plan_id);
+                if (!$plan_details) {
+                    return "No Plan";
+                }
+                if ($dynamicContent['value'] === 'TUTOR_LMS-subscriptions-plan-name') {
+                    if ($plan_details) {
+                        return $plan_details->plan_name;
+                    }
+                } else if ($dynamicContent['value'] === 'TUTOR_LMS-subscriptions-plan-price') {
+                    if ($plan_details) {
+                        return tutor_get_formatted_price($plan_details->regular_price);
+                    }
+                } else if ($dynamicContent['value'] === 'TUTOR_LMS-subscriptions-plan-sale-price') {
+                    if ($plan_details) {
+                        return tutor_get_formatted_price($plan_details->sale_price);
+                    }
+                } else if ($dynamicContent['value'] === 'TUTOR_LMS-subscriptions-plan-recurring-interval') {
+                    if ($plan_details) {
+                        return isset($plan_details->recurring_interval) ? $plan_details->recurring_interval : 'N/A';
+                    }
+                } else if ($dynamicContent['value'] === 'TUTOR_LMS-subscriptions-enrollment-fee') {
+                    if ($plan_details) {
+                        return tutor_get_formatted_price($plan_details->enrollment_fee);
+                    }
+                } else if ($dynamicContent['value'] === 'TUTOR_LMS-subscriptions-plan-short-description') {
+                    if ($plan_details) {
+                        return wp_kses_post($plan_details->short_description);
+                    }
+                }
+            } else if ($dynamicContent['type'] === 'TUTOR_LMS-membership-plans') {
+                $collectionItem = isset($args['collectionItem']) ? $args['collectionItem'] : false;
+                $plan_id = false;
+
+                if ($collectionItem && isset($collectionItem['id'])) {
+                    $plan_id = $collectionItem['id'];
+                } elseif (isset($args['options'], $args['options']['membership-plan'])) {
+                    $plan_id = $args['options']['membership-plan']->id;
+                }
+
+                $plan_model = new PlanModel();
+                $plan_details = $plan_model->get_plan($plan_id);
+
+                if (!$plan_details) {
+                    return "No Plan";
+                }
+
+                if ($dynamicContent['value'] === 'TUTOR_LMS-membership-plans-plan-name') {
+                    if ($plan_details) {
+                        return $plan_details->plan_name;
+                    }
+                } else if ($dynamicContent['value'] === 'TUTOR_LMS-membership-plans-plan-price') {
+                    if ($plan_details) {
+                        return tutor_get_formatted_price($plan_details->regular_price);
+                    }
+                } else if ($dynamicContent['value'] === 'TUTOR_LMS-membership-plans-plan-sale-price') {
+                    if ($plan_details) {
+                        return tutor_get_formatted_price($plan_details->sale_price);
+                    }
+                } else if ($dynamicContent['value'] === 'TUTOR_LMS-membership-plans-plan-recurring-interval') {
+                    if ($plan_details) {
+                        return isset($plan_details->recurring_interval) ? $plan_details->recurring_interval : 'N/A';
+                    }
+                } else if ($dynamicContent['value'] === 'TUTOR_LMS-membership-plans-enrollment-fee') {
+                    if ($plan_details) {
+                        return tutor_get_formatted_price($plan_details->enrollment_fee);
+                    }
+                } else if ($dynamicContent['value'] === 'TUTOR_LMS-membership-plans-plan-short-description') {
+                    if ($plan_details) {
+                        return wp_kses_post($plan_details->short_description);
+                    }
+                } else if ($dynamicContent['value'] === 'TUTOR_LMS-membership-plans-featured-text') {
+                    if ($plan_details) {
+                        return sanitize_text_field($plan_details->featured_text);
+                    }
+                } else if ($dynamicContent['value'] === 'TUTOR_LMS-membership-plans-trial-fee') {
+                    if ($plan_details) {
+                        return tutor_get_formatted_price($plan_details->trial_fee);
+                    }
+                } else if ($dynamicContent['value'] === 'TUTOR_LMS-membership-plans-trial-interval') {
+                    if ($plan_details) {
+                        return isset($plan_details->trial_interval) ? $plan_details->trial_interval : 'N/A';
+                    }
+                } else if ($dynamicContent['value'] === 'TUTOR_LMS-membership-plans-trial-value') {
+                    if ($plan_details) {
+                        return isset($plan_details->trial_value) ? intval($plan_details->trial_value) : 'N/A';
+                    }
+                }
+            } else if ($dynamicContent['type'] === 'TUTOR_LMS-membership-features') {
+                $collectionItem = isset($args['collectionItem']) ? $args['collectionItem'] : false;
+                $feature_id = false;
+
+                if ($collectionItem && isset($collectionItem['id'])) {
+                    $feature_id = $collectionItem['id'];
+                } elseif (isset($args['options'], $args['options']['membership-feature'])) {
+                    $feature_id = $args['options']['membership-feature']['id'];
+                }
+
+                $plan_model = new PlanModel();
+                $active_membership_plans    = $plan_model->get_membership_plans(PlanModel::STATUS_ACTIVE);
+
+                foreach ($active_membership_plans as $plan) {
+                    $features = json_decode($plan->description, true);
+                    foreach ($features as $feature) {
+                        if ($feature['id'] == $feature_id) {
+                            if ($dynamicContent['value'] === 'TUTOR_LMS-membership-features-feature-content') {
+                                return isset($feature['content']) ? wp_kses_post($feature['content']) : '';
+                            }
+                        }
+                    }
+                }
+
+                return '';
+            } else if ($dynamicContent['type'] === 'membership-anchor') {
+                if ($dynamicContent['value'] === 'membership-link') {
+                    $collectionItem = isset($args['collectionItem']) ? $args['collectionItem'] : false;
+
+                    $plan_id = false;
+                    $url = '#';
+
+                    if (isset($args['options'], $args['options']['membership-plan'])) {
+                        $plan_id = $args['options']['membership-plan']->id;
+                        $checkout_link = CheckoutController::get_page_url();
+
+                        if ($checkout_link) {
+                            $url = add_query_arg('plan', $plan_id, $checkout_link);
+                        }
+                    }
+
+                    return $url;
                 }
             }
         } elseif (isset($args['settings'])) {
@@ -467,5 +744,31 @@ class Hooks
             $item->reply = true;
         }
         return $list;
+    }
+
+    public function droip_element_generator_radio_buttons($value, $options)
+    {
+        if (isset($options['options'], $options['options']['TUTOR_LMS-subscriptions'])) {
+
+            $course_id = isset($options['options']['post']) ? $options['options']['post']->ID : get_the_ID();
+            $attributes = isset($options['attributes']) ? $options['attributes'] : '';
+
+            $tag = $options['element']['properties']['tag'] ?? 'div';
+
+            $name = 'name="course_' . $course_id . '_subscription_plan"';
+
+            $extra_attributes = 'data-subscription_id="' . $options['options']['TUTOR_LMS-subscriptions']->id . '"';
+
+
+            // Set checked for first item
+            $checked = '';
+            if (isset($options['options']['item_index']) && $options['options']['item_index'] === 1) {
+                $checked = 'checked="checked"';
+            }
+
+            return "<$tag $name $attributes $extra_attributes $checked />";
+        }
+
+        return $value;
     }
 }

@@ -12,6 +12,7 @@ class ComposerStaticInit631a460b6010ba6d03c73cfd415f87ca
             'Tutor\\Traits\\' => 13,
             'Tutor\\PaymentGateways\\' => 22,
             'Tutor\\Models\\' => 13,
+            'Tutor\\Migrations\\' => 17,
             'Tutor\\Helpers\\' => 14,
             'Tutor\\Ecommerce\\' => 16,
             'Tutor\\Cache\\' => 12,
@@ -31,6 +32,10 @@ class ComposerStaticInit631a460b6010ba6d03c73cfd415f87ca
         'Tutor\\Models\\' => 
         array (
             0 => __DIR__ . '/../..' . '/models',
+        ),
+        'Tutor\\Migrations\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/migrations',
         ),
         'Tutor\\Helpers\\' => 
         array (

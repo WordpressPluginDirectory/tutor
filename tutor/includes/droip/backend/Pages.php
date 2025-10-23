@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Preview script for html markup generator
  *
@@ -9,6 +10,8 @@ namespace TutorLMSDroip;
 
 use Droip\HelperFunctions;
 use TUTOR\Input;
+use TutorPro\Subscription\Settings;
+use TutorPro\Subscription\Subscription;
 
 if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly.
@@ -88,12 +91,16 @@ class Pages
             $template_path = $this->generate_utility_page_content_with_fullcanvas_template_using_type('lms_course_list', $template_path);
         }
 
-        if ($this->is_cart_page() && ($action !== 'droip' || $load_for === 'droip-iframe')) {
-            $template_path = $this->generate_utility_page_content_with_fullcanvas_template_using_type('lms_cart', $template_path);
-        }
+        // if ($this->is_cart_page() && ($action !== 'droip' || $load_for === 'droip-iframe')) {
+        //     $template_path = $this->generate_utility_page_content_with_fullcanvas_template_using_type('lms_cart', $template_path);
+        // }
 
-        if ($this->is_checkout_page() && ($action !== 'droip' || $load_for === 'droip-iframe')) {
-            $template_path = $this->generate_utility_page_content_with_fullcanvas_template_using_type('lms_checkout', $template_path);
+        // if ($this->is_checkout_page() && ($action !== 'droip' || $load_for === 'droip-iframe')) {
+        //     $template_path = $this->generate_utility_page_content_with_fullcanvas_template_using_type('lms_checkout', $template_path);
+        // }
+
+        if ($this->is_membership_page() && ($action !== 'droip' || $load_for === 'droip-iframe')) {
+            $template_path = $this->generate_utility_page_content_with_fullcanvas_template_using_type('lms_membership_page', $template_path);
         }
 
         return $template_path;
@@ -212,6 +219,18 @@ class Pages
                 return false;
             }
             return true;
+        }
+        return false;
+    }
+
+    private function is_membership_page()
+    {
+        if (tutor()->has_pro && Subscription::is_enabled()) {
+            $page_id = Settings::get_pricing_page_id();
+            global $wp_query;
+            if ($wp_query->is_page && $wp_query->post->ID === $page_id) {
+                return true;
+            }
         }
         return false;
     }

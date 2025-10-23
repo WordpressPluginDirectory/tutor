@@ -8,9 +8,11 @@
 
 namespace TutorLMSDroip\ElementGenerator;
 
-use TutorLMSDroip\Helper;
+use TUTOR\Course;
+use TutorPro\Subscription\Models\PlanModel;
+use TutorPro\Subscription\Subscription;
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (! defined('ABSPATH')) {
 	exit; // Exit if accessed directly.
 }
 
@@ -20,74 +22,96 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @package TutorLMSDroip\ElementGenerator
  */
-trait PriceGenerator {
+trait PriceGenerator
+{
 
 	/**
 	 * Generate actionbox markup
 	 *
 	 * @return string
 	 */
-	private function generate_price_markup() {
-		$course_id = isset( $this->options['post'] ) ? $this->options['post']->ID : get_the_ID();
-		$type      = isset( $this->properties['type'] ) ? $this->properties['type'] : 'free';
-		if ( ! $course_id ) {
+	private function generate_price_markup()
+	{
+		$course_id = isset($this->options['post']) ? $this->options['post']->ID : get_the_ID();
+		$type      = isset($this->properties['type']) ? $this->properties['type'] : 'free';
+		if (! $course_id) {
 			return '';
 		}
 
-		// echo $type . " - " . $this->isPaidCourse($course_id);
-		switch ( $type ) {
-			case 'free':{
-				if ( ! $this->isPaidCourse( $course_id ) ) {
-					return $this->generate_common_element();
+		$selling_option = Course::get_selling_option($course_id);
+		if(!$selling_option){
+			$selling_option = Course::SELLING_OPTION_ALL;
+		}
+
+		switch ($type) {
+			case 'free': {
+					if (! $this->isPaidCourse($course_id)) {
+						return $this->generate_common_element();
+					}
+					return "";
 				}
-				break;
-			}
-			case 'paid':{
-				if ( $this->isPaidCourse( $course_id ) && Helper::is_course_for_single_purchaseble($course_id) ) {
-					return $this->generate_common_element();
+			case 'paid': {
+					if ($selling_option === Course::SELLING_OPTION_ALL || $selling_option === Course::SELLING_OPTION_ONE_TIME || $selling_option === Course::SELLING_OPTION_BOTH) {
+						if ($this->isPaidCourse($course_id)) {
+							return $this->generate_common_element();
+						}
+					}
+					return '';
 				}
-				break;
-			}
+			case 'subscription': {
+					if ($selling_option === Course::SELLING_OPTION_ALL || $selling_option === Course::SELLING_OPTION_SUBSCRIPTION || $selling_option === Course::SELLING_OPTION_BOTH) {
+						if (tutor()->has_pro && Subscription::is_enabled()) {
+							$plan_model = new PlanModel();
+							$active_subscription_plans = $plan_model->get_subscription_plans($course_id, PlanModel::STATUS_ACTIVE);
+							if ($this->isPaidCourse($course_id) && count($active_subscription_plans) > 0) {
+								return $this->generate_common_element('', '', 'data-type="subscription"');
+							}
+						}
+					}
+					return "";
+				}
 			default: {
-				return '';
-			}
+					return '';
+				}
 		}
 		return '';
 	}
-	private function generate_price_value_markup() {
-		$course_id = isset( $this->options['post'] ) ? $this->options['post']->ID : get_the_ID();
-		$type      = isset( $this->properties['type'] ) ? $this->properties['type'] : 'sale';
-		if ( ! $course_id || ! $this->isPaidCourse( $course_id ) ) {
+	private function generate_price_value_markup()
+	{
+		$course_id = isset($this->options['post']) ? $this->options['post']->ID : get_the_ID();
+		$type      = isset($this->properties['type']) ? $this->properties['type'] : 'sale';
+		if (! $course_id || ! $this->isPaidCourse($course_id)) {
 			return '';
 		}
 
-		$sale_price   = self::get_course_meta( 'sale_price', $course_id, $this->options );
-		$course_price = self::get_course_meta( 'course_price', $course_id, $this->options );
+		$sale_price   = self::get_course_meta('sale_price', $course_id, $this->options);
+		$course_price = self::get_course_meta('course_price', $course_id, $this->options);
 
-		switch ( $type ) {
-			case 'sale':{
-				if ( $sale_price ) {
-					return $this->generate_common_element( false, $sale_price );
-				} else {
-					return $this->generate_common_element( false, $course_price );
+		switch ($type) {
+			case 'sale': {
+					if ($sale_price) {
+						return $this->generate_common_element(false, $sale_price);
+					} else {
+						return $this->generate_common_element(false, $course_price);
+					}
+					break;
 				}
-				break;
-			}
-			case 'regular':{
-				if ( $sale_price ) {
-					return $this->generate_common_element( false, $course_price );
+			case 'regular': {
+					if ($sale_price) {
+						return $this->generate_common_element(false, $course_price);
+					}
+					break;
 				}
-				break;
-			}
 			default: {
-				return '';
-			}
+					return '';
+				}
 		}
 		return '';
 	}
 
-	private function isPaidCourse( $course_id ) {
-		$is_paid_course = tutor_utils()->is_course_purchasable( $course_id );
+	private function isPaidCourse($course_id)
+	{
+		$is_paid_course = tutor_utils()->is_course_purchasable($course_id);
 		return $is_paid_course;
 	}
 }

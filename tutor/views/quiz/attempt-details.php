@@ -55,7 +55,7 @@ function tutor_render_answer_list( $answers = array(), $dump_data = false ) {
 		foreach ( $answers as $key => $ans ) {
 			$type = isset( $ans->answer_view_format ) ? $ans->answer_view_format : 'text_image';
 
-			if ( isset( $ans->answer_two_gap_match ) ) {
+			if ( ! empty( $ans->answer_two_gap_match ) ) {
 				echo '<div class="matching-type">';
 			}
 
@@ -79,7 +79,7 @@ function tutor_render_answer_list( $answers = array(), $dump_data = false ) {
 							. esc_html( stripslashes( $ans->answer_title ) ) .
 						'</span>';
 
-					if ( isset( $ans->answer_title ) && ! isset( $ans->answer_two_gap_match ) ) {
+					if ( isset( $ans->answer_title ) && empty( $ans->answer_two_gap_match ) ) {
 						$multi_texts[ $ans->answer_title ] = $ans_string;
 					} else {
 						echo $ans_string; //phpcs:ignore -- contain safe data
@@ -101,13 +101,13 @@ function tutor_render_answer_list( $answers = array(), $dump_data = false ) {
 					break;
 			}
 
-			if ( isset( $ans->answer_two_gap_match ) ) {
+			if ( ! empty( $ans->answer_two_gap_match ) ) {
 					echo '<div class="image-match">' . esc_html( stripslashes( $ans->answer_two_gap_match ) ) . '</div>';
 				echo '</div>';
 			}
 		}
             //phpcs:ignore
-			echo count( $multi_texts ) ? implode( ', ', wp_unslash( $multi_texts ) ) : '';
+			echo count( $multi_texts ) ? implode( ', ', $multi_texts ) : '';
 
 		echo '</div>';
 	}
@@ -705,25 +705,29 @@ if ( is_array( $answers ) && count( $answers ) ) {
 										case 'result':
 											?>
 												<td class="result" data-title="<?php echo esc_attr( $column ); ?>">
-												<?php do_action( 'tutor_quiz_attempt_after_result_column', $answer, $answer_status ); ?>
+													<div class="tutor-d-flex tutor-align-center tutor-justify-between tutor-gap-4px">
+														<?php do_action( 'tutor_quiz_attempt_after_result_column', $answer, $answer_status ); ?>
 
-												<?php
-												if ( 'h5p' !== $answer->question_type ) {
-													switch ( $answer_status ) {
-														case 'correct':
-															echo '<span class="tutor-badge-label label-success">' . esc_html__( 'Correct', 'tutor' ) . '</span>';
-															break;
+														<?php
+														if ( 'h5p' !== $answer->question_type ) {
+															switch ( $answer_status ) {
+																case 'correct':
+																	echo '<span class="tutor-badge-label label-success">' . esc_html__( 'Correct', 'tutor' ) . '</span>';
+																	break;
 
-														case 'pending':
-															echo '<span class="tutor-badge-label label-warning">' . esc_html__( 'Pending', 'tutor' ) . '</span>';
-															break;
+																case 'pending':
+																	echo '<span class="tutor-badge-label label-warning">' . esc_html__( 'Pending', 'tutor' ) . '</span>';
+																	break;
 
-														case 'wrong':
-															echo '<span class="tutor-badge-label label-danger">' . esc_html__( 'Incorrect', 'tutor' ) . '</span>';
-															break;
-													}
-												}
-												?>
+																case 'wrong':
+																	echo '<span class="tutor-badge-label label-danger">' . esc_html__( 'Incorrect', 'tutor' ) . '</span>';
+																	break;
+															}
+														}
+														?>
+
+														<?php do_action( 'tutor_quiz_attempt_details_after_result', $answer, $answer_status ); ?>
+													</div>
 												</td>
 												<?php
 											break;
@@ -747,7 +751,7 @@ if ( is_array( $answers ) && count( $answers ) ) {
 								<?php endforeach; ?>
 							</tr>
 
-							<?php do_action( 'tutor_quiz_attempt_details_loop_after_row', $answer, $answer_status ); ?>
+							<?php do_action( 'tutor_quiz_attempt_details_loop_after_row', $answer, $answer_status, $table_2_columns ); ?>
 
 							<?php
 				}

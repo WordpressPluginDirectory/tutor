@@ -8,7 +8,9 @@
 
 namespace TutorLMSDroip;
 
+use TUTOR\Course;
 use Tutor\Models\CartModel;
+use TUTOR_CERT\Certificate;
 use TutorLMSDroip\ElementGenerator\CourseMetaGenerator;
 
 if (! defined('ABSPATH')) {
@@ -99,9 +101,271 @@ class VisibilityCondition
 			switch ($type) {
 				case 'TUTOR_LMS-tutor_course_rating': {
 						$conditions = self::get_course_type_conditions($conditions);
+						break;
+					}
+
+				case 'TUTOR_LMS-subscriptions': {
+						$conditions = self::get_subscription_type_conditions($conditions);
+						break;
+					}
+
+				case 'TUTOR_LMS-membership-plans': {
+						$conditions = self::get_membership_type_conditions($conditions);
+						break;
+					}
+
+				case 'TUTOR_LMS-membership-features': {
+						$conditions = self::get_membership_features_type_conditions($conditions);
+						break;
 					}
 			}
 		}
+
+		return $conditions;
+	}
+
+	private static function get_subscription_type_conditions($conditions)
+	{
+		if (!isset($conditions['post']['fields'])) {
+			$conditions['post']['fields'] = array();
+		}
+		$conditions['post'] = array(
+			'title'  => 'Subscription',
+			'fields' => array_merge(
+				$conditions['post']['fields'],
+				array(
+
+					// recurring_interval
+					array(
+						'source'        => TDE_APP_PREFIX,
+						'value'         => 'recurring_interval',
+						'title'         => 'Recurring Interval',
+						'operator_type' => 'dropdown_operators',
+						'operand_type'  => array_merge(
+							DROIP_PLUGIN_SETTINGS['SELECT'],
+							array(
+								'options' => array(
+									array(
+										'value' => 'day',
+										'title' => 'Day',
+									),
+									array(
+										'value' => 'week',
+										'title' => 'Week',
+									),
+									array(
+										'value' => 'month',
+										'title' => 'Month',
+									),
+									array(
+										'value' => 'year',
+										'title' => 'Year',
+									),
+								),
+							),
+						),
+					),
+
+					// enrollment_fee
+					array(
+						'source' 	  => TDE_APP_PREFIX,
+						'value' 	  => 'enrollment_fee',
+						'title' 	  => 'Enrollment Fee',
+						'operator_type' => 'numeric_operators',
+						'operand_type'  => array_merge(
+							DROIP_PLUGIN_SETTINGS['INPUT_NUMBER'],
+							array(
+								'placeholder' => 'Enrollment Fee',
+							),
+						),
+					),
+
+					// provide_certificate DEFAULT 1, -- 0 or 1
+					array(
+						'source'        => TDE_APP_PREFIX,
+						'value'         => 'provide_certificate',
+						'title'         => 'Provide Certificate',
+						'operator_type' =>  'dropdown_operators',
+						'operand_type'  => array_merge(
+							DROIP_PLUGIN_SETTINGS['SELECT'],
+							array(
+								'options' => array(
+									array(
+										'value' => '1',
+										'title' => 'Yes',
+									),
+									array(
+										'value' => '0',
+										'title' => 'No',
+									),
+								),
+							)
+						),
+					),
+
+					// is_featured
+					array(
+						'source'        => TDE_APP_PREFIX,
+						'value'         => 'is_featured',
+						'title'         => 'Is Featured',
+						'operator_type' =>  'dropdown_operators',
+						'operand_type'  => array_merge(
+							DROIP_PLUGIN_SETTINGS['SELECT'],
+							array(
+								'options' => array(
+									array(
+										'value' => '1',
+										'title' => 'Yes',
+									),
+									array(
+										'value' => '0',
+										'title' => 'No',
+									),
+								),
+							),
+						),
+					),
+
+					// sale_price
+					array(
+						'source' 	  => TDE_APP_PREFIX,
+						'value' 	  => 'sale_price',
+						'title' 	  => 'Sale Price',
+						'operator_type' => 'boolean_operators',
+					),
+				),
+			),
+		);
+
+		return $conditions;
+	}
+
+	private static function get_membership_type_conditions($conditions)
+	{
+		if (!isset($conditions['post']['fields'])) {
+			$conditions['post']['fields'] = array();
+		}
+		$conditions['post'] = array(
+			'title'  => 'Membership',
+			'fields' => array_merge(
+				$conditions['post']['fields'],
+				array(
+					array(
+						'source'        => TDE_APP_PREFIX,
+						'value'         => 'recurring_interval',
+						'title'         => 'Recurring Interval',
+						'operator_type' => 'dropdown_operators',
+						'operand_type'  => array_merge(
+							DROIP_PLUGIN_SETTINGS['SELECT'],
+							array(
+								'options' => array(
+									array(
+										'value' => 'day',
+										'title' => 'Day',
+									),
+									array(
+										'value' => 'week',
+										'title' => 'Week',
+									),
+									array(
+										'value' => 'month',
+										'title' => 'Month',
+									),
+									array(
+										'value' => 'year',
+										'title' => 'Year',
+									),
+								),
+							),
+						),
+					),
+
+					// recurring_value
+					array(
+						'source'        => TDE_APP_PREFIX,
+						'value'         => 'recurring_value',
+						'title'         => 'Recurring Value',
+						'operator_type' => 'numeric_operators',
+						'operand_type'  => array_merge(
+							DROIP_PLUGIN_SETTINGS['INPUT_NUMBER'],
+							array(
+								'placeholder' => 'Recurring Value',
+							)
+						),
+					),
+
+					// enrollment_fee
+					array(
+						'source' 	  => TDE_APP_PREFIX,
+						'value' 	  => 'enrollment_fee',
+						'title' 	  => 'Has enrollment fee',
+						'operator_type' => 'boolean_operators',
+					),
+
+					// provide_certificate DEFAULT 1, -- 0 or 1
+					array(
+						'source'        => TDE_APP_PREFIX,
+						'value'         => 'provide_certificate',
+						'title'         => 'Provide Certificate',
+						'operator_type' => 'boolean_operators',
+					),
+
+					// is_featured
+					array(
+						'source'        => TDE_APP_PREFIX,
+						'value'         => 'is_featured',
+						'title'         => 'Is Featured',
+						'operator_type' => 'boolean_operators',
+					),
+
+					// sale_price
+					array(
+						'source' 	  => TDE_APP_PREFIX,
+						'value' 	  => 'sale_price',
+						'title' 	  => 'Offer sale Price',
+						'operator_type' => 'boolean_operators',
+					),
+				),
+			),
+		);
+
+		return $conditions;
+	}
+
+	private static function get_membership_features_type_conditions($conditions)
+	{
+		if (!isset($conditions['post']['fields'])) {
+			$conditions['post']['fields'] = array();
+		}
+		$conditions['post'] = array(
+			'title'  => 'Feature',
+			'fields' => array_merge(
+				$conditions['post']['fields'],
+				array(
+					array(
+						'source'        => TDE_APP_PREFIX,
+						'value'         => 'icon_type',
+						'title'         => 'Icon',
+						'operator_type' => 'dropdown_operators',
+						'operand_type'  => array_merge(
+							DROIP_PLUGIN_SETTINGS['SELECT'],
+							array(
+								'options' => array(
+									array(
+										'value' => 'yes',
+										'title' => 'Check',
+									),
+									array(
+										'value' => 'no',
+										'title' => 'Times',
+									),
+								),
+							),
+						),
+					),
+				),
+			),
+		);
 
 		return $conditions;
 	}
@@ -127,6 +391,41 @@ class VisibilityCondition
 						'value'         => 'on_sale',
 						'title'         => 'On Sale',
 						'operator_type' => 'boolean_operators',
+					),
+					array(
+						'source'        => TDE_APP_PREFIX,
+						'value'         => 'purchase_options',
+						'title'         => 'Purchase Options',
+						'operator_type' => 'dropdown_operators',
+						'operand_type'  => array_merge(
+							DROIP_PLUGIN_SETTINGS['SELECT'],
+							array(
+								'options' => array(
+									array(
+										'value' => Course::SELLING_OPTION_ONE_TIME,
+										'title' => 'One Time',
+									),
+									array(
+										'value' => Course::SELLING_OPTION_SUBSCRIPTION,
+										'title' => 'Subscription',
+									),
+
+									array(
+										'value' => Course::SELLING_OPTION_BOTH,
+										'title' => 'Subscription & One-Time',
+									),
+
+									array(
+										'value' => Course::SELLING_OPTION_MEMBERSHIP,
+										'title' => 'Membership',
+									),
+									array(
+										'value' => Course::SELLING_OPTION_ALL,
+										'title' => 'All',
+									),
+								),
+							)
+						),
 					),
 					array(
 						'source'        => TDE_APP_PREFIX,
@@ -303,8 +602,6 @@ class VisibilityCondition
 		return $conditions;
 	}
 
-
-
 	public static function element_visibility_condition_check($default_value, $condition, $options)
 	{
 		$source   = $condition['source'];
@@ -312,7 +609,18 @@ class VisibilityCondition
 		$operator = $condition['operator']['value'];
 		$operand  = $condition['operand']['value'];
 
-		$fieldValue = self::get_course_field_value($field, $options);
+		if (isset($options['TUTOR_LMS-subscriptions'])) {
+			$subscription = (array) $options['TUTOR_LMS-subscriptions'];
+			$fieldValue = self::get_subscription_field_value($subscription, $field, $options);
+		} else if (isset($options['membership-plan'], $options['itemType']) && $options['itemType'] === 'membership-plan') {
+			$membership_plan = (array) $options['membership-plan'];
+			$fieldValue = self::get_membership_plan_field_value($membership_plan, $field);
+		} else if (isset($options['membership-feature'], $options['itemType']) && $options['itemType'] === 'membership-feature') {
+			$membership_feature = (array) $options['membership-feature'];
+			$fieldValue = self::get_membership_feature_field_value($membership_feature, $field);
+		} else {
+			$fieldValue = self::get_course_field_value($field, $options);
+		}
 
 		if ($source === TDE_APP_PREFIX) {
 			switch ($operator) {
@@ -344,7 +652,7 @@ class VisibilityCondition
 						return in_array($operand, $fieldValue);
 					}
 				case 'user_state-not_equal': {
-						return in_array($operand, $fieldValue);
+						return !in_array($operand, $fieldValue);
 					}
 			}
 		}
@@ -352,7 +660,70 @@ class VisibilityCondition
 		return $default_value;
 	}
 
+	private static function get_membership_feature_field_value($membership_feature, $field)
+	{
+		$yes_icon_types = array(
+			'tick',
+			'tick_circle',
+			'tick_circle_fill',
+			'plus_square',
+			'plus_circle',
+			'plus_circle_fill',
+			'plus_square_fill',
+		);
 
+		$no_icon_types = array(
+			'cross',
+			'cross_circle',
+			'cross_circle_fill',
+			'minus_square',
+			'minus_circle',
+			'minus_circle_fill',
+			'minus_square_fill',
+		);
+
+		switch ($field) {
+			case 'icon_type': {
+					if (in_array($membership_feature['icon'], $yes_icon_types)) {
+						return 'yes';
+					} elseif (in_array($membership_feature['icon'], $no_icon_types)) {
+						return 'no';
+					}
+
+					return null;
+				}
+		}
+
+		return isset($membership_feature[$field]) ? $membership_feature[$field] : null;
+	}
+
+	private static function get_subscription_field_value($subscription, $field, $options)
+	{
+		switch ($field) {
+			case 'sale_price': {
+					return $subscription['sale_price'] !== '0.00';
+				}
+		}
+		return isset($subscription[$field]) ? $subscription[$field] : null;
+	}
+
+	private static function get_membership_plan_field_value($membership_plan, $field)
+	{
+		switch ($field) {
+			case 'enrollment_fee':
+			case 'sale_price': {
+					return $membership_plan[$field] !== '0.00';
+				}
+
+			case 'is_featured':
+			case 'provide_certificate': {
+					return $membership_plan[$field] == '1';
+				}
+
+			default:
+				return isset($membership_plan[$field]) ? $membership_plan[$field] : null;
+		}
+	}
 
 	private static function get_course_field_value($field, $options)
 	{
@@ -365,6 +736,10 @@ class VisibilityCondition
 			case 'on_sale': {
 					$course_price = tutor_utils()->get_raw_course_price($course_id);
 					return $course_price->sale_price != 0;
+				}
+			case 'purchase_options': {
+					$selling_option = Course::get_selling_option($course_id);
+					return $selling_option;
 				}
 			case 'average_rating': {
 					$average_rating = self::get_course_meta($field, $course_id, $options);
@@ -419,7 +794,11 @@ class VisibilityCondition
 			case 'is_certificate_enabled': {
 					$addon_config = tutor_utils()->get_addon_config('tutor-pro/addons/tutor-certificate/tutor-certificate.php');
 					$is_enabled   = (bool) tutor_utils()->avalue_dot('is_enable', $addon_config);
-					return $is_enabled;
+					if ($is_enabled) {
+						$has_course_certificate_template = (new Certificate(true))->has_course_certificate_template($course_id);
+						return $has_course_certificate_template;
+					}
+					return false;
 				}
 		}
 	}

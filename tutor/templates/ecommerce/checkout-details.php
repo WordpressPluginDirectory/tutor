@@ -22,10 +22,13 @@ use Tutor\Ecommerce\CheckoutController;
  */
 $user_id = apply_filters( 'tutor_checkout_user_id', get_current_user_id() );
 
+$order_model         = new OrderModel();
 $coupon_model        = new CouponModel();
 $cart_controller     = new CartController( false );
 $checkout_controller = new CheckoutController( false );
-$get_cart            = $cart_controller->get_cart_items();
+$order_id            = (int) Input::sanitize_request_data( 'order_id', 0 );
+$order_data          = $order_id ? $order_model->get_order_by_id( $order_id ) : null;
+$get_cart            = ! empty( $order_data ) ? $checkout_controller->get_courses_data_by_order_items( $order_data->items ) : $cart_controller->get_cart_items();
 $courses             = $get_cart['courses'];
 $total_count         = $courses['total_count'];
 $course_id           = (int) Input::sanitize_request_data( 'course_id', 0 );
@@ -81,16 +84,9 @@ $show_coupon_box = Settings::is_coupon_usage_enabled() && ! $checkout_data->is_c
 							array_push( $object_ids, $item->item_id );
 							?>
 							<div class="tutor-checkout-course-item" data-course-id="<?php echo esc_attr( $item->item_id ); ?>">
-								<?php if ( tutor()->has_pro && 'course-bundle' === $course->post_type ) : ?>
-								<div class="tutor-checkout-course-bundle-badge">
-									<?php
-										$bundle_model      = new \TutorPro\CourseBundle\Models\BundleModel();
-										$bundle_course_ids = $bundle_model::get_bundle_course_ids( $course->ID );
-										// translators: %d: Number of courses in the cart.
-										echo esc_html( sprintf( __( '%d Course bundle', 'tutor' ), count( $bundle_course_ids ) ) );
-									?>
+								<div class="tutor-d-flex tutor-align-center tutor-gap-4px">
+									<?php do_action( 'tutor_cart_item_badge', $course ); ?>
 								</div>
-								<?php endif; ?>
 								<div class="tutor-checkout-course-content">
 									<div class="tutor-d-flex tutor-flex-column tutor-gap-1">
 										<div class="tutor-checkout-course-thumb-title">

@@ -9,6 +9,7 @@
  */
 
 use Tutor\Cache\FlashMessage;
+use Tutor\Ecommerce\Ecommerce;
 use Tutor\Ecommerce\OptionKeys;
 use Tutor\Ecommerce\Settings;
 use TUTOR\Input;
@@ -1499,10 +1500,7 @@ if ( ! function_exists( 'tutor_global_timezone_lists' ) ) {
 					continue;
 				}
 
-				$name                = $method['name'];
-				$basename            = "tutor-{$name}/tutor-{$name}.php";
-				$is_plugin_activated = is_plugin_active( $basename );
-				if ( ! $is_manual && 'paypal' !== $name && ! $is_plugin_activated ) {
+				if ( ! Ecommerce::is_payment_gateway_configured( $method['name'] ) ) {
 					continue;
 				}
 
@@ -1644,16 +1642,22 @@ if ( ! function_exists( 'tutor_get_formatted_price' ) ) {
 	 * @return string|void
 	 */
 	function tutor_get_formatted_price( $price ) {
-		$price = floatval( Input::sanitize( $price ) );
+		$price       = floatval( Input::sanitize( $price ) );
+		$monetize_by = tutor_utils()->get_option( 'monetize_by' );
+		if ( Ecommerce::MONETIZE_BY === $monetize_by ) {
+			$currency_symbol    = Settings::get_currency_symbol_by_code( tutor_utils()->get_option( OptionKeys::CURRENCY_CODE, 'USD' ) );
+			$currency_position  = tutor_utils()->get_option( OptionKeys::CURRENCY_POSITION, 'left' );
+			$thousand_separator = tutor_utils()->get_option( OptionKeys::THOUSAND_SEPARATOR, ',' );
+			$decimal_separator  = tutor_utils()->get_option( OptionKeys::DECIMAL_SEPARATOR, '.' );
+			$no_of_decimal      = tutor_utils()->get_option( OptionKeys::NUMBER_OF_DECIMALS, '2' );
 
-		$currency_symbol    = Settings::get_currency_symbol_by_code( tutor_utils()->get_option( OptionKeys::CURRENCY_CODE, 'USD' ) );
-		$currency_position  = tutor_utils()->get_option( OptionKeys::CURRENCY_POSITION, 'left' );
-		$thousand_separator = tutor_utils()->get_option( OptionKeys::THOUSAND_SEPARATOR, ',' );
-		$decimal_separator  = tutor_utils()->get_option( OptionKeys::DECIMAL_SEPARATOR, '.' );
-		$no_of_decimal      = tutor_utils()->get_option( OptionKeys::NUMBER_OF_DECIMALS, '2' );
-
-		$price = number_format( $price, $no_of_decimal, $decimal_separator, $thousand_separator );
-		$price = 'left' === $currency_position ? $currency_symbol . $price : $price . $currency_symbol;
+			$price = number_format( $price, $no_of_decimal, $decimal_separator, $thousand_separator );
+			$price = 'left' === $currency_position ? $currency_symbol . $price : $price . $currency_symbol;
+		} elseif ( 'wc' === $monetize_by ) {
+			$price = wc_price( $price );
+		} elseif ( 'edd' === $monetize_by ) {
+			$price = edd_currency_filter( edd_format_amount( $price ) );
+		}
 
 		return $price;
 	}
@@ -1805,7 +1809,7 @@ if ( ! function_exists( 'tutor_is_local_env' ) ) {
 
 
 
-if ( ! function_exists( 'get_tutor_post_types') ) {
+if ( ! function_exists( 'get_tutor_post_types' ) ) {
 	/**
 	 * Get tutor post type list
 	 *
