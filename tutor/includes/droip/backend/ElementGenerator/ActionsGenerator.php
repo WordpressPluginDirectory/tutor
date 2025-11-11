@@ -274,14 +274,14 @@ trait ActionsGenerator
 
 			if (tutor()->has_pro && Subscription::is_enabled() && $course_id) {
 
-
+				$plan_model = new PlanModel();
 				// Checking is course has subscription plan then show buy now button.
 				$selling_option = Course::get_selling_option($course_id);
 				if (!$selling_option) {
 					$selling_option = Course::SELLING_OPTION_ALL;
 				}
 				if ($selling_option === Course::SELLING_OPTION_SUBSCRIPTION || $selling_option === Course::SELLING_OPTION_BOTH || $selling_option === Course::SELLING_OPTION_ALL) {
-					$plan_model = new PlanModel();
+
 					$items = $plan_model->get_subscription_plans($course_id, PlanModel::STATUS_ACTIVE);
 
 					if (count($items) > 0) {

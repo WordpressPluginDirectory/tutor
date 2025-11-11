@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Tutor\\Traits\\' => array($baseDir . '/traits'),
+    'Tutor\\TemplateImport\\' => array($baseDir . '/template-import'),
     'Tutor\\PaymentGateways\\' => array($baseDir . '/ecommerce/PaymentGateways'),
     'Tutor\\Models\\' => array($baseDir . '/models'),
     'Tutor\\Migrations\\' => array($baseDir . '/migrations'),
